@@ -1,35 +1,32 @@
-/* Portfolio interactions: mobile nav, active section highlight, copy-email, reveal. */
+/* Portfolio interactions: mobile nav, active section highlight, copy-email,
+   schematic boot-up animation, footer year. */
 (function () {
   "use strict";
-
-  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Mobile navigation ---- */
   var toggle = document.querySelector(".nav-toggle");
   var navList = document.getElementById("nav-list");
 
   if (toggle && navList) {
-    toggle.addEventListener("click", function () {
-      var open = navList.classList.toggle("is-open");
+    var setMenu = function (open) {
+      navList.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+
+    toggle.addEventListener("click", function () {
+      setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
 
     // Close the menu when a link is chosen
     navList.addEventListener("click", function (event) {
-      if (event.target.closest("a")) {
-        navList.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Open menu");
-      }
+      if (event.target.closest("a")) { setMenu(false); }
     });
 
     // Close on Escape
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && navList.classList.contains("is-open")) {
-        navList.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Open menu");
+      if (event.key === "Escape" && navList.classList.contains("open")) {
+        setMenu(false);
         toggle.focus();
       }
     });
@@ -51,28 +48,13 @@
       });
     };
 
-    var observer = new IntersectionObserver(function (entries) {
+    var navObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) { setActive(entry.target.id); }
       });
     }, { rootMargin: "-40% 0px -55% 0px" });
 
-    sections.forEach(function (section) { observer.observe(section); });
-  }
-
-  /* ---- Reveal on scroll ---- */
-  var revealTargets = document.querySelectorAll(".case-study, .pipeline-card, .stack-group");
-  if (!prefersReducedMotion && "IntersectionObserver" in window && revealTargets.length) {
-    revealTargets.forEach(function (el) { el.classList.add("reveal"); });
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealTargets.forEach(function (el) { revealObserver.observe(el); });
+    sections.forEach(function (section) { navObserver.observe(section); });
   }
 
   /* ---- Copy email ---- */
@@ -80,21 +62,30 @@
   var copyLabel = document.getElementById("copy-label");
   var EMAIL = "tvet.hjapoon@gmail.com";
 
-  if (copyButton && copyLabel && navigator.clipboard) {
+  if (copyButton && copyLabel) {
     copyButton.addEventListener("click", function () {
-      navigator.clipboard.writeText(EMAIL).then(function () {
-        copyLabel.textContent = "Copied!";
-        copyButton.setAttribute("aria-live", "polite");
-        window.setTimeout(function () { copyLabel.textContent = "Copy email"; }, 2000);
-      }).catch(function () {
-        copyLabel.textContent = "Copy failed";
-        window.setTimeout(function () { copyLabel.textContent = "Copy email"; }, 2000);
-      });
+      var done = function (ok) {
+        copyLabel.textContent = ok ? "copied \u2713" : EMAIL;
+        window.setTimeout(function () { copyLabel.textContent = "copy email"; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(EMAIL).then(function () { done(true); }, function () { done(false); });
+      } else { done(false); }
     });
-  } else if (copyButton) {
-    // No clipboard API: hide the button so it never dead-ends
-    copyButton.style.display = "none";
   }
+
+  /* ---- Schematic boot-up line draw ---- */
+  var schematic = document.querySelector(".schematic");
+  var boot = function () { if (schematic) { schematic.classList.add("boot"); } };
+
+  if (schematic && "IntersectionObserver" in window) {
+    var bootObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { boot(); bootObserver.disconnect(); }
+      });
+    }, { threshold: 0.25 });
+    bootObserver.observe(schematic);
+  } else { boot(); }
 
   /* ---- Footer year ---- */
   var year = document.getElementById("year");
