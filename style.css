@@ -327,6 +327,13 @@ a:hover { color: var(--accent-deep); }
   border: 1px solid var(--line);
 }
 
+.badge--live {
+  color: var(--accent-deep);
+  background: #e2efe9;
+  border: 1px solid #bcd9cd;
+}
+.badge-dot--live { background: var(--accent); }
+
 .case-grid {
   display: grid;
   gap: var(--space-6);

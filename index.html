@@ -24,6 +24,7 @@
         <ul id="nav-list" class="nav-list">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#systems" class="nav-link">Systems</a></li>
           <li><a href="#stack" class="nav-link">Stack</a></li>
           <li><a href="#contact" class="nav-link nav-link--cta">Contact</a></li>
         </ul>
@@ -181,6 +182,81 @@
             </ul>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- AI Systems -->
+    <section class="section" id="systems" aria-labelledby="systems-heading">
+      <div class="container">
+        <p class="eyebrow">AI Systems</p>
+        <h2 id="systems-heading">Systems, not just automations</h2>
+
+        <article class="case-study" aria-labelledby="sys-heading">
+          <div class="case-head">
+            <div>
+              <p class="eyebrow eyebrow--small">Systems case study</p>
+              <h3 id="sys-heading">Agent-Run Production System for AI Content</h3>
+              <p class="case-sub">Built for <span class="case-sub-note">SISTEMA, an AI-assisted serialized drama production</span></p>
+            </div>
+            <span class="badge badge--live">
+              <span class="badge-dot badge-dot--live" aria-hidden="true"></span>
+              Live system
+            </span>
+          </div>
+
+          <div class="case-grid">
+            <div>
+              <h4>The problem</h4>
+              <p>Content creators working with AI hit the same wall: characters drift between generations, assets get lost or overwritten, prompts are one-offs nobody can repeat, and there's no quality gate before anything ships. Scaling one good clip into a whole series breaks down into chaos.</p>
+            </div>
+            <div>
+              <h4>The system</h4>
+              <p>An ICM-structured workspace where the folder structure <em>is</em> the agent architecture. One source of truth for canon, a roster of specialist agents with explicit contracts, and a reviewer-gated task pipeline — so AI content production runs like a production line, with a human checking every stage.</p>
+            </div>
+          </div>
+
+          <h4 class="flow-title">How the architecture works</h4>
+          <ol class="flow">
+            <li><strong>BIBLE</strong><span>Single source of truth — canon, character refs, style guide</span></li>
+            <li><strong>Agents</strong><span>12 specialists, each with identity, capabilities, lifecycle</span></li>
+            <li><strong>Tasks</strong><span>One folder per work item, reviewer-gated lifecycle</span></li>
+            <li><strong>Review</strong><span>Continuity + acceptance gates before anything advances</span></li>
+            <li><strong>Outputs</strong><span>Locked to agents — rendered artifacts only</span></li>
+            <li><strong>Human gates</strong><span>Plan, teaser, and integrate approvals</span></li>
+          </ol>
+
+          <div class="case-grid">
+            <div>
+              <h4>Architecture highlights</h4>
+              <ul class="checklist">
+                <li><strong>One folder, one job</strong> — every folder states its own purpose; the structure is the documentation.</li>
+                <li><strong>Contracts per stage</strong> — each folder declares its inputs, process, outputs, and human check.</li>
+                <li><strong>Agents are registered, not improvised</strong> — new agent types pass a promotion lifecycle (created → tested → validated → approved → trusted) before touching real work.</li>
+                <li><strong>Reviewer-only closes</strong> — tasks move ASSIGNED → SUBMITTED → COMPLETED or REWORK; only a reviewer can close one.</li>
+                <li><strong>Guardrails encoded</strong> — known model limits (face drift in video, fixed output lengths) are documented constraints the pipeline designs around, e.g. stills-first for character-critical shots.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>What it produces</h4>
+              <ul class="checklist">
+                <li>Character reference sheets with identical faces across views, verified by face QA.</li>
+                <li>A season teaser run end-to-end through the pipeline: beat sheet → script → storyboard → video prompts, each stage gated.</li>
+                <li>Every asset traceable to the task folder that produced it — nothing appears from nowhere.</li>
+                <li>A repeatable pipeline: the next episode copies the pattern instead of reinventing it.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="case-meta">
+            <ul class="chip-list" aria-label="System concepts">
+              <li>ICM workspace architecture</li>
+              <li>AI agent orchestration</li>
+              <li>Reviewer-gated pipelines</li>
+              <li>Human-in-the-loop</li>
+            </ul>
+            <p class="case-effort">Scope: ongoing personal production system · the method is the deliverable — creative IP stays private</p>
+          </div>
+        </article>
       </div>
     </section>
 
