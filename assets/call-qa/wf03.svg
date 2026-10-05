@@ -1,43 +1,118 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 900" role="img" aria-label="WF03 — QA Evaluation">
-<rect width="300" height="900" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF03 — QA EVALUATION</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">WEBHOOK</text>
-<text x="42" y="88" class="nd">call_id in</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">LOAD SCORECARD</text>
-<text x="42" y="206" class="nd">supabase · active version</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">LOAD RULES</text>
-<text x="42" y="324" class="nd">18 rules · weights</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">AI EVIDENCE</text>
-<text x="42" y="442" class="nd">gemini · per-rule quotes</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">PARSE + VALIDATE</text>
-<text x="42" y="560" class="nd">json schema check</text>
-<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="634" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="658" class="nl">STORE ITEMS</text>
-<text x="42" y="678" class="nd">supabase · evaluation_items</text>
-<line x1="150" y1="694" x2="150" y2="752" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="723" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="752" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="776" class="nl">TRIGGER WF04</text>
-<text x="42" y="796" class="nd">webhook · call_id</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3542 556" width="100%" role="img" aria-label="WF03 — QA Evaluation — live n8n canvas render">
+<rect width="3542" height="556" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF03 — QA EVALUATION</text>
+<text x="3496" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 17 NODES</text>
+<line x1="46" y1="44" x2="3496" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,238.0 C252.0,238.0 234.0,238.0 270,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M440,238.0 C476.0,238.0 458.0,238.0 494,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M664,238.0 C700.0,238.0 682.0,238.0 718,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1560,238.0 C1596.0,238.0 1578.0,238.0 1614,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1587.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M2360,238.0 C2396.0,238.0 2378.0,142.0 2414,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2387.0" cy="190.0" r="3" fill="#5fd08a"/>
+<path d="M2360,238.0 C2396.0,238.0 2378.0,334.0 2414,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2387.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M2072,478.0 C2189.0,478.0 1721.0,238.0 1838,238.0" fill="none" stroke="#3a4653" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="1955.0" cy="358.0" r="3" fill="#5fd08a"/>
+<path d="M888,238.0 C924.0,238.0 906.0,238.0 942,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="915.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1112,238.0 C1148.0,238.0 1130.0,238.0 1166,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1139.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M3032,142.0 C3068.0,142.0 3050.0,142.0 3086,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="3059.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M1784,238.0 C1820.0,238.0 1802.0,238.0 1838,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1811.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M3256,142.0 C3292.0,142.0 3290.0,142.0 3326,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="3291.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M2584,142.0 C2620.0,142.0 2602.0,142.0 2638,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2611.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M2008,238.0 C2099.0,238.0 2099.0,238.0 2190,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2099.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1336,238.0 C1372.0,238.0 1354.0,238.0 1390,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1363.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M2808,142.0 C2844.0,142.0 2826.0,142.0 2862,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2835.0" cy="142.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="216" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="234" class="t">Webhook (call_id)</text>
+<text x="62" y="258" class="ty">WEBHOOK</text>
+<rect x="270" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="228" class="t">Load Active</text>
+<text x="286" y="244" class="t">Scorecard</text>
+<text x="286" y="258" class="ty">SUPABASE</text>
+<rect x="494" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="234" class="t">Load Scorecard Rules</text>
+<text x="510" y="258" class="ty">SUPABASE</text>
+<rect x="1390" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1390" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1406" y="228" class="t">Build Evaluation</text>
+<text x="1406" y="244" class="t">Prompt</text>
+<text x="1406" y="258" class="ty">CODE</text>
+<rect x="2190" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2190" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2206" y="234" class="t">Parse Rule Results</text>
+<text x="2206" y="258" class="ty">CODE</text>
+<rect x="2414" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2414" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2430" y="324" class="t">Notify Evaluation</text>
+<text x="2430" y="340" class="t">Error</text>
+<text x="2430" y="354" class="ty">GMAIL</text>
+<rect x="1902" y="446" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="1902" y="456" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="1918" y="468" class="t">Google Gemini Chat</text>
+<text x="1918" y="484" class="t">Model</text>
+<text x="1918" y="498" class="ty">GEMINI CHAT MODEL</text>
+<rect x="718" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="734" y="234" class="t">Load Call Transcript</text>
+<text x="734" y="258" class="ty">SUPABASE</text>
+<rect x="942" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="942" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="958" y="228" class="t">Dedup Call</text>
+<text x="958" y="244" class="t">Transcript</text>
+<text x="958" y="258" class="ty">CODE</text>
+<rect x="3326" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="3326" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="3342" y="132" class="t">Trigger WF04 -</text>
+<text x="3342" y="148" class="t">Notifications</text>
+<text x="3342" y="162" class="ty">HTTP REQUEST</text>
+<rect x="2862" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2862" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2878" y="138" class="t">Dedup WF04 Trigger</text>
+<text x="2878" y="162" class="ty">CODE</text>
+<rect x="1614" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1614" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1630" y="228" class="t">Build AI Rule</text>
+<text x="1630" y="244" class="t">Evaluation Prompt</text>
+<text x="1630" y="258" class="ty">CODE</text>
+<rect x="3086" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="3086" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="3102" y="132" class="t">Build WF04 Trigger</text>
+<text x="3102" y="148" class="t">Payload</text>
+<text x="3102" y="162" class="ty">CODE</text>
+<rect x="2414" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2414" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2430" y="132" class="t">Build Store Rule</text>
+<text x="2430" y="148" class="t">Body</text>
+<text x="2430" y="162" class="ty">CODE</text>
+<rect x="1838" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="1838" y="216" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="1854" y="228" class="t">AI Rule Evaluation</text>
+<text x="1854" y="244" class="t">(LLM Chain)</text>
+<text x="1854" y="258" class="ty">LLM CHAIN</text>
+<rect x="1166" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1166" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1182" y="234" class="t">Create Evaluation</text>
+<text x="1182" y="258" class="ty">SUPABASE</text>
+<rect x="2638" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2638" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2654" y="132" class="t">Store_Rule_Evaluatio</text>
+<text x="2654" y="148" class="t">n</text>
+<text x="2654" y="162" class="ty">SUPABASE</text>
 </svg>

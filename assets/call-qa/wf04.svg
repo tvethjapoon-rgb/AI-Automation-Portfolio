@@ -1,38 +1,125 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 782" role="img" aria-label="WF04 — Score Calculation">
-<rect width="300" height="782" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF04 — SCORE CALCULATION</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">WEBHOOK</text>
-<text x="42" y="88" class="nd">call_id in</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">AGGREGATE</text>
-<text x="42" y="206" class="nd">rule results → categories</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">DETERMINISTIC SCORE</text>
-<text x="42" y="324" class="nd">weights · no llm math</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">CRITICAL CHECK</text>
-<text x="42" y="442" class="nd">fail-fast rules</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">UPDATE EVALUATION</text>
-<text x="42" y="560" class="nd">supabase · status</text>
-<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="634" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="658" class="nl">TRIGGER WF05/06</text>
-<text x="42" y="678" class="nd">webhooks · fan-out</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2486 660.0" width="100%" role="img" aria-label="WF04 — Notifications and Actions — live n8n canvas render">
+<rect width="2486" height="660.0" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF04 — NOTIFICATIONS AND ACTIONS</text>
+<text x="2440" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 17 NODES</text>
+<line x1="46" y1="44" x2="2440" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,238.0 C252.0,238.0 234.0,238.0 270,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1112,334.0 C1148.0,334.0 1130.0,238.0 1166,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1139.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M1112,334.0 C1148.0,334.0 1130.0,430.0 1166,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1139.0" cy="382.0" r="3" fill="#5fd08a"/>
+<path d="M1560,334.0 C1596.0,334.0 1578.0,334.0 1614,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1587.0" cy="334.0" r="3" fill="#5fd08a"/>
+<text x="1568" y="326.0" class="ty">true</text>
+<path d="M1560,334.0 C1915.0,334.0 1915.0,254.0 2270,254.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1915.0" cy="294.0" r="3" fill="#5fd08a"/>
+<text x="1568" y="326.0" class="ty">false</text>
+<path d="M1336,430.0 C1372.0,430.0 1354.0,334.0 1390,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1363.0" cy="382.0" r="3" fill="#5fd08a"/>
+<text x="1344" y="422.0" class="ty">true</text>
+<path d="M1336,430.0 C1372.0,430.0 1354.0,526.0 1390,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1363.0" cy="478.0" r="3" fill="#5fd08a"/>
+<text x="1344" y="422.0" class="ty">false</text>
+<path d="M2232,254.0 C2268.0,254.0 2234.0,254.0 2270,254.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2251.0" cy="254.0" r="3" fill="#5fd08a"/>
+<path d="M1560,526.0 C1596.0,526.0 1578.0,526.0 1614,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1587.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M2008,334.0 C2044.0,334.0 2026.0,254.0 2062,254.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="294.0" r="3" fill="#5fd08a"/>
+<text x="2016" y="326.0" class="ty">true</text>
+<path d="M2008,334.0 C2044.0,334.0 2026.0,414.0 2062,414.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="374.0" r="3" fill="#5fd08a"/>
+<text x="2016" y="326.0" class="ty">false</text>
+<path d="M440,238.0 C476.0,238.0 458.0,238.0 494,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M664,238.0 C700.0,238.0 682.0,334.0 718,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M664,238.0 C700.0,238.0 682.0,142.0 718,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="190.0" r="3" fill="#5fd08a"/>
+<path d="M888,334.0 C924.0,334.0 906.0,334.0 942,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="915.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M1784,526.0 C1820.0,526.0 1802.0,526.0 1838,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1811.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M1784,334.0 C1820.0,334.0 1802.0,334.0 1838,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1811.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M2232,414.0 C2232,614.0 2062,454.0 2062,254.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2147.0" cy="614.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="216" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="234" class="t">Webhook (call_id)</text>
+<text x="62" y="258" class="ty">WEBHOOK</text>
+<rect x="942" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="942" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="958" y="330" class="t">Aggregate Call Score</text>
+<text x="958" y="354" class="ty">CODE</text>
+<rect x="1390" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1390" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1406" y="324" class="t">Check Low Score or</text>
+<text x="1406" y="340" class="t">Critical Fail</text>
+<text x="1406" y="354" class="ty">IF</text>
+<rect x="1838" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1838" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1854" y="324" class="t">Coaching Action</text>
+<text x="1854" y="340" class="t">Exists</text>
+<text x="1854" y="354" class="ty">IF</text>
+<rect x="1838" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1838" y="504" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1854" y="516" class="t">Trigger WF05 - Agent</text>
+<text x="1854" y="532" class="t">Feedback</text>
+<text x="1854" y="546" class="ty">HTTP REQUEST</text>
+<rect x="1166" y="398" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1166" y="408" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1182" y="426" class="t">Route by Call Type</text>
+<text x="1182" y="450" class="ty">IF</text>
+<rect x="2270" y="222" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2270" y="232" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2286" y="244" class="t">Trigger WF06 -</text>
+<text x="2286" y="260" class="t">Performance</text>
+<text x="2286" y="274" class="ty">HTTP REQUEST</text>
+<rect x="2062" y="222" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2062" y="232" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2078" y="244" class="t">Build WF05 Trigger</text>
+<text x="2078" y="260" class="t">Payload</text>
+<text x="2078" y="274" class="ty">CODE</text>
+<rect x="1390" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1390" y="504" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1406" y="516" class="t">Build WF06 Trigger</text>
+<text x="1406" y="532" class="t">Payload</text>
+<text x="1406" y="546" class="ty">CODE</text>
+<rect x="270" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="234" class="t">Get Evaluations</text>
+<text x="286" y="258" class="ty">SUPABASE</text>
+<rect x="494" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="234" class="t">Get Evaluation Items</text>
+<text x="510" y="258" class="ty">SUPABASE</text>
+<rect x="718" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="734" y="138" class="t">Load Call Type</text>
+<text x="734" y="162" class="ty">SUPABASE</text>
+<rect x="718" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="734" y="330" class="t">Load Scorecard Rules</text>
+<text x="734" y="354" class="ty">SUPABASE</text>
+<rect x="1166" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1166" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1182" y="234" class="t">Update Evaluation</text>
+<text x="1182" y="258" class="ty">SUPABASE</text>
+<rect x="1614" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1614" y="504" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1630" y="522" class="t">Wait</text>
+<text x="1630" y="546" class="ty">WAIT</text>
+<rect x="1614" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1614" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1630" y="324" class="t">Check Existing</text>
+<text x="1630" y="340" class="t">Coaching Action</text>
+<text x="1630" y="354" class="ty">SUPABASE</text>
+<rect x="2062" y="382" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2062" y="392" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2078" y="404" class="t">Create Coaching</text>
+<text x="2078" y="420" class="t">Action</text>
+<text x="2078" y="434" class="ty">SUPABASE</text>
 </svg>

@@ -1,38 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 782" role="img" aria-label="WF05 — Sales Intelligence">
-<rect width="300" height="782" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF05 — SALES INTELLIGENCE</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">WEBHOOK</text>
-<text x="42" y="88" class="nd">call_id in</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">LOAD EVALUATIONS</text>
-<text x="42" y="206" class="nd">supabase · items + rules</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">AI EXTRACT</text>
-<text x="42" y="324" class="nd">gemini · sales behaviors</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">PARSE BEHAVIORS</text>
-<text x="42" y="442" class="nd">observed · evidence</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">STORE</text>
-<text x="42" y="560" class="nd">supabase · sales_behaviors</text>
-<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="634" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="658" class="nl">TRIGGER WF06</text>
-<text x="42" y="678" class="nd">webhook</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2566 620" width="100%" role="img" aria-label="WF05 — Sales Intelligence — live n8n canvas render">
+<rect width="2566" height="620" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF05 — SALES INTELLIGENCE</text>
+<text x="2520" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 14 NODES</text>
+<line x1="46" y1="44" x2="2520" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,238.0 C252.0,238.0 234.0,238.0 270,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M440,238.0 C476.0,238.0 458.0,334.0 494,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M440,238.0 C476.0,238.0 458.0,142.0 494,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="190.0" r="3" fill="#5fd08a"/>
+<path d="M664,334.0 C700.0,334.0 682.0,334.0 718,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M888,334.0 C924.0,334.0 906.0,334.0 942,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="915.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M1112,334.0 C1148.0,334.0 1130.0,334.0 1166,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1139.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M1336,334.0 C1427.0,334.0 1427.0,334.0 1518,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1427.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M1256,542.0 C1301.0,542.0 1121.0,334.0 1166,334.0" fill="none" stroke="#3a4653" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="1211.0" cy="438.0" r="3" fill="#5fd08a"/>
+<path d="M1688,334.0 C1724.0,334.0 1706.0,334.0 1742,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1715.0" cy="334.0" r="3" fill="#5fd08a"/>
+<path d="M1912,334.0 C1948.0,334.0 1930.0,430.0 1966,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1939.0" cy="382.0" r="3" fill="#5fd08a"/>
+<path d="M2328,430.0 C2364.0,430.0 2314.0,430.0 2350,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2339.0" cy="430.0" r="3" fill="#5fd08a"/>
+<path d="M1912,526.0 C1948.0,526.0 1930.0,430.0 1966,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1939.0" cy="478.0" r="3" fill="#5fd08a"/>
+<path d="M2136,430.0 C2172.0,430.0 2122.0,430.0 2158,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2147.0" cy="430.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="216" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="234" class="t">Webhook (call_id)</text>
+<text x="62" y="258" class="ty">WEBHOOK</text>
+<rect x="270" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="234" class="t">Load Call</text>
+<text x="286" y="258" class="ty">SUPABASE</text>
+<rect x="494" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="330" class="t">Load Evaluations</text>
+<text x="510" y="354" class="ty">SUPABASE</text>
+<rect x="718" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="734" y="324" class="t">Load Evaluation</text>
+<text x="734" y="340" class="t">Items</text>
+<text x="734" y="354" class="ty">SUPABASE</text>
+<rect x="494" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="138" class="t">Load Sales Rules</text>
+<text x="510" y="162" class="ty">SUPABASE</text>
+<rect x="942" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="942" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="958" y="330" class="t">Build Sales Prompt</text>
+<text x="958" y="354" class="ty">CODE</text>
+<rect x="1086" y="510" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="1086" y="520" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="1102" y="532" class="t">Google Gemini Chat</text>
+<text x="1102" y="548" class="t">Model</text>
+<text x="1102" y="562" class="ty">GEMINI CHAT MODEL</text>
+<rect x="1166" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="1166" y="312" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="1182" y="324" class="t">Extract Sales</text>
+<text x="1182" y="340" class="t">Behaviors</text>
+<text x="1182" y="354" class="ty">AI AGENT</text>
+<rect x="1518" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1518" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1534" y="330" class="t">Parse Behaviors</text>
+<text x="1534" y="354" class="ty">CODE</text>
+<rect x="1742" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1742" y="312" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1758" y="324" class="t">Dedup Sales</text>
+<text x="1758" y="340" class="t">Behaviors</text>
+<text x="1758" y="354" class="ty">CODE</text>
+<rect x="2350" y="398" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2350" y="408" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2366" y="420" class="t">Trigger WF06 -</text>
+<text x="2366" y="436" class="t">Performance</text>
+<text x="2366" y="450" class="ty">HTTP REQUEST</text>
+<rect x="2158" y="398" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2158" y="408" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2174" y="420" class="t">Build WF06 Trigger</text>
+<text x="2174" y="436" class="t">Payload</text>
+<text x="2174" y="450" class="ty">CODE</text>
+<rect x="1742" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1742" y="504" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1758" y="522" class="t">Build Sales Body</text>
+<text x="1758" y="546" class="ty">CODE</text>
+<rect x="1966" y="398" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1966" y="408" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1982" y="420" class="t">Store Sales</text>
+<text x="1982" y="436" class="t">Behaviors</text>
+<text x="1982" y="450" class="ty">SUPABASE</text>
 </svg>

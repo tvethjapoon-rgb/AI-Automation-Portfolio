@@ -1,38 +1,128 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 782" role="img" aria-label="WF07 — Coaching">
-<rect width="300" height="782" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF07 — COACHING</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">WEBHOOK</text>
-<text x="42" y="88" class="nd">agent weaknesses in</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">FETCH CONTEXT</text>
-<text x="42" y="206" class="nd">supabase · agent + items</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">RECOMMENDATIONS</text>
-<text x="42" y="324" class="nd">deterministic · priority</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">TRELLO CARD</text>
-<text x="42" y="442" class="nd">coaching task</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">STORE ACTION</text>
-<text x="42" y="560" class="nd">supabase · coaching_actions</text>
-<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="634" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="658" class="nl">TRIGGER WF08</text>
-<text x="42" y="678" class="nd">webhook</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2726 776.0" width="100%" role="img" aria-label="WF07 — Coaching — live n8n canvas render">
+<rect width="2726" height="776.0" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF07 — COACHING</text>
+<text x="2680" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 17 NODES</text>
+<line x1="46" y1="44" x2="2680" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,526.0 C252.0,526.0 234.0,526.0 270,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M1112,526.0 C1148.0,526.0 1130.0,526.0 1166,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1139.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M2456,382.0 C2492.0,382.0 2474.0,382.0 2510,382.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2483.0" cy="382.0" r="3" fill="#5fd08a"/>
+<text x="2464" y="374.0" class="ty">true</text>
+<path d="M2456,382.0 C2492.0,382.0 2474.0,574.0 2510,574.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2483.0" cy="478.0" r="3" fill="#5fd08a"/>
+<text x="2464" y="374.0" class="ty">false</text>
+<path d="M2680,574.0 C2680,710.0 1390,566.0 1390,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="710.0" r="3" fill="#5fd08a"/>
+<path d="M2680,382.0 C2680,682.0 1390,730.0 1390,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="730.0" r="3" fill="#5fd08a"/>
+<path d="M2456,142.0 C2492.0,142.0 2474.0,142.0 2510,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2483.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M2008,286.0 C2044.0,286.0 2026.0,142.0 2062,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="214.0" r="3" fill="#5fd08a"/>
+<text x="2016" y="278.0" class="ty">true</text>
+<path d="M2008,286.0 C2044.0,286.0 2026.0,382.0 2062,382.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2035.0" cy="334.0" r="3" fill="#5fd08a"/>
+<text x="2016" y="278.0" class="ty">false</text>
+<path d="M440,526.0 C476.0,526.0 458.0,526.0 494,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M664,526.0 C700.0,526.0 682.0,526.0 718,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M888,526.0 C924.0,526.0 906.0,526.0 942,526.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="915.0" cy="526.0" r="3" fill="#5fd08a"/>
+<path d="M1336,526.0 C1372.0,526.0 1354.0,430.0 1390,430.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1363.0" cy="478.0" r="3" fill="#5fd08a"/>
+<text x="1344" y="518.0" class="ty">true</text>
+<path d="M1336,526.0 C1372.0,526.0 1354.0,622.0 1390,622.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1363.0" cy="574.0" r="3" fill="#5fd08a"/>
+<text x="1344" y="518.0" class="ty">false</text>
+<path d="M2232,142.0 C2268.0,142.0 2250.0,142.0 2286,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2259.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M2232,382.0 C2268.0,382.0 2250.0,382.0 2286,382.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="2259.0" cy="382.0" r="3" fill="#5fd08a"/>
+<path d="M1784,286.0 C1820.0,286.0 1802.0,286.0 1838,286.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1811.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M1560,430.0 C1811.0,430.0 1811.0,142.0 2062,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1811.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M1560,430.0 C1596.0,430.0 1578.0,286.0 1614,286.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1587.0" cy="358.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="504" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="516" class="t">Webhook (WF06</text>
+<text x="62" y="532" class="t">Output)</text>
+<text x="62" y="546" class="ty">WEBHOOK</text>
+<rect x="270" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="504" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="522" class="t">Fetch Agent Details</text>
+<text x="286" y="546" class="ty">SUPABASE</text>
+<rect x="494" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="504" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="516" class="t">Fetch Evaluation</text>
+<text x="510" y="532" class="t">Items</text>
+<text x="510" y="546" class="ty">SUPABASE</text>
+<rect x="718" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="504" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="734" y="522" class="t">Fetch Evaluation</text>
+<text x="734" y="546" class="ty">SUPABASE</text>
+<rect x="942" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="942" y="504" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="958" y="516" class="t">Generate</text>
+<text x="958" y="532" class="t">Recommendations</text>
+<text x="958" y="546" class="ty">CODE</text>
+<rect x="2286" y="350" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2286" y="360" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2302" y="378" class="t">Check Trello Success</text>
+<text x="2302" y="402" class="ty">IF</text>
+<rect x="2510" y="542" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2510" y="552" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2526" y="564" class="t">Notify Ops - Trello</text>
+<text x="2526" y="580" class="t">Failure</text>
+<text x="2526" y="594" class="ty">GMAIL</text>
+<rect x="2510" y="350" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2510" y="360" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2526" y="372" class="t">Store Coaching</text>
+<text x="2526" y="388" class="t">Action</text>
+<text x="2526" y="402" class="ty">SUPABASE</text>
+<rect x="2286" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2286" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2302" y="132" class="t">Trigger WF08 -</text>
+<text x="2302" y="148" class="t">Reporting</text>
+<text x="2302" y="162" class="ty">HTTP REQUEST</text>
+<rect x="2510" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#5a6a62" stroke-width="1.5" opacity="0.98"/>
+<rect x="2510" y="120" width="4" height="44" rx="2" fill="#5a6a62"/>
+<text x="2526" y="138" class="t">Respond to Webhook</text>
+<text x="2526" y="162" class="ty">WEBHOOK REPLY</text>
+<rect x="1390" y="590" width="170" height="64" rx="7" fill="#0f1513" stroke="#5a6a62" stroke-width="1.5" opacity="0.98"/>
+<rect x="1390" y="600" width="4" height="44" rx="2" fill="#5a6a62"/>
+<text x="1406" y="618" class="t">Respond - Exit Early</text>
+<text x="1406" y="642" class="ty">WEBHOOK REPLY</text>
+<rect x="1838" y="254" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1838" y="264" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1854" y="276" class="t">Coaching Action</text>
+<text x="1854" y="292" class="t">Exists</text>
+<text x="1854" y="306" class="ty">IF</text>
+<rect x="1166" y="494" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1166" y="504" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1182" y="522" class="t">Route by Status IF</text>
+<text x="1182" y="546" class="ty">IF</text>
+<rect x="2062" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="2062" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="2078" y="132" class="t">Build WF08 Trigger</text>
+<text x="2078" y="148" class="t">Payload</text>
+<text x="2078" y="162" class="ty">CODE</text>
+<rect x="2062" y="350" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="2062" y="360" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="2078" y="378" class="t">Create a card</text>
+<text x="2078" y="402" class="ty">TRELLO</text>
+<rect x="1614" y="254" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1614" y="264" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1630" y="276" class="t">Check Existing</text>
+<text x="1630" y="292" class="t">Coaching Action</text>
+<text x="1630" y="306" class="ty">SUPABASE</text>
+<rect x="1390" y="398" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1390" y="408" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1406" y="426" class="t">Loop Over Items</text>
+<text x="1406" y="450" class="ty">LOOP</text>
 </svg>

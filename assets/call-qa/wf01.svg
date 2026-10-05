@@ -1,33 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 664" role="img" aria-label="WF01 — Call Intake">
-<rect width="300" height="664" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF01 — CALL INTAKE</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">SHEETS TRIGGER</text>
-<text x="42" y="88" class="nd">new transcript row</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">VALIDATE</text>
-<text x="42" y="206" class="nd">uuid · required fields</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">DEDUPE CHECK</text>
-<text x="42" y="324" class="nd">call_id exists?</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">INSERT CALL</text>
-<text x="42" y="442" class="nd">supabase · calls</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">TRIGGER WF02</text>
-<text x="42" y="560" class="nd">webhook · call_id</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1478 424.0" width="100%" role="img" aria-label="WF01 — Call Intake — live n8n canvas render">
+<rect width="1478" height="424.0" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF01 — CALL INTAKE</text>
+<text x="1432" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 7 NODES</text>
+<line x1="46" y1="44" x2="1432" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,142.0 C252.0,142.0 234.0,142.0 270,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M664,206.0 C700.0,206.0 666.0,206.0 702,206.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="683.0" cy="206.0" r="3" fill="#5fd08a"/>
+<path d="M872,206.0 C872,358.0 270,294.0 270,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="571.0" cy="358.0" r="3" fill="#5fd08a"/>
+<text x="880" y="198.0" class="ty">true</text>
+<path d="M872,206.0 C908.0,206.0 842.0,270.0 878,270.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="875.0" cy="238.0" r="3" fill="#5fd08a"/>
+<text x="880" y="198.0" class="ty">false</text>
+<path d="M1048,270.0 C1084.0,270.0 1034.0,270.0 1070,270.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1059.0" cy="270.0" r="3" fill="#5fd08a"/>
+<path d="M1240,270.0 C1276.0,270.0 1226.0,270.0 1262,270.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1251.0" cy="270.0" r="3" fill="#5fd08a"/>
+<path d="M440,142.0 C476.0,142.0 458.0,206.0 494,206.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="174.0" r="3" fill="#5fd08a"/>
+<path d="M1432,270.0 C1432,378.0 270,250.0 270,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="851.0" cy="378.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="120" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="132" class="t">Google Sheets</text>
+<text x="62" y="148" class="t">Trigger</text>
+<text x="62" y="162" class="ty">SHEETS TRIGGER</text>
+<rect x="494" y="174" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="184" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="510" y="202" class="t">Check Duplicate Call</text>
+<text x="510" y="226" class="ty">SUPABASE</text>
+<rect x="702" y="174" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="702" y="184" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="718" y="202" class="t">Is Duplicate?</text>
+<text x="718" y="226" class="ty">IF</text>
+<rect x="878" y="238" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="878" y="248" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="894" y="266" class="t">Insert Call</text>
+<text x="894" y="290" class="ty">SUPABASE</text>
+<rect x="1070" y="238" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1070" y="248" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1086" y="260" class="t">Trigger_WF02 - Call</text>
+<text x="1086" y="276" class="t">Classification</text>
+<text x="1086" y="290" class="ty">HTTP REQUEST</text>
+<rect x="270" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="286" y="138" class="t">Loop Over Items</text>
+<text x="286" y="162" class="ty">LOOP</text>
+<rect x="1262" y="238" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1262" y="248" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1278" y="266" class="t">Wait</text>
+<text x="1278" y="290" class="ty">WAIT</text>
 </svg>

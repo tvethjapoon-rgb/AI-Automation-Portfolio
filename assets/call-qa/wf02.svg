@@ -1,38 +1,89 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 782" role="img" aria-label="WF02 — Call Classification">
-<rect width="300" height="782" fill="#0c1210"/>
-<style>
-text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
-.nd{font-size:10px;fill:#93a89a}
-.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
-</style>
-<text x="30" y="24" class="cap">WF02 — CALL CLASSIFICATION</text>
-<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="68" class="nl">WEBHOOK</text>
-<text x="42" y="88" class="nd">call_id in</text>
-<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="186" class="nl">FETCH TRANSCRIPT</text>
-<text x="42" y="206" class="nd">supabase · calls</text>
-<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="304" class="nl">AI AGENT</text>
-<text x="42" y="324" class="nd">gemini · classify</text>
-<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="422" class="nl">PARSE OUTPUT</text>
-<text x="42" y="442" class="nd">type · intent · outcome</text>
-<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
-<text x="42" y="540" class="nl">UPDATE CALL</text>
-<text x="42" y="560" class="nd">supabase · classification</text>
-<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
-<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
-<rect x="30" y="634" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-<text x="42" y="658" class="nl">TRIGGER WF03</text>
-<text x="42" y="678" class="nd">webhook · call_id</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1958 652" width="100%" role="img" aria-label="WF02 — Call Classification — live n8n canvas render">
+<rect width="1958" height="652" fill="#0c1210"/>
+<style>text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}.t{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.04em}.ty{font-size:10.5px;fill:#93a89a;letter-spacing:.05em}.cap{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.08em}.sub{font-size:10.5px;fill:#93a89a;letter-spacing:.06em}</style>
+<text x="46" y="30" class="cap">WF02 — CALL CLASSIFICATION</text>
+<text x="1912" y="30" text-anchor="end" class="sub">LIVE CANVAS RENDER · 13 NODES</text>
+<line x1="46" y1="44" x2="1912" y2="44" stroke="#3a4653" stroke-width="1"/>
+<path d="M216,238.0 C252.0,238.0 234.0,238.0 270,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1240,238.0 C1276.0,238.0 1258.0,334.0 1294,334.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1267.0" cy="286.0" r="3" fill="#5fd08a"/>
+<path d="M1240,238.0 C1276.0,238.0 1258.0,142.0 1294,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1267.0" cy="190.0" r="3" fill="#5fd08a"/>
+<path d="M888,238.0 C979.0,238.0 979.0,238.0 1070,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="979.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M960,470.0 C1081.0,470.0 597.0,238.0 718,238.0" fill="none" stroke="#3a4653" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="839.0" cy="354.0" r="3" fill="#5fd08a"/>
+<path d="M440,238.0 C476.0,238.0 458.0,238.0 494,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M216,574.0 C252.0,574.0 234.0,574.0 270,574.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="243.0" cy="574.0" r="3" fill="#5fd08a"/>
+<path d="M440,574.0 C476.0,574.0 458.0,574.0 494,574.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="467.0" cy="574.0" r="3" fill="#5fd08a"/>
+<path d="M1464,142.0 C1500.0,142.0 1482.0,142.0 1518,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1491.0" cy="142.0" r="3" fill="#5fd08a"/>
+<path d="M664,238.0 C700.0,238.0 682.0,238.0 718,238.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="691.0" cy="238.0" r="3" fill="#5fd08a"/>
+<path d="M1688,142.0 C1724.0,142.0 1706.0,142.0 1742,142.0" fill="none" stroke="#3a4653" stroke-width="2"/>
+<circle cx="1715.0" cy="142.0" r="3" fill="#5fd08a"/>
+<rect x="46" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#5fd08a" stroke-width="1.5" opacity="0.98"/>
+<rect x="46" y="216" width="4" height="44" rx="2" fill="#5fd08a"/>
+<text x="62" y="234" class="t">Webhook (call_id)</text>
+<text x="62" y="258" class="ty">WEBHOOK</text>
+<rect x="1070" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1070" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1086" y="234" class="t">Parse AI Output</text>
+<text x="1086" y="258" class="ty">CODE</text>
+<rect x="1294" y="302" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1294" y="312" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1310" y="324" class="t">Notify</text>
+<text x="1310" y="340" class="t">Classification Error</text>
+<text x="1310" y="354" class="ty">GMAIL</text>
+<rect x="718" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="718" y="216" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="734" y="234" class="t">AI Agent</text>
+<text x="734" y="258" class="ty">AI AGENT</text>
+<rect x="790" y="438" width="170" height="64" rx="7" fill="#0f1513" stroke="#e0b45c" stroke-width="1.5" opacity="0.98"/>
+<rect x="790" y="448" width="4" height="44" rx="2" fill="#e0b45c"/>
+<text x="806" y="460" class="t">Google Gemini Chat</text>
+<text x="806" y="476" class="t">Model</text>
+<text x="806" y="490" class="ty">GEMINI CHAT MODEL</text>
+<rect x="494" y="542" width="170" height="64" rx="7" fill="#0f1513" stroke="#5a6a62" stroke-width="1.5" opacity="0.98" stroke-dasharray="6 4"/>
+<rect x="494" y="552" width="4" height="44" rx="2" fill="#5a6a62"/>
+<text x="510" y="564" class="t">Trigger WF03 - QA</text>
+<text x="510" y="580" class="t">Evaluation</text>
+<text x="510" y="594" class="ty">RUN WORKFLOW</text>
+<rect x="270" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="270" y="216" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="234" class="t">Fetch_Transcript</text>
+<text x="286" y="258" class="ty">SUPABASE</text>
+<rect x="46" y="542" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98" stroke-dasharray="6 4"/>
+<rect x="46" y="552" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="62" y="570" class="t">Build Update Payload</text>
+<text x="62" y="594" class="ty">CODE</text>
+<rect x="270" y="542" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98" stroke-dasharray="6 4"/>
+<rect x="270" y="552" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="286" y="564" class="t">Update Call</text>
+<text x="286" y="580" class="t">Classification</text>
+<text x="286" y="594" class="ty">HTTP REQUEST</text>
+<rect x="1294" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1294" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1310" y="132" class="t">Update_Call_Classifi</text>
+<text x="1310" y="148" class="t">cation</text>
+<text x="1310" y="162" class="ty">SUPABASE</text>
+<rect x="1742" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#8a9a93" stroke-width="1.5" opacity="0.98"/>
+<rect x="1742" y="120" width="4" height="44" rx="2" fill="#8a9a93"/>
+<text x="1758" y="132" class="t">Trigger_WF03 -</text>
+<text x="1758" y="148" class="t">QA-Evaluation</text>
+<text x="1758" y="162" class="ty">HTTP REQUEST</text>
+<rect x="494" y="206" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="494" y="216" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="510" y="228" class="t">Build AI Agent</text>
+<text x="510" y="244" class="t">Prompt</text>
+<text x="510" y="258" class="ty">CODE</text>
+<rect x="1518" y="110" width="170" height="64" rx="7" fill="#0f1513" stroke="#7fb3d8" stroke-width="1.5" opacity="0.98"/>
+<rect x="1518" y="120" width="4" height="44" rx="2" fill="#7fb3d8"/>
+<text x="1534" y="132" class="t">Build WF03 Trigger</text>
+<text x="1534" y="148" class="t">Payload</text>
+<text x="1534" y="162" class="ty">CODE</text>
 </svg>
