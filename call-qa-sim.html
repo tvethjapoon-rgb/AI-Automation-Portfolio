@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive simulation: AI Call QA & Performance Intelligence. Fictional demo data, runs entirely in your browser.">
+<title>Call QA Simulation — Hanz Jay Apoon</title>
+<style>
+:root{
+  --bg:#0c1210; --panel:#111916; --ink:#e9f2ec; --muted:#93a89a;
+  --line:#243128; --accent:#5fd08a; --accent-ink:#0a1a10; --ok:#37c978;
+  --warn:#ffb020; --bad:#ff5d5d;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --disp:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);padding:.9rem 0}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-decoration:none}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:-.02em;margin:.6rem 0}
+.hero p{color:var(--muted);max-width:44rem}
+.sim-badge{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;border:1px dashed var(--warn);color:var(--warn);padding:.4rem .8rem;margin-bottom:1rem}
+.section{padding:2.5rem 0;border-bottom:1px solid var(--line)}
+.section h2{font-size:1.4rem;margin-bottom:1rem}
+.section h2 .n{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin-right:.6rem}
+.call-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.call-card{background:var(--bg);padding:1.25rem;cursor:pointer;border:2px solid transparent;text-align:left;color:var(--ink);font-family:var(--disp);width:100%}
+.call-card:hover{background:var(--panel)}
+.call-card.sel{border-color:var(--accent)}
+.call-card h3{font-family:var(--mono);font-size:.95rem;color:var(--accent);margin-bottom:.4rem}
+.call-card p{font-size:.88rem;color:var(--muted)}
+.transcript{background:var(--panel);border:1px solid var(--line);padding:1.25rem;font-size:.92rem;max-height:22rem;overflow:auto}
+.transcript .spk{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--accent);margin-top:.9rem}
+.transcript .spk:first-child{margin-top:0}
+.transcript .spk.cust{color:var(--warn)}
+.btn{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;padding:.85rem 1.5rem;border:1px solid var(--accent);display:inline-block;cursor:pointer;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none}
+.btn:disabled{opacity:.4;cursor:default}
+.btn--ghost{background:transparent;color:var(--accent)}
+.stages{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}
+.stage{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;border:1px solid var(--line);color:var(--muted);padding:.45rem .7rem}
+.stage.on{border-color:var(--accent);color:var(--accent)}
+.stage.done{border-color:var(--ok);color:var(--ok)}
+.stage.fail{border-color:var(--bad);color:var(--bad)}
+.stage-out{background:var(--panel);border:1px solid var(--line);padding:1.25rem;min-height:8rem;font-size:.92rem}
+.kv{display:grid;grid-template-columns:11rem 1fr;gap:.3rem .8rem;font-size:.9rem;margin:.6rem 0}
+.kv dt{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.06em}
+.kv dd{color:var(--ink)}
+.rule{border-bottom:1px dashed var(--line);padding:.7rem 0}
+.rule:last-child{border-bottom:none}
+.rule .rh{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.78rem}
+.badge{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;padding:.2rem .55rem;border:1px solid}
+.b-pass{color:var(--ok);border-color:var(--ok)}
+.b-partial{color:var(--warn);border-color:var(--warn)}
+.b-fail{color:var(--bad);border-color:var(--bad)}
+.ev{border-left:2px solid var(--accent);padding:.4rem .8rem;margin:.5rem 0;color:var(--muted);font-size:.88rem;font-style:italic}
+.crit{border:1px solid var(--bad);color:var(--bad);font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;padding:.6rem .9rem;margin:.8rem 0}
+.bar-row{display:grid;grid-template-columns:10rem 1fr 3.5rem;gap:.8rem;align-items:center;margin:.55rem 0;font-size:.85rem}
+.bar-track{background:var(--line);height:.7rem;position:relative}
+.bar-fill{background:var(--accent);height:100%;width:0;transition:width .8s ease}
+.bar-fill.low{background:var(--bad)}
+.bar-fill.mid{background:var(--warn)}
+.verdict{border:1px solid var(--accent);padding:1.5rem;margin-top:1.5rem}
+.verdict.bad{border-color:var(--bad)}
+.verdict h3{font-size:1.6rem;margin:.4rem 0}
+.verdict .score{font-family:var(--mono);font-size:2.6rem;color:var(--accent);font-weight:800}
+.verdict.bad .score{color:var(--bad)}
+.trello-mock{border:1px solid var(--line);background:var(--bg);padding:1rem;margin-top:1rem;font-size:.88rem}
+.trello-mock .th{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--accent);margin-bottom:.4rem}
+.note{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1.5rem;letter-spacing:.04em}
+.hidden{display:none}
+footer{padding:2rem 0;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+@media (max-width:40rem){.kv{grid-template-columns:1fr}.bar-row{grid-template-columns:7rem 1fr 3rem}}
+@media (prefers-reduced-motion:reduce){.bar-fill{transition:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html">hanz@automation:~</a>
+  <span class="tag">simulation</span>
+</div></header>
+<main>
+  <section class="hero"><div class="wrap">
+    <span class="sim-badge">SIMULATION · FICTIONAL DATA · RUNS 100% IN YOUR BROWSER</span>
+    <h1>AI Call QA &amp; Performance Intelligence</h1>
+    <p>Watch a call transcript move through the pipeline: intake → AI classification → scorecard evidence extraction → <strong>deterministic</strong> scoring → coaching. The AI extracts evidence; <strong>rules do the math</strong> — the model never invents the final score. Nothing here touches a real system; every transcript, score, and name is fictional.</p>
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <h2><span class="n">[01]</span>Pick a call</h2>
+    <div class="call-grid" id="call-grid" role="listbox" aria-label="Fictional demo calls"></div>
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <h2><span class="n">[02]</span>Transcript <span class="tag" style="font-size:.65rem">fictional</span></h2>
+    <div class="transcript" id="transcript"><p style="color:var(--muted)">Select a call above to load its transcript.</p></div>
+    <p style="margin-top:1.25rem"><button class="btn" id="run-btn" disabled>▶ Run pipeline</button>
+    <button class="btn btn--ghost" id="reset-btn" type="button">Reset</button></p>
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <h2><span class="n">[03]</span>Pipeline</h2>
+    <div class="stages" id="stages"></div>
+    <div class="stage-out" id="stage-out"><p style="color:var(--muted)">The pipeline hasn't run yet. Pick a call and press <strong>Run pipeline</strong>.</p></div>
+    <div id="verdict-slot"></div>
+    <p class="note">// demo business: Brightline Telecom (fictional) · scorecard weights: compliance 25 · handling 20 · communication 15 · resolution 15 · sales 15 · process 10 · critical-rule failure caps the evaluation regardless of points</p>
+  </div></section>
+</main>
+<footer><div class="wrap"><p>Simulation for portfolio demo only — fictional data, client-side only. <a href="index.html">← back to portfolio</a></p></div></footer>
+
+<script>
+(function(){
+"use strict";
+var CAT_W = {compliance:.25, handling:.20, communication:.15, resolution:.15, sales:.15, process:.10};
+var CAT_LABEL = {compliance:"Compliance", handling:"Customer Handling", communication:"Communication", resolution:"Resolution", sales:"Sales", process:"Process Adherence"};
+
+var CALLS = [
+{
+  id:"SALES-1042", label:"Sales call — strong close", agent:"Maya R.", date:"2026-09-20", dur:"06:12",
+  transcript:[
+    ["AGENT","Thanks for calling Brightline Telecom, this is Maya. May I have your full name and account number to verify?"],
+    ["CUSTOMER","It's Jordan Ellis, account 88412. I'm thinking about upgrading my plan, the current one feels slow."],
+    ["AGENT","Thanks Jordan, verified. What do you mainly use your connection for — work, streaming, gaming?"],
+    ["CUSTOMER","Mostly remote work and video calls, plus the kids stream in the evening."],
+    ["AGENT","Then the 500 Mbps tier fits — stable video for work, headroom for the evening. It's $15 more than your current plan and includes the new router free."],
+    ["CUSTOMER","Hmm, $15 more… is it really worth it?"],
+    ["AGENT","Fair question. On your current 100 Mbps, two video calls plus streaming is exactly where slowdowns start. The 500 tier removes that bottleneck, and the router alone is worth $120."],
+    ["CUSTOMER","Okay, let's do it."],
+    ["AGENT","Great — I'll process the upgrade now and schedule your router delivery for Thursday. You'll get a confirmation text today."]
+  ],
+  classification:{type:"sales", intent:"plan_upgrade", outcome:"sale_closed", confidence:0.94},
+  rules:[
+    {rule:"Required greeting", cat:"compliance", max:10, score:10, result:"pass", conf:0.99, crit:false, ev:"\"Thanks for calling Brightline Telecom, this is Maya.\""},
+    {rule:"Customer verification", cat:"compliance", max:10, score:10, result:"pass", conf:0.98, crit:true, ev:"\"May I have your full name and account number to verify?\" — verified before discussing account."},
+    {rule:"Discovery questions", cat:"sales", max:10, score:9, result:"pass", conf:0.93, crit:false, ev:"\"What do you mainly use your connection for — work, streaming, gaming?\""},
+    {rule:"Value proposition", cat:"sales", max:10, score:9, result:"pass", conf:0.91, crit:false, ev:"Mapped 500 Mbps tier to stated needs; quantified router value ($120)."},
+    {rule:"Objection handling", cat:"sales", max:10, score:8, result:"pass", conf:0.88, crit:false, ev:"Addressed price concern with specific bottleneck explanation, not a discount."},
+    {rule:"Closing attempt", cat:"sales", max:10, score:10, result:"pass", conf:0.97, crit:false, ev:"\"I'll process the upgrade now and schedule your router delivery for Thursday.\""},
+    {rule:"No prohibited statements", cat:"compliance", max:10, score:10, result:"pass", conf:0.99, crit:true, ev:"No guarantees, no false claims detected."},
+    {rule:"Follow-up scheduled", cat:"process", max:10, score:9, result:"pass", conf:0.92, crit:false, ev:"Router delivery Thursday + confirmation text promised."}
+  ],
+  coaching:null
+},
+{
+  id:"SUP-2077", label:"Complaint — mishandled", agent:"Dan K.", date:"2026-09-21", dur:"09:47",
+  transcript:[
+    ["AGENT","Brightline, Dan speaking."],
+    ["CUSTOMER","Hi, I've been charged twice this month and I need it fixed right now, this is ridiculous."],
+    ["AGENT","Yeah that's just how the billing cycle works, nothing I can do about it."],
+    ["CUSTOMER","Excuse me? I was charged $89 twice. I want a refund for the duplicate."],
+    ["AGENT","Look, that's company policy, I can't just hand out refunds."],
+    ["CUSTOMER","Then get me your supervisor."],
+    ["AGENT","They're all busy. Is there anything else?"]
+  ],
+  classification:{type:"complaint", intent:"billing_dispute", outcome:"unresolved", confidence:0.91},
+  rules:[
+    {rule:"Required greeting", cat:"compliance", max:10, score:6, result:"partial", conf:0.9, crit:false, ev:"\"Brightline, Dan speaking.\" — missing full greeting and name offer."},
+    {rule:"Customer verification", cat:"compliance", max:10, score:0, result:"fail", conf:0.97, crit:true, ev:"No verification performed before discussing billing."},
+    {rule:"Empathy statements", cat:"handling", max:10, score:3, result:"fail", conf:0.9, crit:false, ev:"No acknowledgment of frustration; dismissive tone throughout."},
+    {rule:"No prohibited statements", cat:"compliance", max:10, score:0, result:"fail", conf:0.95, crit:true, ev:"\"that's company policy, I can't just hand out refunds\" — absolute refusal language."},
+    {rule:"Correct escalation", cat:"resolution", max:10, score:2, result:"fail", conf:0.93, crit:false, ev:"Refused supervisor request: \"They're all busy.\""},
+    {rule:"Communication clarity", cat:"communication", max:10, score:6, result:"partial", conf:0.85, crit:false, ev:"Short, clipped responses; no explanation of billing cycle."},
+    {rule:"Resolution offered", cat:"resolution", max:10, score:0, result:"fail", conf:0.96, crit:false, ev:"No refund, credit, or investigation offered."},
+    {rule:"Follow-up scheduled", cat:"process", max:10, score:0, result:"fail", conf:0.98, crit:false, ev:"Call ended with no next step."}
+  ],
+  coaching:{issue:"Skipped verification; used absolute refusal language; denied escalation.", recommendation:"1:1 coaching on verification-first flow and de-escalation phrasing. Shadow Maya R.'s next 3 complaint calls.", priority:"HIGH"}
+},
+{
+  id:"BIL-3091", label:"Billing inquiry — average", agent:"Priya S.", date:"2026-09-22", dur:"04:31",
+  transcript:[
+    ["AGENT","Thanks for calling Brightline Telecom, this is Priya. Could I verify your name and account number?"],
+    ["CUSTOMER","Sam Ortiz, 77120. My bill went up $12 and I don't know why."],
+    ["AGENT","Thanks Sam, verified. I see the $12 — your promo discount expired this cycle. Your base plan is unchanged."],
+    ["CUSTOMER","Ah, okay. Can I get the promo back?"],
+    ["AGENT","I can't reapply that exact promo, but there's a loyalty rate $6 less than what you're paying now. Want me to switch you?"],
+    ["CUSTOMER","Sure, that works."],
+    ["AGENT","Done — takes effect next cycle. Anything else I can help with?"]
+  ],
+  classification:{type:"billing", intent:"invoice_question", outcome:"resolved", confidence:0.88},
+  rules:[
+    {rule:"Required greeting", cat:"compliance", max:10, score:10, result:"pass", conf:0.98, crit:false, ev:"Full greeting with name."},
+    {rule:"Customer verification", cat:"compliance", max:10, score:10, result:"pass", conf:0.97, crit:true, ev:"Verified before discussing billing."},
+    {rule:"Discovery questions", cat:"sales", max:10, score:5, result:"partial", conf:0.8, crit:false, ev:"No needs discovery — missed upsell context."},
+    {rule:"Value proposition", cat:"sales", max:10, score:6, result:"partial", conf:0.78, crit:false, ev:"Loyalty rate offered reactively, not positioned."},
+    {rule:"Empathy statements", cat:"handling", max:10, score:8, result:"pass", conf:0.86, crit:false, ev:"Calm, clear explanation of the $12 change."},
+    {rule:"No prohibited statements", cat:"compliance", max:10, score:10, result:"pass", conf:0.99, crit:true, ev:"None detected."},
+    {rule:"Resolution offered", cat:"resolution", max:10, score:9, result:"pass", conf:0.9, crit:false, ev:"Loyalty rate applied, effective next cycle."},
+    {rule:"Follow-up scheduled", cat:"process", max:10, score:5, result:"partial", conf:0.82, crit:false, ev:"No confirmation channel offered."}
+  ],
+  coaching:{issue:"No discovery questions — reactive instead of consultative on billing calls.", recommendation:"Add one discovery question to the billing flow; review Maya R.'s discovery pattern.", priority:"LOW"}
+}];
+
+var STAGES = ["INTAKE","CLASSIFY","SCORECARD","EVIDENCE","SCORING","CRITICAL CHECK","COACHING","REPORT"];
+var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+var $ = function(id){ return document.getElementById(id); };
+var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var wait = function(ms){ return sleep(reduced ? 60 : ms); };
+
+var current = null;
+
+function renderPicker(){
+  var grid = $("call-grid"); grid.innerHTML = "";
+  CALLS.forEach(function(c, i){
+    var b = document.createElement("button");
+    b.className = "call-card"; b.setAttribute("role","option");
+    b.innerHTML = "<h3>"+c.id+"</h3><p><strong style='color:var(--ink)'>"+c.label+"</strong><br>Agent "+c.agent+" · "+c.dur+" · "+c.date+"</p>";
+    b.addEventListener("click", function(){ selectCall(i); });
+    grid.appendChild(b);
+  });
+}
+function selectCall(i){
+  current = CALLS[i];
+  var cards = document.querySelectorAll(".call-card");
+  cards.forEach(function(el, j){ el.classList.toggle("sel", j===i); });
+  var t = $("transcript"); t.innerHTML = "";
+  current.transcript.forEach(function(line){
+    var d = document.createElement("div");
+    d.innerHTML = "<div class='spk"+(line[0]==="CUSTOMER"?" cust":"")+"'>"+line[0]+"</div><div>"+line[1]+"</div>";
+    t.appendChild(d);
+  });
+  $("run-btn").disabled = false;
+  $("stage-out").innerHTML = "<p style='color:var(--muted)'>Transcript loaded. Press <strong>Run pipeline</strong>.</p>";
+  $("verdict-slot").innerHTML = "";
+  paintStages(-1);
+}
+function paintStages(activeIdx, failed){
+  var box = $("stages"); box.innerHTML = "";
+  STAGES.forEach(function(s, i){
+    var d = document.createElement("span");
+    d.className = "stage" + (i < activeIdx ? " done" : "") + (i === activeIdx ? (failed ? " fail" : " on") : "");
+    d.textContent = "0"+(i+1)+" · "+s;
+    box.appendChild(d);
+  });
+}
+function badge(r){
+  var cls = r==="pass" ? "b-pass" : (r==="partial" ? "b-partial" : "b-fail");
+  return "<span class='badge "+cls+"'>"+r.toUpperCase()+"</span>";
+}
+function kv(rows){
+  return "<dl class='kv'>" + rows.map(function(r){ return "<dt>"+r[0]+"</dt><dd>"+r[1]+"</dd>"; }).join("") + "</dl>";
+}
+function catScores(call){
+  var acc = {};
+  call.rules.forEach(function(r){
+    (acc[r.cat] = acc[r.cat] || {got:0, max:0}).got += r.score;
+    acc[r.cat].max += r.max;
+  });
+  var out = {}, total = 0;
+  Object.keys(CAT_W).forEach(function(c){
+    var a = acc[c] || {got:0, max:0};
+    var pct = a.max ? (a.got / a.max) * 100 : 0;
+    out[c] = pct; total += pct * CAT_W[c];
+  });
+  return {cats: out, overall: total};
+}
+function critFailed(call){
+  return call.rules.filter(function(r){ return r.crit && r.result === "fail"; });
+}
+
+async function run(){
+  if(!current) return;
+  var btn = $("run-btn"); btn.disabled = true;
+  $("verdict-slot").innerHTML = "";
+  var out = $("stage-out"), c = current;
+
+  // 01 INTAKE
+  paintStages(0); out.innerHTML = "<p class='tag'>wf01 · call intake</p>" + kv([
+    ["call_id", c.id+"-uuid"], ["agent", c.agent+" (resolved to agent_id)"],
+    ["validate", "required fields ✓ · uuid ✓"], ["dedupe", "call_id not seen → insert"],
+    ["→ supabase", "calls row created"]
+  ]);
+  await wait(900);
+
+  // 02 CLASSIFY
+  paintStages(1);
+  out.innerHTML = "<p class='tag'>wf02 · ai classification (gemini)</p>" + kv([
+    ["call_type", c.classification.type], ["intent", c.classification.intent],
+    ["outcome", c.classification.outcome],
+    ["confidence", "<strong>"+Math.round(c.classification.confidence*100)+"%</strong>"]
+  ]) + "<p class='note'>// model classifies only — routing and storage are deterministic</p>";
+  await wait(1100);
+
+  // 03 SCORECARD
+  paintStages(2);
+  out.innerHTML = "<p class='tag'>wf03 · scorecard selection</p>" + kv([
+    ["scorecard", c.classification.type+"_v4 (active)"],
+    ["rules loaded", c.rules.length+" rules · weights sum 100%"],
+    ["weights", "compliance 25 · handling 20 · communication 15 · resolution 15 · sales 15 · process 10"]
+  ]);
+  await wait(900);
+
+  // 04 EVIDENCE
+  paintStages(3);
+  var html = "<p class='tag'>wf03 · ai evidence extraction — one quote per rule</p>";
+  c.rules.forEach(function(r){
+    html += "<div class='rule'><div class='rh'><span>"+r.rule+(r.crit?" ⚠ critical":"")+"</span>"+badge(r.result)+"</div>"
+      + "<div class='ev'>"+r.ev+"</div>"
+      + "<div style='font-family:var(--mono);font-size:.72rem;color:var(--muted)'>score "+r.score+"/"+r.max+" · confidence "+Math.round(r.conf*100)+"%</div></div>";
+  });
+  out.innerHTML = html;
+  await wait(1600);
+
+  // 05 SCORING
+  paintStages(4);
+  var sc = catScores(c);
+  html = "<p class='tag'>wf04 · deterministic scoring — rules do the math</p>";
+  Object.keys(CAT_W).forEach(function(k){
+    var pct = sc.cats[k];
+    var cls = pct >= 80 ? "" : (pct >= 50 ? "mid" : "low");
+    html += "<div class='bar-row'><span>"+CAT_LABEL[k]+"</span><div class='bar-track'><div class='bar-fill "+cls+"' data-w='"+pct.toFixed(0)+"'></div></div><span class='mono'>"+pct.toFixed(0)+"%</span></div>";
+  });
+  html += "<p class='note'>// overall = Σ(category × weight) — computed in code, never by the model</p>";
+  out.innerHTML = html;
+  await wait(150);
+  document.querySelectorAll(".bar-fill").forEach(function(b){ b.style.width = b.getAttribute("data-w")+"%"; });
+  await wait(1200);
+
+  // 06 CRITICAL CHECK
+  var crit = critFailed(c);
+  paintStages(5, crit.length > 0);
+  if(crit.length){
+    out.innerHTML = "<p class='tag'>wf04 · critical-failure check</p><div class='crit'>⛔ CRITICAL FAILURE — "+crit.map(function(r){return r.rule;}).join(" · ")+"</div><p>Score capped. Evaluation flagged for human review regardless of points earned.</p>";
+  } else {
+    out.innerHTML = "<p class='tag'>wf04 · critical-failure check</p><p style='color:var(--ok);font-family:var(--mono)'>✓ CLEAR — no critical rules failed.</p>";
+  }
+  await wait(1100);
+
+  // 07 COACHING
+  paintStages(6);
+  if(c.coaching){
+    out.innerHTML = "<p class='tag'>wf07 · coaching</p>" + kv([
+      ["issue", c.coaching.issue],
+      ["recommendation", c.coaching.recommendation],
+      ["priority", "<strong>"+c.coaching.priority+"</strong>"]
+    ]) + "<div class='trello-mock'><div class='th'>TRELLO · coaching board (mock)</div><strong>Coaching: "+c.agent+" — "+c.id+"</strong><br><span style='color:var(--muted)'>"+c.coaching.recommendation+"</span></div>";
+  } else {
+    out.innerHTML = "<p class='tag'>wf07 · coaching</p><p style='color:var(--muted)'>No repeated weakness detected — no coaching action created. (This is the system working: not every call needs a task.)</p>";
+  }
+  await wait(1100);
+
+  // 08 REPORT
+  paintStages(7);
+  var overall = crit.length ? Math.min(sc.overall, 39) : sc.overall;
+  out.innerHTML = "<p class='tag'>wf08 · reporting</p>" + kv([
+    ["→ supabase", "evaluation + "+c.rules.length+" items stored"],
+    ["→ sheets", "period aggregates updated"],
+    ["→ docs", "management summary regenerated"],
+    ["→ gmail", "supervisor digest queued"]
+  ]);
+  await wait(800);
+
+  // VERDICT
+  paintStages(8);
+  var v = document.createElement("div");
+  v.className = "verdict" + (crit.length ? " bad" : "");
+  v.innerHTML = "<p class='tag'>evaluation complete · human review "+(crit.length || overall < 60 ? "REQUIRED" : "optional")+"</p>"
+    + "<div class='score'>" + overall.toFixed(0) + "<span style='font-size:1.2rem'>/100</span></div>"
+    + "<h3>"+c.id+" — "+c.label+"</h3>"
+    + "<p style='color:var(--muted)'>"+c.rules.filter(function(r){return r.result==="pass";}).length+"/"+c.rules.length+" rules passed"
+    + (crit.length ? " · <strong style='color:var(--bad)'>critical failure: "+crit.map(function(r){return r.rule;}).join(", ")+"</strong>" : "")
+    + " · confidence "+Math.round(c.classification.confidence*100)+"%</p>"
+    + "<p class='note'>// fictional evaluation — the real pipeline stores evidence per rule in Supabase and routes low-confidence or critical cases to a human</p>";
+  $("verdict-slot").appendChild(v);
+  btn.disabled = false;
+}
+
+$("run-btn").addEventListener("click", run);
+$("reset-btn").addEventListener("click", function(){
+  $("verdict-slot").innerHTML = "";
+  $("stage-out").innerHTML = "<p style='color:var(--muted)'>Pipeline reset. Press <strong>Run pipeline</strong>.</p>";
+  paintStages(-1);
+});
+renderPicker();
+paintStages(-1);
+})();
+</script>
+</body>
+</html>

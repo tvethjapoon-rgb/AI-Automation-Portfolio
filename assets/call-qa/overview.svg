@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 1172" role="img" aria-label="Call QA system overview">
+<rect width="300" height="1172" fill="#0c1210"/>
+<style>
+text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
+.nd{font-size:10px;fill:#93a89a}
+.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
+</style>
+<text x="30" y="24" class="cap">CALL QA — SYSTEM OVERVIEW</text>
+<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="68" class="nl">SHEETS</text>
+<text x="42" y="88" class="nd">transcript in</text>
+<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="186" class="nl">WF01 · INTAKE</text>
+<text x="42" y="206" class="nd">validate · dedupe</text>
+<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="304" class="nl">WF02 · CLASSIFY</text>
+<text x="42" y="324" class="nd">type · intent · outcome</text>
+<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="422" class="nl">WF03 · EVALUATE</text>
+<text x="42" y="442" class="nd">ai evidence per rule</text>
+<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="516" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="540" class="nl">WF04 · SCORE</text>
+<text x="42" y="560" class="nd">deterministic · critical check</text>
+<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="634" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="658" class="nl">WF05 · SALES INTEL</text>
+<text x="42" y="678" class="nd">behaviors → outcomes</text>
+<line x1="150" y1="694" x2="150" y2="752" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="723" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="752" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="776" class="nl">WF06 · PERFORMANCE</text>
+<text x="42" y="796" class="nd">aggregate · rank</text>
+<line x1="150" y1="812" x2="150" y2="870" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="841" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="870" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="894" class="nl">WF07 · COACHING</text>
+<text x="42" y="914" class="nd">trello tasks</text>
+<line x1="150" y1="930" x2="150" y2="988" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="959" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="988" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="1012" class="nl">WF08 · REPORTING</text>
+<text x="42" y="1032" class="nd">sheets · docs · gmail</text>
+<rect x="30" y="1114" width="240" height="40" fill="none" stroke="#5fd08a" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="42" y="1139" class="nd" fill="#5fd08a">SUPABASE = system of record</text>
+</svg>

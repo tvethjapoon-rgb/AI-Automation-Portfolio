@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 782" role="img" aria-label="WF07 — Coaching">
+<rect width="300" height="782" fill="#0c1210"/>
+<style>
+text{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.nl{font-size:12px;font-weight:700;fill:#e9f2ec;letter-spacing:.06em}
+.nd{font-size:10px;fill:#93a89a}
+.cap{font-size:11px;fill:#93a89a;letter-spacing:.06em}
+</style>
+<text x="30" y="24" class="cap">WF07 — COACHING</text>
+<rect x="30" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="68" class="nl">WEBHOOK</text>
+<text x="42" y="88" class="nd">agent weaknesses in</text>
+<line x1="150" y1="104" x2="150" y2="162" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="133" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="186" class="nl">FETCH CONTEXT</text>
+<text x="42" y="206" class="nd">supabase · agent + items</text>
+<line x1="150" y1="222" x2="150" y2="280" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="251" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="304" class="nl">RECOMMENDATIONS</text>
+<text x="42" y="324" class="nd">deterministic · priority</text>
+<line x1="150" y1="340" x2="150" y2="398" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="369" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="398" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="422" class="nl">TRELLO CARD</text>
+<text x="42" y="442" class="nd">coaching task</text>
+<line x1="150" y1="458" x2="150" y2="516" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="487" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="516" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/>
+<text x="42" y="540" class="nl">STORE ACTION</text>
+<text x="42" y="560" class="nd">supabase · coaching_actions</text>
+<line x1="150" y1="576" x2="150" y2="634" stroke="#3a4653" stroke-width="2"/>
+<circle cx="150" cy="605" r="3.5" fill="#5fd08a"/>
+<rect x="30" y="634" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
+<text x="42" y="658" class="nl">TRIGGER WF08</text>
+<text x="42" y="678" class="nd">webhook</text>
+</svg>

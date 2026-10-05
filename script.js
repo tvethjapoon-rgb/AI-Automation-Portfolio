@@ -75,17 +75,17 @@
   }
 
   /* ---- Schematic boot-up line draw ---- */
-  var schematic = document.querySelector(".schematic");
-  var boot = function () { if (schematic) { schematic.classList.add("boot"); } };
+  var schematics = Array.prototype.slice.call(document.querySelectorAll(".schematic"));
+  var bootOne = function (el) { el.classList.add("boot"); };
 
-  if (schematic && "IntersectionObserver" in window) {
+  if (schematics.length && "IntersectionObserver" in window) {
     var bootObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) { boot(); bootObserver.disconnect(); }
+        if (entry.isIntersecting) { bootOne(entry.target); bootObserver.unobserve(entry.target); }
       });
     }, { threshold: 0.25 });
-    bootObserver.observe(schematic);
-  } else { boot(); }
+    schematics.forEach(function (el) { bootObserver.observe(el); });
+  } else { schematics.forEach(bootOne); }
 
   /* ---- Footer year ---- */
   var year = document.getElementById("year");
