@@ -140,26 +140,18 @@
             <div><h4>output: the system</h4><p>An AI-assisted QA pipeline: every transcript is classified, evaluated against a versioned scorecard with AI-extracted evidence per rule, then scored by <strong>deterministic rules</strong> — the model never invents the final score. Weaknesses become Trello coaching tasks; managers get period reports.</p></div>
           </div>
           <figure class="schematic">
-            <svg viewBox="0 0 430 1172" role="img" aria-label="Schematic of the call QA pipeline: sheets entry and eight workflow stages — intake, classify, evaluate, score, sales intel, performance, coaching, reporting.">
-              <g stroke="#3a4653" stroke-width="2"><line class="wire" pathLength="1" x1="140" y1="104" x2="140" y2="162"/><line class="wire" pathLength="1" x1="140" y1="222" x2="140" y2="280"/><line class="wire" pathLength="1" x1="140" y1="340" x2="140" y2="398"/><line class="wire" pathLength="1" x1="140" y1="458" x2="140" y2="516"/><line class="wire" pathLength="1" x1="140" y1="576" x2="140" y2="634"/><line class="wire" pathLength="1" x1="140" y1="694" x2="140" y2="752"/><line class="wire" pathLength="1" x1="140" y1="812" x2="140" y2="870"/><line class="wire" pathLength="1" x1="140" y1="930" x2="140" y2="988"/></g>
-              <g fill="#5fd08a"><circle cx="140" cy="133" r="3.5"/><circle cx="140" cy="251" r="3.5"/><circle cx="140" cy="369" r="3.5"/><circle cx="140" cy="487" r="3.5"/><circle cx="140" cy="605" r="3.5"/><circle cx="140" cy="723" r="3.5"/><circle cx="140" cy="841" r="3.5"/><circle cx="140" cy="959" r="3.5"/></g>
-              <g>
-                <rect x="20" y="44" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/><text x="32" y="68" class="nl">SHEETS</text><text x="32" y="88" class="nd">transcript in</text>
-                <rect x="20" y="162" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="186" class="nl">WF01 · INTAKE</text><text x="32" y="206" class="nd">validate · dedupe</text>
-                <rect x="20" y="280" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="304" class="nl">WF02 · CLASSIFY</text><text x="32" y="324" class="nd">type · intent · outcome</text>
-                <rect x="20" y="398" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="422" class="nl">WF03 · EVALUATE</text><text x="32" y="442" class="nd">ai evidence per rule</text>
-                <rect x="20" y="516" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/><text x="32" y="540" class="nl">WF04 · SCORE</text><text x="32" y="560" class="nd">deterministic · critical check</text>
-                <rect x="20" y="634" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="658" class="nl">WF05 · SALES INTEL</text><text x="32" y="678" class="nd">behaviors → outcomes</text>
-                <rect x="20" y="752" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="776" class="nl">WF06 · PERFORMANCE</text><text x="32" y="796" class="nd">aggregate · rank</text>
-                <rect x="20" y="870" width="240" height="60" fill="none" stroke="#5fd08a" stroke-width="1.5"/><text x="32" y="894" class="nl">WF07 · COACHING</text><text x="32" y="914" class="nd">trello tasks</text>
-                <rect x="20" y="988" width="240" height="60" fill="none" stroke="#3a4653" stroke-width="1.5"/><text x="32" y="1012" class="nl">WF08 · REPORTING</text><text x="32" y="1032" class="nd">sheets · docs · gmail</text>
-                <rect x="20" y="1056" width="240" height="40" fill="none" stroke="#5fd08a" stroke-width="1" stroke-dasharray="5 4"/><text x="32" y="1081" class="nd" fill="#5fd08a">SUPABASE = system of record</text>
-              </g>
-              <path d="M272 536 l14 10 -14 10 -14 -10 z" fill="none" stroke="#5fd08a" stroke-width="1.5"/>
-              <text x="294" y="550" class="nd" fill="#5fd08a">NO LLM MATH</text>
-            </svg>
-            <figcaption>fig. 02 — call QA pipeline schematic · 8 stages. Green nodes mark the deterministic scoring gate and the coaching action gate.</figcaption>
-          </figure>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf01.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf01.png" alt="WF01 Call Intake — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF01 · Call Intake</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf02.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf02.png" alt="WF02 Call Classification — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF02 · Call Classification</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf03.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf03.png" alt="WF03 QA Evaluation — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF03 · QA Evaluation</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf04.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf04.png" alt="WF04 Score Calculation — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF04 · Score Calculation</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf05.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf05.png" alt="WF05 Sales Intelligence — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF05 · Sales Intelligence</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf06.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf06.png" alt="WF06 CSR Performance — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF06 · CSR Performance</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf07.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf07.png" alt="WF07 Coaching — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF07 · Coaching</p></div>
+    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf08.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf08.png" alt="WF08 Reporting — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF08 · Reporting</p></div>
+  </div>
+  <figcaption>fig. 02 — real n8n canvas screenshots · 8 workflows · dark mode · sticky-note annotated. Click any shot for full size.</figcaption>
+</figure>
           <div class="duo">
             <div>
               <h4>architecture</h4>
@@ -187,19 +179,6 @@
               </table>
             </div>
           </div>
-          <details style="margin-top:var(--s4)">
-            <summary class="tag" style="cursor:pointer">// live canvas renders — per workflow</summary>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1rem">
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf01.svg" alt="WF01 call intake diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf01 · intake</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf02.svg" alt="WF02 call classification diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf02 · classify</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf03.svg" alt="WF03 QA evaluation diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf03 · evaluate</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf04.svg" alt="WF04 score calculation diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf04 · score</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf05.svg" alt="WF05 sales intelligence diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf05 · sales intel</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf06.svg" alt="WF06 CSR performance diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf06 · performance</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf07.svg" alt="WF07 coaching diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf07 · coaching</figcaption></figure>
-              <figure style="background:var(--bg);padding:1rem"><img src="assets/call-qa/wf08.svg" alt="WF08 reporting diagram" style="width:100%;height:auto"><figcaption class="tag" style="margin-top:.5rem">wf08 · reporting</figcaption></figure>
-            </div>
-          </details>
           <p style="margin-top:var(--s4)"><a class="btn btn--ghost" href="call-qa-sim.html">▶ Try the interactive simulation</a></p>
           <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional call data — it is not connected to any live system</p>
           <ul class="chips" aria-label="Technologies used"><li>n8n</li><li>Supabase</li><li>Google Sheets</li><li>Airtable</li><li>Trello</li><li>Google Gemini</li></ul>
