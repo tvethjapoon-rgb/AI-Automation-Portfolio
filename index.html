@@ -94,33 +94,15 @@
             </svg>
             <figcaption>fig. 01 — lead pipeline schematic · grid 430×1020 · 8 stages. Green nodes mark event entry and the human approval gate.</figcaption>
           </figure>
-          <div class="duo">
-            <div>
-              <h4>architecture</h4>
-              <ul class="checklist">
+                    <div>
+            <h4 class="arch-h">architecture</h4>
+            <ul class="checklist">
                 <li><strong>Supabase</strong> is the system of record — leads, messages, sequences, reviews, audit log.</li>
                 <li><strong>Airtable</strong> holds human-friendly config: templates, sequence timing, business hours, tone.</li>
                 <li><strong>Trello</strong> is the approval gate — no AI-drafted message sends without a human record.</li>
                 <li><strong>Stop-on-reply &amp; opt-out handling</strong> built into the sequence engine.</li>
                 <li><strong>Guardrails:</strong> drafts are validated — no prices, no time commitments, no invented services.</li>
               </ul>
-            </div>
-            <div>
-              <h4>workflow registry</h4>
-              <table class="wftable">
-                <thead><tr><th>ID</th><th>Workflow</th><th>Function</th></tr></thead>
-                <tbody>
-                  <tr><td>WF01</td><td>Lead Intake</td><td>receive, validate, classify, dedupe</td></tr>
-                  <tr><td>WF02</td><td>Instant Responder</td><td>business-hours templates, owner alerts</td></tr>
-                  <tr><td>WF03</td><td>AI Follow-up Drafter</td><td>tone-matched drafts to Trello</td></tr>
-                  <tr><td>WF04</td><td>Approval &amp; Send</td><td>approve / edit / reject, audited</td></tr>
-                  <tr><td>WF05</td><td>Sequence Scheduler</td><td>due steps, stop conditions, opt-outs</td></tr>
-                  <tr><td>WF06</td><td>Review Request</td><td>on job completion, one reminder</td></tr>
-                  <tr><td>WF07</td><td>Metrics &amp; Dashboard</td><td>weekly summary to Sheets</td></tr>
-                  <tr><td>WF08</td><td>Owner Notifications</td><td>hot leads, digest via Gmail</td></tr>
-                </tbody>
-              </table>
-            </div>
           </div>
           <ul class="chips" aria-label="Technologies used"><li>n8n</li><li>Supabase</li><li>Airtable</li><li>Trello</li><li>Google Workspace</li><li>Google Gemini</li></ul>
           <p class="scope">// scope: 8 workflows · ~50-hour MVP build · simulated lead events (real SMS provider integration designed as a future phase)</p>
@@ -139,19 +121,83 @@
             <div><h4>input: the problem</h4><p>Support teams judge call quality by hand — slow, inconsistent, and impossible to scale. One QA reviewer hears a call one way, another hears it differently, and coaching ends up anecdotal instead of evidence-based.</p></div>
             <div><h4>output: the system</h4><p>An AI-assisted QA pipeline: every transcript is classified, evaluated against a versioned scorecard with AI-extracted evidence per rule, then scored by <strong>deterministic rules</strong> — the model never invents the final score. Weaknesses become Trello coaching tasks; managers get period reports.</p></div>
           </div>
-          <figure class="schematic">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf01.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf01.png" alt="WF01 Call Intake — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF01 · Call Intake</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf02.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf02.png" alt="WF02 Call Classification — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF02 · Call Classification</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf03.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf03.png" alt="WF03 QA Evaluation — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF03 · QA Evaluation</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf04.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf04.png" alt="WF04 Score Calculation — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF04 · Score Calculation</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf05.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf05.png" alt="WF05 Sales Intelligence — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF05 · Sales Intelligence</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf06.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf06.png" alt="WF06 CSR Performance — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF06 · CSR Performance</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf07.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf07.png" alt="WF07 Coaching — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF07 · Coaching</p></div>
-    <div style="background:var(--bg);padding:1rem"><a href="assets/call-qa/screenshots/wf08.png" target="_blank" rel="noopener"><img src="assets/call-qa/screenshots/wf08.png" alt="WF08 Reporting — real n8n canvas screenshot, dark mode, sticky-note annotated" style="width:100%;height:auto;border:1px solid var(--line)" loading="lazy"></a><p class="tag" style="margin:.5rem 0 0">WF08 · Reporting</p></div>
-  </div>
-  <figcaption>fig. 02 — real n8n canvas screenshots · 8 workflows · dark mode · sticky-note annotated. Click any shot for full size.</figcaption>
-</figure>
+                    <figure class="wffig">
+            <figcaption>fig. 02 — workflow registry · 8 real n8n canvas screenshots · dark mode · sticky-note annotated · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF01</span><h5>Call Intake</h5></div>
+                <p>New transcripts arrive on a Sheets trigger; each one is validated and deduped before QA begins.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf01.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf01.png" alt="WF01 Call Intake — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF02</span><h5>Call Classification</h5></div>
+                <p>AI classifies every call by type, intent, and outcome.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf02.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf02.png" alt="WF02 Call Classification — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF03</span><h5>QA Evaluation</h5></div>
+                <p>Transcripts are evaluated against versioned scorecard rules, with AI extracting per-rule evidence quotes.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf03.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf03.png" alt="WF03 QA Evaluation — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF04</span><h5>Score Calculation</h5></div>
+                <p>Weighted scores are calculated in deterministic code, with critical-failure checks enforced.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf04.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf04.png" alt="WF04 Score Calculation — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF05</span><h5>Sales Intelligence</h5></div>
+                <p>Observed sales behaviors are linked to call outcomes.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf05.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf05.png" alt="WF05 Sales Intelligence — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF06</span><h5>CSR Performance</h5></div>
+                <p>Scores aggregate into CSR rankings and trend views.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf06.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf06.png" alt="WF06 CSR Performance — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF07</span><h5>Coaching</h5></div>
+                <p>Weaknesses are detected and turned into Trello coaching tasks.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf07.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf07.png" alt="WF07 Coaching — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div class="wfunit-head"><span class="wfnum">WF08</span><h5>Reporting</h5></div>
+                <p>Period reporting via Sheets, Docs, and Gmail digest. Fix in progress.</p>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf08.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf08.png" alt="WF08 Reporting — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+          </figure>
           <div class="duo">
             <div>
               <h4>architecture</h4>
