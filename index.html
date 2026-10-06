@@ -94,15 +94,33 @@
             </svg>
             <figcaption>fig. 01 — lead pipeline schematic · grid 430×1020 · 8 stages. Green nodes mark event entry and the human approval gate.</figcaption>
           </figure>
-                    <div>
-            <h4 class="arch-h">architecture</h4>
-            <ul class="checklist">
+                              <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
                 <li><strong>Supabase</strong> is the system of record — leads, messages, sequences, reviews, audit log.</li>
                 <li><strong>Airtable</strong> holds human-friendly config: templates, sequence timing, business hours, tone.</li>
                 <li><strong>Trello</strong> is the approval gate — no AI-drafted message sends without a human record.</li>
                 <li><strong>Stop-on-reply &amp; opt-out handling</strong> built into the sequence engine.</li>
                 <li><strong>Guardrails:</strong> drafts are validated — no prices, no time commitments, no invented services.</li>
               </ul>
+            </div>
+            <div>
+              <h4>workflow registry</h4>
+              <table class="wftable">
+                <thead><tr><th>ID</th><th>Workflow</th><th>Function</th></tr></thead>
+                <tbody>
+                  <tr><td>WF01</td><td>Lead Intake</td><td>receive, validate, classify, dedupe</td></tr>
+                  <tr><td>WF02</td><td>Instant Responder</td><td>business-hours templates, owner alerts</td></tr>
+                  <tr><td>WF03</td><td>AI Follow-up Drafter</td><td>tone-matched drafts to Trello</td></tr>
+                  <tr><td>WF04</td><td>Approval &amp; Send</td><td>approve / edit / reject, audited</td></tr>
+                  <tr><td>WF05</td><td>Sequence Scheduler</td><td>due steps, stop conditions, opt-outs</td></tr>
+                  <tr><td>WF06</td><td>Review Request</td><td>on job completion, one reminder</td></tr>
+                  <tr><td>WF07</td><td>Metrics &amp; Dashboard</td><td>weekly summary to Sheets</td></tr>
+                  <tr><td>WF08</td><td>Owner Notifications</td><td>hot leads, digest via Gmail</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <ul class="chips" aria-label="Technologies used"><li>n8n</li><li>Supabase</li><li>Airtable</li><li>Trello</li><li>Google Workspace</li><li>Google Gemini</li></ul>
           <p class="scope">// scope: 8 workflows · ~50-hour MVP build · simulated lead events (real SMS provider integration designed as a future phase)</p>
@@ -232,26 +250,21 @@
                 <li><strong>Supabase</strong> is the system of record — calls, evaluations, items, behaviors, coaching actions, audit log.</li>
               </ul>
             </div>
-            <div>
-              <h4>workflow registry</h4>
-              <table class="wftable">
-                <thead><tr><th>ID</th><th>Workflow</th><th>Function</th></tr></thead>
-                <tbody>
-                  <tr><td>WF01</td><td>Call Intake</td><td>sheets trigger, validate, dedupe</td></tr>
-                  <tr><td>WF02</td><td>Call Classification</td><td>type · intent · outcome via AI</td></tr>
-                  <tr><td>WF03</td><td>QA Evaluation</td><td>scorecard rules, evidence extraction</td></tr>
-                  <tr><td>WF04</td><td>Score Calculation</td><td>deterministic scoring, critical check</td></tr>
-                  <tr><td>WF05</td><td>Sales Intelligence</td><td>behaviors linked to outcomes</td></tr>
-                  <tr><td>WF06</td><td>CSR Performance</td><td>aggregation, rankings, trends</td></tr>
-                  <tr><td>WF07</td><td>Coaching</td><td>weakness detection, Trello tasks</td></tr>
-                  <tr><td>WF08</td><td>Reporting</td><td>sheets, docs, gmail digest <span style="color:var(--muted)">· fix in progress</span></td></tr>
-                </tbody>
-              </table>
+                        <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/googlesheets.svg" alt="Google Sheets logo"><span>Google Sheets</span></li>
+                <li><img src="assets/stack/airtable.svg" alt="Airtable logo"><span>Airtable</span></li>
+                <li><img src="assets/stack/trello.svg" alt="Trello logo"><span>Trello</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
             </div>
           </div>
           <p style="margin-top:var(--s4)"><a class="btn btn--ghost" href="call-qa-sim.html">▶ Try the interactive simulation</a></p>
           <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional call data — it is not connected to any live system</p>
-          <ul class="chips" aria-label="Technologies used"><li>n8n</li><li>Supabase</li><li>Google Sheets</li><li>Airtable</li><li>Trello</li><li>Google Gemini</li></ul>
+          
           <p class="scope">// scope: 8 workflows · mock-transcript MVP · 5-test validation suite: 23 pass · 0 fail · WF01→WF07 verified live end-to-end 2026-10-05 (sales 94%, complaint 26% w/ critical failure caught, billing 89%) · WF08 reporting: fix in progress</p>
         </div>
       </article>
