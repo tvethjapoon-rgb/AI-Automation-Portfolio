@@ -155,3 +155,7 @@ footer{padding-block:var(--s4);font-family:var(--mono);font-size:.75rem;color:va
 @media (max-width:46rem){
   .wfunit{grid-template-columns:1fr}
 }
+.stacklogos{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem}
+.stacklogos li{display:flex;align-items:center;gap:.65rem;border:1px solid var(--line);padding:.55rem .75rem;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.stacklogos img{width:22px;height:22px;flex:none}
+.stacklogos span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
