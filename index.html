@@ -94,7 +94,108 @@
             </svg>
             <figcaption>fig. 01 — lead pipeline schematic · grid 430×1020 · 8 stages. Green nodes mark event entry and the human approval gate.</figcaption>
           </figure>
-                              <div class="duo">
+          <figure class="wffig">
+            <figcaption>fig. 02 — workflow registry · 8 n8n workflow diagrams rendered from live exports · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Lead Intake</h5>
+                  <p>New leads arrive via webhook; each is validated, deduped, and classified before anything else runs.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf01-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf01-diagram.png" alt="WF01 Lead Intake — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Instant Responder</h5>
+                  <p>Business-hours-aware templates fire within minutes; after-hours leads get a morning follow-up queued.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf02-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf02-diagram.png" alt="WF02 Instant Responder — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>AI Follow-up Drafter</h5>
+                  <p>Gemini drafts tone-matched follow-ups from lead context; every draft lands in Trello awaiting approval.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf03-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf03-diagram.png" alt="WF03 AI Follow-up Drafter — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF04</span>
+                  <h5>Approval &amp; Send</h5>
+                  <p>The owner approves, edits, or rejects each draft in Trello; every decision is audited.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf04-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf04-diagram.png" alt="WF04 Approval and Send — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF05</span>
+                  <h5>Sequence Scheduler</h5>
+                  <p>Day 1·3·7 follow-ups fire on schedule; the sequence stops the moment the customer replies or opts out.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf05-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf05-diagram.png" alt="WF05 Sequence Scheduler — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF06</span>
+                  <h5>Review Request</h5>
+                  <p>Completed jobs trigger a review request, with one polite reminder — then it stops.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf06-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf06-diagram.png" alt="WF06 Review Request — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF07</span>
+                  <h5>Metrics &amp; Dashboard</h5>
+                  <p>Weekly performance summary compiled to Sheets: leads, sends, replies, reviews.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf07-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf07-diagram.png" alt="WF07 Metrics and Dashboard — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF08</span>
+                  <h5>Owner Notifications</h5>
+                  <p>Hot-lead alerts and the weekly digest go out via Gmail; nothing urgent gets buried.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf08-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf08-diagram.png" alt="WF08 Owner Notifications — n8n workflow diagram" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+          </figure>
+          <div class="duo">
             <div>
               <h4>architecture</h4>
               <ul class="checklist">
@@ -106,25 +207,20 @@
               </ul>
             </div>
             <div>
-              <h4>workflow registry</h4>
-              <table class="wftable">
-                <thead><tr><th>ID</th><th>Workflow</th><th>Function</th></tr></thead>
-                <tbody>
-                  <tr><td>WF01</td><td>Lead Intake</td><td>receive, validate, classify, dedupe</td></tr>
-                  <tr><td>WF02</td><td>Instant Responder</td><td>business-hours templates, owner alerts</td></tr>
-                  <tr><td>WF03</td><td>AI Follow-up Drafter</td><td>tone-matched drafts to Trello</td></tr>
-                  <tr><td>WF04</td><td>Approval &amp; Send</td><td>approve / edit / reject, audited</td></tr>
-                  <tr><td>WF05</td><td>Sequence Scheduler</td><td>due steps, stop conditions, opt-outs</td></tr>
-                  <tr><td>WF06</td><td>Review Request</td><td>on job completion, one reminder</td></tr>
-                  <tr><td>WF07</td><td>Metrics &amp; Dashboard</td><td>weekly summary to Sheets</td></tr>
-                  <tr><td>WF08</td><td>Owner Notifications</td><td>hot leads, digest via Gmail</td></tr>
-                </tbody>
-              </table>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/airtable.svg" alt="Airtable logo"><span>Airtable</span></li>
+                <li><img src="assets/stack/trello.svg" alt="Trello logo"><span>Trello</span></li>
+                <li><img src="assets/stack/googlesheets.svg" alt="Google Sheets logo"><span>Google Sheets</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
+              <p style="margin-top:var(--s4)"><a class="btn" href="coa-sim.html" style="text-decoration:none">▶ Try the Interactive Simulation</a> <a class="btn btn--ghost" href="coa-samples.html" style="text-decoration:none;margin-left:.6rem">📸 Trello / Airtable / Email Samples</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional lead data — it is not connected to any live system</p>
             </div>
           </div>
-          <ul class="chips" aria-label="Technologies used"><li>n8n</li><li>Supabase</li><li>Airtable</li><li>Trello</li><li>Google Workspace</li><li>Google Gemini</li></ul>
-          <p class="scope">// scope: 8 workflows · ~50-hour MVP build · simulated lead events (real SMS provider integration designed as a future phase)</p>
-          <p style="margin-top:1rem"><a href="coa-sim.html" class="btn" style="text-decoration:none">▶ Try the Interactive Simulation</a> <a href="coa-samples.html" class="btn btn--ghost" style="text-decoration:none;margin-left:.6rem">📸 Trello / Airtable / Email Samples</a></p>
+          <p class="scope">// scope: 8 workflows · verified live end-to-end 2026-10-08 · simulated lead events (real SMS provider integration designed as a future phase)</p>
         </div>
       </article>
       <article class="node" aria-labelledby="qa-h" style="margin-top:var(--s6)">
