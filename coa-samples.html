@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COA Sample Visuals — Trello, Airtable, Email</title>
+<style>
+:root{
+  --bg:#0c1210; --panel:#111916; --ink:#e9f2ec; --muted:#93a89a;
+  --line:#243128; --accent:#5fd08a; --warn:#ffb020;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --disp:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.6;padding:2rem}
+.wrap{max-width:75rem;margin:0 auto}
+h1{font-size:2rem;margin-bottom:.5rem}
+.sub{color:var(--muted);margin-bottom:2rem}
+h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:var(--accent);font-family:var(--mono)}
+.badge{display:inline-block;font-family:var(--mono);font-size:.7rem;border:1px dashed var(--warn);color:var(--warn);padding:.3rem .7rem;margin-bottom:1rem;letter-spacing:.1em}
+
+/* TRELLO */
+.trello-board{background:#0079bf;border-radius:12px;padding:1.5rem;overflow-x:auto}
+.trello-lists{display:flex;gap:1rem;min-width:800px}
+.trello-list{background:#ebecf0;border-radius:8px;padding:.8rem;width:280px;flex-shrink:0}
+.trello-list h3{font-size:.85rem;color:#172b4d;margin-bottom:.8rem;font-weight:600}
+.trello-card{background:#fff;border-radius:6px;padding:.8rem;margin-bottom:.6rem;box-shadow:0 1px 2px rgba(0,0,0,.15);color:#172b4d;font-size:.85rem}
+.trello-card .card-title{font-weight:600;margin-bottom:.4rem}
+.trello-card .card-meta{font-size:.75rem;color:#5e6c84;margin-top:.4rem}
+.trello-card .card-label{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:3px;color:#fff;margin-bottom:.4rem;margin-right:.3rem}
+.label-green{background:#61bd4f}.label-yellow{background:#f2d600;color:#172b4d}.label-red{background:#eb5a46}.label-blue{background:#0079bf}
+
+/* AIRTABLE */
+.airtable{background:#fff;border-radius:12px;overflow:hidden;color:#1d1d1f}
+.at-tabs{display:flex;background:#f5f5f7;border-bottom:1px solid #e0e0e0}
+.at-tab{padding:.8rem 1.2rem;font-size:.85rem;color:#666;border-bottom:2px solid transparent;cursor:pointer}
+.at-tab.active{color:#1d1d1f;border-bottom-color:#f0b429;font-weight:600}
+.at-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.at-table th{background:#f5f5f7;text-align:left;padding:.7rem 1rem;font-weight:600;color:#555;border-bottom:1px solid #e0e0e0;white-space:nowrap}
+.at-table td{padding:.7rem 1rem;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.at-table tr:hover td{background:#fafafa}
+
+/* EMAIL */
+.email{background:#fff;border-radius:12px;overflow:hidden;color:#1d1d1f;max-width:600px}
+.email-header{background:#f5f5f7;padding:1rem 1.5rem;border-bottom:1px solid #e0e0e0}
+.email-header .from{font-weight:600;font-size:.9rem}
+.email-header .subject{font-size:1.1rem;margin-top:.3rem}
+.email-body{padding:1.5rem;font-size:.9rem;line-height:1.7}
+.email-body h4{margin:1rem 0 .5rem;color:#333}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+.metric{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center}
+.metric .num{font-size:1.8rem;font-weight:700;color:#0079bf}
+.metric .lbl{font-size:.75rem;color:#666;margin-top:.2rem}
+.email-cta{display:inline-block;background:#0079bf;color:#fff;padding:.7rem 1.5rem;border-radius:6px;text-decoration:none;margin-top:1rem;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+<span class="badge">⚠ SAMPLE VISUALS — FICTIONAL DATA FOR PORTFOLIO</span>
+<h1>Contractor's Office Autopilot — Sample Visuals</h1>
+<p class="sub">What the owner sees: Trello approval board, Airtable config, email notifications. All fictional demo data.</p>
+
+<h2>// trello — approval board</h2>
+<div class="trello-board">
+<div class="trello-lists">
+  <div class="trello-list">
+    <h3>📥 Needs Review</h3>
+    <div class="trello-card">
+      <span class="card-label label-yellow">quote follow-up</span>
+      <div class="card-title">Day-1 quote follow-up — Maria Santos</div>
+      <div style="font-style:italic;color:#5e6c84">"Hi Maria! Following up on your panel upgrade inquiry. I'd be happy to schedule a free assessment..."</div>
+      <div class="card-meta">Supabase message_id: a1b2c3d4… · Created 2h ago</div>
+    </div>
+    <div class="trello-card">
+      <span class="card-label label-yellow">nudge</span>
+      <div class="card-title">Day-3 nudge — Jose Rizal</div>
+      <div style="font-style:italic;color:#5e6c84">"Hi Jose! Just checking in — still interested in that wiring estimate?"</div>
+      <div class="card-meta">Supabase message_id: e5f6g7h8… · Created 5h ago</div>
+    </div>
+  </div>
+  <div class="trello-list">
+    <h3>✅ Approved</h3>
+    <div class="trello-card">
+      <span class="card-label label-green">approved</span>
+      <div class="card-title">Day-1 quote follow-up — Ana Cruz</div>
+      <div class="card-meta">Approved by owner · Moved 1h ago</div>
+    </div>
+  </div>
+  <div class="trello-list">
+    <h3>📤 Sent</h3>
+    <div class="trello-card">
+      <span class="card-label label-blue">sent</span>
+      <div class="card-title">Day-1 quote follow-up — Pedro Lim</div>
+      <div class="card-meta">Sent 9:15 AM · Moved 3h ago</div>
+    </div>
+    <div class="trello-card">
+      <span class="card-label label-blue">sent</span>
+      <div class="card-title">Day-7 final follow-up — Rosa Diaz</div>
+      <div class="card-meta">Sent 9:12 AM · Moved 3h ago</div>
+    </div>
+  </div>
+  <div class="trello-list">
+    <h3>❌ Rejected / Needs Rewrite</h3>
+    <div class="trello-card">
+      <span class="card-label label-red">rejected</span>
+      <div class="card-title">Day-3 nudge — Carlos Tan</div>
+      <div class="card-meta">Rejected: tone too formal · Moved yesterday</div>
+    </div>
+  </div>
+</div>
+</div>
+<p style="color:var(--muted);font-size:.85rem;margin-top:.8rem">The owner drags cards between lists. Moving to Approved triggers the send. Moving to Rejected cancels it. Every move is audited.</p>
+
+<h2>// airtable — configuration base</h2>
+<div class="airtable">
+  <div class="at-tabs">
+    <div class="at-tab active">📋 Message Templates</div>
+    <div class="at-tab">🏢 Business Profile</div>
+    <div class="at-tab">📅 Sequences</div>
+    <div class="at-tab">🎨 Tone Guidelines</div>
+  </div>
+  <table class="at-table">
+    <thead><tr><th>Template Name</th><th>In-Hours Variant</th><th>After-Hours Variant</th><th>Use Case</th></tr></thead>
+    <tbody>
+      <tr><td><strong>missed_call_instant</strong></td><td>Hi {name}! Thanks for calling {business}. We'll call you back within the hour.</td><td>Hi {name}! Thanks for calling {business}. We're closed now but we'll reach out first thing in the morning.</td><td>Immediate auto-reply</td></tr>
+      <tr><td><strong>quote_followup_d1</strong></td><td>Hi {name}! Following up on your {service} inquiry. Happy to schedule a free assessment — what time works for you?</td><td><em>(same)</em></td><td>AI-drafted, owner-approved</td></tr>
+      <tr><td><strong>review_request</strong></td><td>Hi {name}! Thanks for choosing {business} for your {service}. If you were happy, a quick Google review would mean a lot: {review_link}</td><td><em>(same)</em></td><td>Post-job, 2 days after</td></tr>
+      <tr><td><strong>opt_out_confirm</strong></td><td>Got it, {name} — you won't hear from us again. Thanks for considering {business}!</td><td><em>(same)</em></td><td>STOP keyword reply</td></tr>
+    </tbody>
+  </table>
+</div>
+<p style="color:var(--muted);font-size:.85rem;margin-top:.8rem">Non-technical config. The owner edits templates, hours, and tone in Airtable — no code changes needed.</p>
+
+<h2>// email — hot lead alert</h2>
+<div class="email">
+  <div class="email-header">
+    <div class="from">Contractor's Office Autopilot &lt;noreply@reyes-electrical.ph&gt;</div>
+    <div class="subject">🔥 Hot Lead: Maria Santos — Panel Upgrade Quote</div>
+    <div style="font-size:.8rem;color:#666;margin-top:.3rem">To: owner@reyes-electrical.ph · Oct 8, 2026 9:47 PM</div>
+  </div>
+  <div class="email-body">
+    <p>A new <strong>quote request</strong> just came in after hours.</p>
+    <h4>Lead Details</h4>
+    <p><strong>Name:</strong> Maria Santos<br>
+    <strong>Phone:</strong> +63 917 123 4567<br>
+    <strong>Service:</strong> Panel upgrade<br>
+    <strong>Source:</strong> Website contact form</p>
+    <h4>What happened automatically</h4>
+    <p>✅ After-hours instant reply sent<br>
+    ✅ Lead classified as <em>quote_request</em> (high priority)<br>
+    ✅ AI follow-up draft created — awaiting your approval in Trello</p>
+    <a href="#" class="email-cta">Review in Trello →</a>
+  </div>
+</div>
+
+<h2>// email — weekly digest</h2>
+<div class="email" style="margin-top:1.5rem">
+  <div class="email-header">
+    <div class="from">Contractor's Office Autopilot &lt;noreply@reyes-electrical.ph&gt;</div>
+    <div class="subject">📊 Weekly Summary — Oct 1–7, 2026</div>
+    <div style="font-size:.8rem;color:#666;margin-top:.3rem">To: owner@reyes-electrical.ph · Oct 7, 2026 8:00 AM</div>
+  </div>
+  <div class="email-body">
+    <p>Here's how your lead pipeline performed last week:</p>
+    <div class="metric-grid">
+      <div class="metric"><div class="num">23</div><div class="lbl">New Leads</div></div>
+      <div class="metric"><div class="num">23</div><div class="lbl">Instant Replies Sent</div></div>
+      <div class="metric"><div class="num">18</div><div class="lbl">AI Drafts Approved</div></div>
+      <div class="metric"><div class="num">2</div><div class="lbl">Drafts Rejected</div></div>
+      <div class="metric"><div class="num">7</div><div class="lbl">Jobs Booked</div></div>
+      <div class="metric"><div class="num">5</div><div class="lbl">Reviews Requested</div></div>
+    </div>
+    <h4>Highlights</h4>
+    <p>🎯 <strong>30% conversion rate</strong> (leads → jobs), up from 22% last week<br>
+    ⚡ Average first-response time: <strong>3 minutes</strong><br>
+    ✅ Zero messages sent without your approval</p>
+    <a href="#" class="email-cta">View Full Dashboard →</a>
+  </div>
+</div>
+
+<p style="color:var(--muted);font-size:.85rem;margin-top:2rem;text-align:center">All data fictional. Reyes Electrical is a demo business.</p>
+</div>
+</body>
+</html>

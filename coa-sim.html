@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive simulation: Contractor's Office Autopilot. Fictional demo data, runs entirely in your browser.">
+<title>COA Simulation — Hanz Jay Apoon</title>
+<style>
+:root{
+  --bg:#0c1210; --panel:#111916; --ink:#e9f2ec; --muted:#93a89a;
+  --line:#243128; --accent:#5fd08a; --accent-ink:#0a1a10; --ok:#37c978;
+  --warn:#ffb020; --bad:#ff5d5d; --info:#5aa9ff;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --disp:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);padding:.9rem 0}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-decoration:none}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:-.02em;margin:.6rem 0}
+.hero p{color:var(--muted);max-width:44rem}
+.sim-badge{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;border:1px dashed var(--warn);color:var(--warn);padding:.4rem .8rem;margin-bottom:1rem}
+.section{padding:2.5rem 0;border-bottom:1px solid var(--line)}
+.section h2{font-size:1.4rem;margin-bottom:1rem}
+.section h2 .n{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin-right:.6rem}
+.stages{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}
+.stage{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;border:1px solid var(--line);color:var(--muted);padding:.45rem .7rem;border-radius:4px}
+.stage.on{border-color:var(--accent);color:var(--accent);background:rgba(95,208,138,.08)}
+.stage.done{border-color:var(--ok);color:var(--ok)}
+.stage.fail{border-color:var(--bad);color:var(--bad)}
+.stage-out{background:var(--panel);border:1px solid var(--line);padding:1.5rem;min-height:10rem;font-size:.92rem;border-radius:8px}
+.btn{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;padding:.85rem 1.5rem;border:1px solid var(--accent);display:inline-block;cursor:pointer;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border-radius:6px;margin-right:.6rem;margin-top:1rem}
+.btn:disabled{opacity:.4;cursor:default}
+.btn--ghost{background:transparent;color:var(--accent)}
+.btn--warn{background:transparent;color:var(--warn);border-color:var(--warn)}
+.btn--bad{background:transparent;color:var(--bad);border-color:var(--bad)}
+.kv{display:grid;grid-template-columns:11rem 1fr;gap:.3rem .8rem;font-size:.9rem;margin:.6rem 0}
+.kv dt{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.06em}
+.kv dd{color:var(--ink)}
+.trello-card{background:#1a2420;border:1px solid var(--line);border-radius:8px;padding:1.25rem;margin:1rem 0}
+.trello-card h4{font-family:var(--mono);font-size:.85rem;color:var(--accent);margin-bottom:.6rem}
+.trello-card .draft{background:var(--bg);border-left:3px solid var(--warn);padding:.8rem 1rem;margin:.8rem 0;font-style:italic;color:var(--muted)}
+.trello-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.log{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:1rem;max-height:12rem;overflow:auto}
+.log .t{color:var(--accent)}
+.log .w{color:var(--warn)}
+.log .e{color:var(--bad)}
+.timeline{position:relative;padding-left:1.5rem;margin:1rem 0}
+.timeline::before{content:'';position:absolute;left:.4rem;top:.5rem;bottom:.5rem;width:2px;background:var(--line)}
+.tl-item{position:relative;margin-bottom:1.2rem}
+.tl-item::before{content:'';position:absolute;left:-1.35rem;top:.35rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--line);border:2px solid var(--bg)}
+.tl-item.done::before{background:var(--ok)}
+.tl-item.active::before{background:var(--accent);box-shadow:0 0 0 4px rgba(95,208,138,.2)}
+.tl-item .tl-time{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.tl-item .tl-desc{font-size:.9rem;margin-top:.2rem}
+footer{padding:2rem 0;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="index.html">hanzjayapoon.dev</a>
+  <span class="tag">simulation</span>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <span class="sim-badge">⚠ INTERACTIVE SIMULATION — FICTIONAL DATA, RUNS IN YOUR BROWSER</span>
+  <h1>Contractor's Office Autopilot</h1>
+  <p>Walk through a complete lead lifecycle: from missed call to review request. Every step below mirrors what the real n8n workflows do — intake, instant reply, AI drafting, <strong>human approval</strong>, scheduled follow-ups, and review requests. Nothing here sends real messages; it's all simulated.</p>
+</div></div>
+
+<div class="wrap">
+<!-- STAGE 1: Lead comes in -->
+<div class="section" id="s1">
+  <h2><span class="n">[01]</span> Lead Intake</h2>
+  <p style="color:var(--muted);margin-bottom:1rem">A potential customer calls after hours. The system captures it instantly.</p>
+  <div class="stages" id="stages1">
+    <span class="stage" data-s="intake">INTAKE</span>
+    <span class="stage" data-s="classify">CLASSIFY</span>
+    <span class="stage" data-s="dedupe">DEDUPE</span>
+    <span class="stage" data-s="store">STORE</span>
+  </div>
+  <div class="stage-out" id="out1">
+    <p style="color:var(--muted)">Click below to simulate an incoming lead.</p>
+  </div>
+  <button class="btn" onclick="runIntake()">📞 Simulate Missed Call</button>
+</div>
+
+<!-- STAGE 2: Instant response -->
+<div class="section" id="s2" style="opacity:.4;pointer-events:none">
+  <h2><span class="n">[02]</span> Instant Responder</h2>
+  <p style="color:var(--muted);margin-bottom:1rem">Zero AI in the send path — deterministic template based on business hours.</p>
+  <div class="stages" id="stages2">
+    <span class="stage" data-s="hours">CHECK HOURS</span>
+    <span class="stage" data-s="template">PICK TEMPLATE</span>
+    <span class="stage" data-s="send">SEND (SIMULATED)</span>
+  </div>
+  <div class="stage-out" id="out2"></div>
+</div>
+
+<!-- STAGE 3: AI Draft -->
+<div class="section" id="s3" style="opacity:.4;pointer-events:none">
+  <h2><span class="n">[03]</span> AI Follow-up Drafter</h2>
+  <p style="color:var(--muted);margin-bottom:1rem">The AI drafts a personalized follow-up. It <strong>cannot send</strong> — structurally incapable, it only creates a Trello card.</p>
+  <div class="stages" id="stages3">
+    <span class="stage" data-s="context">ASSEMBLE CONTEXT</span>
+    <span class="stage" data-s="draft">AI DRAFT</span>
+    <span class="stage" data-s="validate">VALIDATE</span>
+    <span class="stage" data-s="card">CREATE TRELLO CARD</span>
+  </div>
+  <div class="stage-out" id="out3"></div>
+</div>
+
+<!-- STAGE 4: Approval -->
+<div class="section" id="s4" style="opacity:.4;pointer-events:none">
+  <h2><span class="n">[04]</span> Owner Approval <span style="color:var(--accent);font-size:.85rem">← HUMAN GATE</span></h2>
+  <p style="color:var(--muted);margin-bottom:1rem">You are the owner. Review the AI draft in Trello. Approve, edit, or reject it.</p>
+  <div class="stage-out" id="out4"></div>
+</div>
+
+<!-- STAGE 5: Sequence -->
+<div class="section" id="s5" style="opacity:.4;pointer-events:none">
+  <h2><span class="n">[05]</span> Follow-up Sequence</h2>
+  <p style="color:var(--muted);margin-bottom:1rem">Day 1, 3, 7 follow-ups. Stops automatically if the lead replies.</p>
+  <div class="timeline" id="timeline5"></div>
+  <div class="stage-out" id="out5"></div>
+</div>
+
+<!-- STAGE 6: Review -->
+<div class="section" id="s6" style="opacity:.4;pointer-events:none">
+  <h2><span class="n">[06]</span> Review Request</h2>
+  <p style="color:var(--muted);margin-bottom:1rem">Job completed. The system asks for a Google review.</p>
+  <div class="stage-out" id="out6"></div>
+</div>
+
+<div class="section">
+  <button class="btn btn--ghost" onclick="location.reload()">↺ Restart Simulation</button>
+  <a class="btn btn--ghost" href="index.html" style="text-decoration:none">← Back to Portfolio</a>
+</div>
+</div>
+
+<footer><div class="wrap">
+  <p>Simulation only — fictional data (Reyes Electrical). The real system runs on n8n + Supabase + Trello. No real messages are sent.</p>
+</div></footer>
+
+<script>
+// State
+let lead = null;
+let draft = null;
+
+function setStage(containerId, stage, state) {
+  const el = document.querySelector(`#${containerId} [data-s="${stage}"]`);
+  if (el) { el.classList.remove('on','done','fail'); if (state) el.classList.add(state); }
+}
+function unlock(id) {
+  const el = document.getElementById(id);
+  el.style.opacity = '1'; el.style.pointerEvents = 'auto';
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function log(msg, cls='') {
+  return `<div class="log"><span class="${cls}">${msg}</span></div>`;
+}
+
+// STAGE 1: Intake
+function runIntake() {
+  const stages = ['intake','classify','dedupe','store'];
+  let i = 0;
+  const out = document.getElementById('out1');
+  out.innerHTML = '<p>Processing...</p>';
+  
+  function next() {
+    if (i > 0) setStage('stages1', stages[i-1], 'done');
+    if (i >= stages.length) {
+      lead = { name: 'Maria Santos', phone: '+639171234567', service: 'Panel upgrade', type: 'quote_request' };
+      out.innerHTML = `
+        <dl class="kv">
+          <dt>NAME</dt><dd>${lead.name}</dd>
+          <dt>PHONE</dt><dd>${lead.phone}</dd>
+          <dt>SERVICE</dt><dd>${lead.service}</dd>
+          <dt>CLASSIFICATION</dt><dd><span style="color:var(--accent)">quote_request</span> — explicit price inquiry</dd>
+          <dt>DEDUPE</dt><dd>No existing lead found — new record created</dd>
+          <dt>LEAD ID</dt><dd><span style="font-family:var(--mono);font-size:.8rem">a1b2c3d4-... (simulated)</span></dd>
+        </dl>
+        ${log('✓ WF01 complete — lead stored, classified as quote_request', 't')}`;
+      unlock('s2');
+      setTimeout(runResponder, 800);
+      return;
+    }
+    setStage('stages1', stages[i], 'on');
+    i++;
+    setTimeout(next, 600);
+  }
+  next();
+}
+
+// STAGE 2: Instant responder
+function runResponder() {
+  const stages = ['hours','template','send'];
+  let i = 0;
+  const out = document.getElementById('out2');
+  
+  function next() {
+    if (i > 0) setStage('stages2', stages[i-1], 'done');
+    if (i >= stages.length) {
+      out.innerHTML = `
+        <dl class="kv">
+          <dt>BUSINESS HOURS</dt><dd>After hours (9:47 PM) — using after-hours template</dd>
+          <dt>TEMPLATE</dt><dd>after_hours_missed_call</dd>
+          <dt>MESSAGE SENT</dt><dd style="font-style:italic">"Hi Maria! Thanks for calling Reyes Electrical. We're closed right now but we'll get back to you first thing in the morning. — Mang Domeng"</dd>
+          <dt>STATUS</dt><dd><span style="color:var(--ok)">Sent (simulated)</span></dd>
+        </dl>
+        ${log('✓ WF02 complete — deterministic reply, zero AI in send path', 't')}`;
+      unlock('s3');
+      setTimeout(runDrafter, 800);
+      return;
+    }
+    setStage('stages2', stages[i], 'on');
+    i++;
+    setTimeout(next, 600);
+  }
+  next();
+}
+
+// STAGE 3: AI Drafter
+function runDrafter() {
+  const stages = ['context','draft','validate','card'];
+  let i = 0;
+  const out = document.getElementById('out3');
+  
+  function next() {
+    if (i > 0) setStage('stages3', stages[i-1], 'done');
+    if (i >= stages.length) {
+      draft = "Hi Maria! Following up on your panel upgrade inquiry. I'd be happy to schedule a free assessment at your convenience. Let me know what time works for you this week!";
+      out.innerHTML = `
+        <dl class="kv">
+          <dt>AI MODEL</dt><dd>Google Gemini (via n8n)</dd>
+          <dt>PERSONALIZATION</dt><dd>Used lead's first name "Maria", service "panel upgrade"</dd>
+          <dt>VALIDATION</dt><dd><span style="color:var(--ok)">✓</span> No prices &nbsp; <span style="color:var(--ok)">✓</span> No time commitments &nbsp; <span style="color:var(--ok)">✓</span> No invented services</dd>
+          <dt>TRELLO CARD</dt><dd>Created in <strong>Needs Review</strong> list</dd>
+        </dl>
+        <div class="trello-card">
+          <h4>📋 Trello Card — Needs Review</h4>
+          <p><strong>Day-1 quote follow-up — Maria Santos</strong></p>
+          <div class="draft">"${draft}"</div>
+          <p style="font-size:.8rem;color:var(--muted)">Supabase message_id: a1b2c3d4-... · Status: pending_approval</p>
+        </div>
+        ${log('✓ WF03 complete — draft created, awaiting human approval. AI cannot send.', 't')}`;
+      unlock('s4');
+      showApproval();
+      return;
+    }
+    setStage('stages3', stages[i], 'on');
+    i++;
+    setTimeout(next, 700);
+  }
+  next();
+}
+
+// STAGE 4: Approval
+function showApproval() {
+  const out = document.getElementById('out4');
+  out.innerHTML = `
+    <div class="trello-card">
+      <h4>📋 Your Turn — Review This Draft</h4>
+      <p><strong>From:</strong> AI Assistant &nbsp; <strong>To:</strong> Maria Santos</p>
+      <div class="draft">"${draft}"</div>
+      <div class="trello-actions">
+        <button class="btn" onclick="approveDraft()">✓ Approve & Send</button>
+        <button class="btn btn--warn" onclick="editDraft()">✏️ Edit First</button>
+        <button class="btn btn--bad" onclick="rejectDraft()">✗ Reject</button>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:.8rem">This is the human gate. Nothing sends without your decision.</p>`;
+}
+
+function approveDraft() {
+  document.getElementById('out4').innerHTML += log('✓ You approved — message marked sent, card moved to Sent list', 't');
+  unlock('s5');
+  runSequence('approved');
+}
+function editDraft() {
+  const edited = prompt('Edit the draft:', draft);
+  if (edited) {
+    draft = edited;
+    document.getElementById('out4').innerHTML += log('✓ You edited — your version will be sent instead of the AI draft', 'w');
+    unlock('s5');
+    runSequence('edited');
+  }
+}
+function rejectDraft() {
+  document.getElementById('out4').innerHTML += log('✗ You rejected — message marked rejected, no send. Audit logged.', 'e');
+  document.getElementById('out5').innerHTML = '<p style="color:var(--muted)">Sequence cancelled — draft was rejected. The lead stays in the system for manual follow-up.</p>';
+  unlock('s5');
+  document.getElementById('s5').querySelector('#timeline5').innerHTML = `
+    <div class="tl-item done"><div class="tl-time">NOW</div><div class="tl-desc">Draft rejected by owner — no follow-ups scheduled</div></div>`;
+  unlock('s6');
+  showReviewSkipped();
+}
+function showReviewSkipped() {
+  document.getElementById('out6').innerHTML = '<p style="color:var(--muted)">No review request — the lead did not convert to a job in this simulation.</p>';
+}
+
+// STAGE 5: Sequence
+function runSequence(mode) {
+  const tl = document.getElementById('timeline5');
+  const out = document.getElementById('out5');
+  const steps = [
+    { day: 'Day 1', desc: `Follow-up sent (${mode})`, done: true },
+    { day: 'Day 3', desc: 'Nudge — "Just checking in..."', done: true },
+    { day: 'Day 7', desc: 'Final follow-up', done: false },
+  ];
+  tl.innerHTML = steps.map((s, i) =>
+    `<div class="tl-item ${s.done ? 'done' : ''}" id="tl${i}">
+      <div class="tl-time">${s.day.toUpperCase()}</div><div class="tl-desc">${s.desc}</div>
+    </div>`).join('');
+  
+  // Simulate lead replying on day 5 — sequence stops
+  setTimeout(() => {
+    document.getElementById('tl2').classList.add('active');
+    out.innerHTML = `
+      <dl class="kv">
+        <dt>DAY 5</dt><dd><span style="color:var(--warn)">Lead replied!</span> "Yes, Thursday morning works for me."</dd>
+        <dt>ACTION</dt><dd><span style="color:var(--ok)">Sequence stopped automatically</span> — Day 7 follow-up cancelled</dd>
+        <dt>STATUS</dt><dd>Lead converted → job scheduled</dd>
+      </dl>
+      ${log('✓ WF05 complete — stop-on-reply worked, no spam sent', 't')}`;
+    unlock('s6');
+    setTimeout(runReview, 800);
+  }, 2000);
+  
+  out.innerHTML = '<p style="color:var(--muted)">Sequence running... (simulated timeline)</p>';
+}
+
+// STAGE 6: Review
+function runReview() {
+  const out = document.getElementById('out6');
+  out.innerHTML = `
+    <dl class="kv">
+      <dt>TRIGGER</dt><dd>Job completed 2 days ago</dd>
+      <dt>TEMPLATE</dt><dd>"Hi Maria! Thanks for choosing Reyes Electrical for your panel upgrade. If you were happy with the work, a quick Google review would mean a lot to us: [review link] Thank you!"</dd>
+      <dt>STATUS</dt><dd><span style="color:var(--ok)">Review request sent (simulated)</span></dd>
+      <dt>AUDIT</dt><dd>review_request_sent logged</dd>
+    </dl>
+    ${log('✓ WF06 complete — full lead lifecycle finished', 't')}
+    <p style="margin-top:1.5rem;padding:1rem;background:rgba(95,208,138,.08);border:1px solid var(--accent);border-radius:8px">
+      <strong style="color:var(--accent)">🎉 Simulation complete!</strong><br>
+      <span style="color:var(--muted);font-size:.9rem">Missed call → instant reply → AI draft → your approval → follow-ups → job → review request. Every step logged, every AI message approved by a human.</span>
+    </p>`;
+}
+</script>
+</body>
+</html>
