@@ -360,7 +360,7 @@
             <div><h4>output: the system</h4><p>A 4-workflow suite: <strong>Gemini scores every lead</strong> (ICP 0–100, grade, written reasoning, saved to the database), quotes are <strong>priced from live catalogs and sent as PDF proposals</strong>, stale quotes get <strong>chased daily with a 3-touch sequence that stops the moment anything changes</strong>, and a <strong>Monday dashboard digest</strong> reports the pipeline in money, not process timings.</p></div>
           </div>
           <figure class="wffig">
-            <figcaption>fig. 03 — workflow registry · 4 diagrams rendered from the live workflow exports + system overview · click any shot for full size</figcaption>
+            <figcaption>fig. 03 — workflow registry · 4 real n8n canvas screenshots · dark mode · sticky-note annotated · click any shot for full size</figcaption>
             <div class="wfrows">
             <div class="wfrow">
               <div class="wfunit">
@@ -369,8 +369,8 @@
                   <h5>Lead Scoring &amp; Enrichment</h5>
                   <p>Leads arrive via webhook; company and contact are saved, then Gemini scores fit (0–100 + grade + reasoning) and writes it back.</p>
                 </div>
-                <a class="wfshot" href="assets/leadscore/wf01-scoring.png" target="_blank" rel="noopener">
-                  <img src="assets/leadscore/wf01-scoring.png" alt="WF01 Lead Scoring and Enrichment — workflow diagram rendered from the live export" loading="lazy">
+                <a class="wfshot" href="assets/leadscore/screenshots/wf01.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf01.png" alt="WF01 Lead Scoring and Enrichment — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
                   <span class="tag">full size &#8599;</span>
                 </a>
               </div>
@@ -380,8 +380,8 @@
                   <h5>Quotation &amp; PDF Generator</h5>
                   <p>Base × complexity multiplier + catalog services and add-ons; a real PDF proposal is generated and emailed to the client, with a team alert.</p>
                 </div>
-                <a class="wfshot" href="assets/leadscore/wf02-quotation.png" target="_blank" rel="noopener">
-                  <img src="assets/leadscore/wf02-quotation.png" alt="WF02 Quotation and PDF Generator — workflow diagram rendered from the live export" loading="lazy">
+                <a class="wfshot" href="assets/leadscore/screenshots/wf02.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf02.png" alt="WF02 Quotation and PDF Generator — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
                   <span class="tag">full size &#8599;</span>
                 </a>
               </div>
@@ -393,8 +393,8 @@
                   <h5>Stale Quote Recovery</h5>
                   <p>Daily 09:00 scan enrolls stale quotes into +0/+3/+6-day reminders, with a stop check before every send; dead quotes expire with a team alert.</p>
                 </div>
-                <a class="wfshot" href="assets/leadscore/wf03-recovery.png" target="_blank" rel="noopener">
-                  <img src="assets/leadscore/wf03-recovery.png" alt="WF03 Stale Quote Recovery — workflow diagram rendered from the live export" loading="lazy">
+                <a class="wfshot" href="assets/leadscore/screenshots/wf03.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf03.png" alt="WF03 Stale Quote Recovery — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
                   <span class="tag">full size &#8599;</span>
                 </a>
               </div>
@@ -404,14 +404,14 @@
                   <h5>Pipeline Velocity Report</h5>
                   <p>Monday 08:00 dashboard-styled HTML digest: leads by grade, quotes by status, open pipeline value, accepted value, stale count.</p>
                 </div>
-                <a class="wfshot" href="assets/leadscore/wf04-velocity.png" target="_blank" rel="noopener">
-                  <img src="assets/leadscore/wf04-velocity.png" alt="WF04 Pipeline Velocity Report — workflow diagram rendered from the live export" loading="lazy">
+                <a class="wfshot" href="assets/leadscore/screenshots/wf04.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf04.png" alt="WF04 Pipeline Velocity Report — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
                   <span class="tag">full size &#8599;</span>
                 </a>
               </div>
             </div>
             </div>
-            <p style="margin-top:var(--s4)"><a href="assets/leadscore/overview.png" target="_blank" rel="noopener">System overview diagram &#8599;</a> <span style="color:var(--muted)">— 4 independent workflows, one shared Supabase database; no workflow calls another.</span></p>
+            <p style="margin-top:var(--s4)"><a href="assets/leadscore/overview.png" target="_blank" rel="noopener">System overview diagram &#8599;</a> <span style="color:var(--muted)">— 4 independent workflows, one shared Supabase database; no workflow calls another. Prefer a schematic? Rendered diagrams:</span> <a href="assets/leadscore/wf01-scoring.png" target="_blank" rel="noopener">WF01</a> · <a href="assets/leadscore/wf02-quotation.png" target="_blank" rel="noopener">WF02</a> · <a href="assets/leadscore/wf03-recovery.png" target="_blank" rel="noopener">WF03</a> · <a href="assets/leadscore/wf04-velocity.png" target="_blank" rel="noopener">WF04</a></p>
           </figure>
           <div class="duo">
             <div>
