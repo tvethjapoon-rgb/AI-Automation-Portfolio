@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contractor's Office Autopilot — AI lead response and follow-up system for trade businesses. Case study by Hanz Jay Apoon.">
+<title>Contractor's Office Autopilot — Case Study — Hanz Jay Apoon</title>
+<link rel="stylesheet" href="style.css?v=20261006c">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>hanz@automation:~</a>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html#projects">./work</a></li>
+        <li><a class="nav-link" href="index.html#systems">./systems</a></li>
+        <li><a class="nav-link" href="index.html#contact">./contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="section" style="border-bottom:none">
+    <div class="wrap">
+      <p class="sec-label"><a href="index.html#projects" style="color:var(--accent);text-decoration:none">← all projects</a> <span class="n" style="margin-left:1rem">// case_study</span></p>
+<article class="node" aria-labelledby="case-h">
+        <div class="node-head">
+          <div>
+            <h3 id="case-h">Contractor's Office Autopilot</h3>
+            <p class="node-sub">target: Reyes Electrical <span style="color:var(--muted)">(fictional demo business)</span></p>
+          </div>
+          <span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span>
+        </div>
+        <div class="node-body">
+          <div class="duo">
+            <div><h4>input: the problem</h4><p>Trade businesses lose jobs because missed calls and web inquiries don't get an instant response, quotes go unfollowed, and happy customers are never asked for reviews. After-hours leads go cold before the office opens.</p></div>
+            <div><h4>output: the system</h4><p>An AI-assisted lead response and follow-up system: every new lead gets an instant acknowledgment within minutes, quotes get automatic well-timed follow-ups, and completed jobs trigger review requests — with the owner approving every AI-drafted message before anything goes out.</p></div>
+          </div>
+          <figure class="wffig">
+            <figcaption>fig. 01 — workflow registry · 8 real n8n canvas screenshots (dark mode) · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Lead Intake</h5>
+                  <p>New leads arrive via webhook; each is validated, deduped, and classified before anything else runs.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf01-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf01-diagram.png" alt="WF01 Lead Intake — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Instant Responder</h5>
+                  <p>Business-hours-aware templates fire within minutes; after-hours leads get a morning follow-up queued.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf02-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf02-diagram.png" alt="WF02 Instant Responder — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>AI Follow-up Drafter</h5>
+                  <p>Gemini drafts tone-matched follow-ups from lead context; every draft lands in Trello awaiting approval.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf03-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf03-diagram.png" alt="WF03 AI Follow-up Drafter — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF04</span>
+                  <h5>Approval &amp; Send</h5>
+                  <p>The owner approves, edits, or rejects each draft in Trello; every decision is audited.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf04-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf04-diagram.png" alt="WF04 Approval and Send — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF05</span>
+                  <h5>Sequence Scheduler</h5>
+                  <p>Day 1·3·7 follow-ups fire on schedule; the sequence stops the moment the customer replies or opts out.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf05-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf05-diagram.png" alt="WF05 Sequence Scheduler — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF06</span>
+                  <h5>Review Request</h5>
+                  <p>Completed jobs trigger a review request, with one polite reminder — then it stops.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf06-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf06-diagram.png" alt="WF06 Review Request — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF07</span>
+                  <h5>Metrics &amp; Dashboard</h5>
+                  <p>Weekly performance summary compiled to Sheets: leads, sends, replies, reviews.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf07-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf07-diagram.png" alt="WF07 Metrics and Dashboard — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF08</span>
+                  <h5>Owner Notifications</h5>
+                  <p>Hot-lead alerts and the weekly digest go out via Gmail; nothing urgent gets buried.</p>
+                </div>
+                <a class="wfshot" href="assets/coa/wf08-diagram.png" target="_blank" rel="noopener">
+                  <img src="assets/coa/wf08-diagram.png" alt="WF08 Owner Notifications — real n8n canvas screenshot" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+          </figure>
+          <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
+                <li><strong>Supabase</strong> is the system of record — leads, messages, sequences, reviews, audit log.</li>
+                <li><strong>Airtable</strong> holds human-friendly config: templates, sequence timing, business hours, tone.</li>
+                <li><strong>Trello</strong> is the approval gate — no AI-drafted message sends without a human record.</li>
+                <li><strong>Stop-on-reply &amp; opt-out handling</strong> built into the sequence engine.</li>
+                <li><strong>Guardrails:</strong> drafts are validated — no prices, no time commitments, no invented services.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/airtable.svg" alt="Airtable logo"><span>Airtable</span></li>
+                <li><img src="assets/stack/trello.svg" alt="Trello logo"><span>Trello</span></li>
+                <li><img src="assets/stack/googlesheets.svg" alt="Google Sheets logo"><span>Google Sheets</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
+              <p style="margin-top:var(--s4);display:flex;flex-wrap:wrap;gap:1rem"><a class="btn" href="coa-sim.html" style="text-decoration:none">▶ Try the Interactive Simulation</a><a class="btn btn--ghost" href="coa-samples.html" style="text-decoration:none">📸 Trello / Airtable / Email Samples</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional lead data — it is not connected to any live system</p>
+            </div>
+          </div>
+          <p class="scope">// scope: 8 workflows · verified live end-to-end 2026-10-08 · simulated lead events (real SMS provider integration designed as a future phase)</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot-inner">
+    <p>&copy; <span id="year">2026</span> Hanz Jay Apoon — built by hand, no templates, no trackers.</p>
+    <p><a href="index.html#projects">← Back to all projects</a></p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

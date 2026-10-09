@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Call QA & Performance Intelligence — AI-assisted call quality pipeline for support operations. Case study by Hanz Jay Apoon.">
+<title>AI Call QA & Performance Intelligence — Case Study — Hanz Jay Apoon</title>
+<link rel="stylesheet" href="style.css?v=20261006c">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>hanz@automation:~</a>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html#projects">./work</a></li>
+        <li><a class="nav-link" href="index.html#systems">./systems</a></li>
+        <li><a class="nav-link" href="index.html#contact">./contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="section" style="border-bottom:none">
+    <div class="wrap">
+      <p class="sec-label"><a href="index.html#projects" style="color:var(--accent);text-decoration:none">← all projects</a> <span class="n" style="margin-left:1rem">// case_study</span></p>
+<article class="node" aria-labelledby="qa-h">
+        <div class="node-head">
+          <div>
+            <h3 id="qa-h">AI Call QA &amp; Performance Intelligence</h3>
+            <p class="node-sub">target: support operations <span style="color:var(--muted)">(mock call transcripts)</span></p>
+          </div>
+          <span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span>
+        </div>
+        <div class="node-body">
+          <div class="duo">
+            <div><h4>input: the problem</h4><p>Support teams judge call quality by hand — slow, inconsistent, and impossible to scale. One QA reviewer hears a call one way, another hears it differently, and coaching ends up anecdotal instead of evidence-based.</p></div>
+            <div><h4>output: the system</h4><p>An AI-assisted QA pipeline: every transcript is classified, evaluated against a versioned scorecard with AI-extracted evidence per rule, then scored by <strong>deterministic rules</strong> — the model never invents the final score. Weaknesses become Trello coaching tasks; managers get period reports.</p></div>
+          </div>
+                    <figure class="wffig">
+            <figcaption>fig. 02 — workflow registry · 8 real n8n canvas screenshots · dark mode · sticky-note annotated · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Call Intake</h5>
+                  <p>New transcripts arrive on a Sheets trigger; each one is validated and deduped before QA begins.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf01.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf01.png" alt="WF01 Call Intake — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Call Classification</h5>
+                  <p>AI classifies every call by type, intent, and outcome.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf02.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf02.png" alt="WF02 Call Classification — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>QA Evaluation</h5>
+                  <p>Transcripts are evaluated against versioned scorecard rules, with AI extracting per-rule evidence quotes.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf03.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf03.png" alt="WF03 QA Evaluation — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF04</span>
+                  <h5>Score Calculation</h5>
+                  <p>Weighted scores are calculated in deterministic code, with critical-failure checks enforced.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf04.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf04.png" alt="WF04 Score Calculation — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF05</span>
+                  <h5>Sales Intelligence</h5>
+                  <p>Observed sales behaviors are linked to call outcomes.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf05.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf05.png" alt="WF05 Sales Intelligence — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF06</span>
+                  <h5>CSR Performance</h5>
+                  <p>Scores aggregate into CSR rankings and trend views.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf06.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf06.png" alt="WF06 CSR Performance — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF07</span>
+                  <h5>Coaching</h5>
+                  <p>Weaknesses are detected and turned into Trello coaching tasks.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf07.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf07.png" alt="WF07 Coaching — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF08</span>
+                  <h5>Reporting</h5>
+                  <p>Period reporting via Sheets, Docs, and Gmail digest. Fix in progress.</p>
+                </div>
+                <a class="wfshot" href="assets/call-qa/screenshots/wf08.png" target="_blank" rel="noopener">
+                  <img src="assets/call-qa/screenshots/wf08.png" alt="WF08 Reporting — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+          </figure>
+          <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
+                <li><strong>AI extracts, rules decide</strong> — Gemini pulls evidence quotes per scorecard rule; weighted scoring and critical-failure checks run in deterministic code.</li>
+                <li><strong>Versioned scorecards</strong> — evaluation criteria, weights, and critical flags live in Supabase; new versions don't rewrite history.</li>
+                <li><strong>Human oversight by design</strong> — critical failures and low-confidence evaluations route to reviewers; coaching tasks land in Trello, not in a black box.</li>
+                <li><strong>Supabase</strong> is the system of record — calls, evaluations, items, behaviors, coaching actions, audit log.</li>
+              </ul>
+            </div>
+                        <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/googlesheets.svg" alt="Google Sheets logo"><span>Google Sheets</span></li>
+                <li><img src="assets/stack/airtable.svg" alt="Airtable logo"><span>Airtable</span></li>
+                <li><img src="assets/stack/trello.svg" alt="Trello logo"><span>Trello</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
+              <p style="margin-top:var(--s4)"><a class="btn btn--ghost" href="call-qa-sim.html">▶ Try the interactive simulation</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional call data — it is not connected to any live system</p>
+            </div>
+          </div>
+          <p class="scope">// scope: 8 workflows · mock-transcript MVP · 5-test validation suite: 23 pass · 0 fail · WF01→WF07 verified live end-to-end 2026-10-05 (sales 94%, complaint 26% w/ critical failure caught, billing 89%) · WF08 reporting: fix in progress</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot-inner">
+    <p>&copy; <span id="year">2026</span> Hanz Jay Apoon — built by hand, no templates, no trackers.</p>
+    <p><a href="index.html#projects">← Back to all projects</a></p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

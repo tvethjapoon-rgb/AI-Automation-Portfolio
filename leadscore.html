@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LeadScore Engine — AI lead scoring, dynamic quotation and pipeline recovery suite. Case study by Hanz Jay Apoon.">
+<title>LeadScore Engine — Case Study — Hanz Jay Apoon</title>
+<link rel="stylesheet" href="style.css?v=20261006c">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>hanz@automation:~</a>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html#projects">./work</a></li>
+        <li><a class="nav-link" href="index.html#systems">./systems</a></li>
+        <li><a class="nav-link" href="index.html#contact">./contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="section" style="border-bottom:none">
+    <div class="wrap">
+      <p class="sec-label"><a href="index.html#projects" style="color:var(--accent);text-decoration:none">← all projects</a> <span class="n" style="margin-left:1rem">// case_study</span></p>
+<article class="node" aria-labelledby="lse-h">
+        <div class="node-head">
+          <div>
+            <h3 id="lse-h">LeadScore Engine</h3>
+            <p class="node-sub">target: sales-led SMBs <span style="color:var(--muted)">(fictional demo data in the simulation)</span></p>
+          </div>
+          <span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span>
+        </div>
+        <div class="node-body">
+          <div class="duo">
+            <div><h4>input: the problem</h4><p>Inbound leads get scored by gut feel — or not at all. Quotes sit in Draft and Sent until they go cold, nobody chases them, and the owner only sees the pipeline slowing down when the month is already lost.</p></div>
+            <div><h4>output: the system</h4><p>A 4-workflow suite: <strong>Gemini scores every lead</strong> (ICP 0–100, grade, written reasoning, saved to the database), quotes are <strong>priced from live catalogs and sent as PDF proposals</strong>, stale quotes get <strong>chased daily with a 3-touch sequence that stops the moment anything changes</strong>, and a <strong>Monday dashboard digest</strong> reports the pipeline in money, not process timings.</p></div>
+          </div>
+          <figure class="wffig">
+            <figcaption>fig. 03 — workflow registry · 4 real n8n canvas screenshots · dark mode · sticky-note annotated · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Lead Scoring &amp; Enrichment</h5>
+                  <p>Leads arrive via webhook; company and contact are saved, then Gemini scores fit (0–100 + grade + reasoning) and writes it back.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/screenshots/wf01.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf01.png" alt="WF01 Lead Scoring and Enrichment — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Quotation &amp; PDF Generator</h5>
+                  <p>Base × complexity multiplier + catalog services and add-ons; a real PDF proposal is generated and emailed to the client, with a team alert.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/screenshots/wf02.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf02.png" alt="WF02 Quotation and PDF Generator — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>Stale Quote Recovery</h5>
+                  <p>Daily 09:00 scan enrolls stale quotes into +0/+3/+6-day reminders, with a stop check before every send; dead quotes expire with a team alert.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/screenshots/wf03.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf03.png" alt="WF03 Stale Quote Recovery — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF04</span>
+                  <h5>Pipeline Velocity Report</h5>
+                  <p>Monday 08:00 dashboard-styled HTML digest: leads by grade, quotes by status, open pipeline value, accepted value, stale count.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/screenshots/wf04.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/screenshots/wf04.png" alt="WF04 Pipeline Velocity Report — real n8n canvas screenshot, dark mode, sticky-note annotated" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+            <p style="margin-top:var(--s4)"><a href="assets/leadscore/overview.png" target="_blank" rel="noopener">System overview diagram &#8599;</a> <span style="color:var(--muted)">— 4 independent workflows, one shared Supabase database; no workflow calls another. Prefer a schematic? Rendered diagrams:</span> <a href="assets/leadscore/wf01-scoring.png" target="_blank" rel="noopener">WF01</a> · <a href="assets/leadscore/wf02-quotation.png" target="_blank" rel="noopener">WF02</a> · <a href="assets/leadscore/wf03-recovery.png" target="_blank" rel="noopener">WF03</a> · <a href="assets/leadscore/wf04-velocity.png" target="_blank" rel="noopener">WF04</a></p>
+          </figure>
+          <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
+                <li><strong>Supabase is the system of record</strong> — companies, contacts, quotes, service/add-on catalogs, follow-up sequences.</li>
+                <li><strong>AI scores, rules price</strong> — Gemini judges lead fit with written reasoning; pricing is deterministic catalog math (base × complexity + services + add-ons).</li>
+                <li><strong>Recovery with manners</strong> — every reminder is re-checked before sending (status changed / quote updated / no contact email), and client copy never shows a "reminder N of 3" counter.</li>
+                <li><strong>Owner-first reporting</strong> — the digest leads with open pipeline and accepted value; an internal timing KPI was removed because it read as a performance grade.</li>
+                <li><strong>Tested in the enabled configuration</strong> — a visual review of every output caught a production-only bug that disabled-node testing had masked; fixed and re-verified live.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
+              <p style="margin-top:var(--s4)"><a class="btn" href="leadscore-sim.html" style="text-decoration:none">▶ Try the Interactive Simulation</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional data — it is not connected to any live system</p>
+            </div>
+          </div>
+          <p class="scope">// scope: 4 workflows · verified live end-to-end 2026-10-09 · Gemini test scores 45 (C) and 75 (A) with reasoning · verified quote total 4,250.00 with a 306 KB PDF · digest metrics matched independent recomputation 14/14 in three rounds · the suite arrived broken (its database tables had never been created) — the schema was rebuilt from the workflows' actual usage, and three pre-existing bugs were found and fixed along the way</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot-inner">
+    <p>&copy; <span id="year">2026</span> Hanz Jay Apoon — built by hand, no templates, no trackers.</p>
+    <p><a href="index.html#projects">← Back to all projects</a></p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
