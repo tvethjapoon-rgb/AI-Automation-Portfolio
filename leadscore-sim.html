@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive simulation: LeadScore Engine. Fictional demo data, runs entirely in your browser.">
+<title>LeadScore Engine Simulation — Hanz Jay Apoon</title>
+<style>
+:root{
+  --bg:#0c1210; --panel:#111916; --ink:#e9f2ec; --muted:#93a89a;
+  --line:#243128; --accent:#5fd08a; --accent-ink:#0a1a10; --ok:#37c978;
+  --warn:#ffb020; --bad:#ff5d5d; --info:#5aa9ff;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --disp:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);padding:.9rem 0}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-decoration:none}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:-.02em;margin:.6rem 0}
+.hero p{color:var(--muted);max-width:44rem}
+.sim-badge{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;border:1px dashed var(--warn);color:var(--warn);padding:.4rem .8rem;margin-bottom:1rem}
+.section{padding:2.5rem 0;border-bottom:1px solid var(--line)}
+.section h2{font-size:1.4rem;margin-bottom:1rem}
+.section h2 .n{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin-right:.6rem}
+.section.locked{opacity:.38;pointer-events:none}
+.btn{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;padding:.85rem 1.5rem;border:1px solid var(--accent);display:inline-block;cursor:pointer;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border-radius:6px;margin-right:.6rem;margin-top:1rem}
+.btn:disabled{opacity:.4;cursor:default}
+.btn--ghost{background:transparent;color:var(--accent)}
+.btn--warn{background:transparent;color:var(--warn);border-color:var(--warn)}
+.panel{background:var(--panel);border:1px solid var(--line);padding:1.5rem;font-size:.92rem;border-radius:8px;margin-top:1rem}
+.kv{display:grid;grid-template-columns:11rem 1fr;gap:.3rem .8rem;font-size:.9rem;margin:.6rem 0}
+.kv dt{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.06em}
+.kv dd{color:var(--ink)}
+.scorewrap{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;margin:1rem 0}
+.scorebig{font-family:var(--mono);font-size:3.4rem;font-weight:700;color:var(--accent);line-height:1}
+.grade{font-family:var(--mono);font-size:1.1rem;border:2px solid var(--accent);color:var(--accent);border-radius:50%;width:3.2rem;height:3.2rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.reason{background:var(--bg);border-left:3px solid var(--accent);padding:.8rem 1rem;font-style:italic;color:var(--muted)}
+.pick{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .8rem;border:1px solid var(--line);border-radius:6px;margin:.4rem 0;cursor:pointer}
+.pick:hover{border-color:var(--accent)}
+.pick input{accent-color:var(--accent)}
+.total{font-family:var(--mono);font-size:1.3rem;color:var(--accent);margin-top:1rem}
+.mail{background:#1a2420;border:1px solid var(--line);border-radius:8px;padding:1.25rem;margin:1rem 0}
+.mail h4{font-family:var(--mono);font-size:.85rem;color:var(--accent);margin-bottom:.4rem}
+.mail .subj{font-weight:700}
+.mail p{color:var(--muted);font-size:.9rem}
+.log{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:1rem;max-height:12rem;overflow:auto}
+.log .t{color:var(--accent)} .log .w{color:var(--warn)} .log .e{color:var(--bad)}
+.timeline{position:relative;padding-left:1.5rem;margin:1rem 0}
+.timeline::before{content:'';position:absolute;left:.4rem;top:.5rem;bottom:.5rem;width:2px;background:var(--line)}
+.tl-item{position:relative;margin-bottom:1.2rem;opacity:.35}
+.tl-item::before{content:'';position:absolute;left:-1.35rem;top:.35rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--line);border:2px solid var(--bg)}
+.tl-item.done{opacity:1}.tl-item.done::before{background:var(--ok)}
+.tl-item.active{opacity:1}.tl-item.active::before{background:var(--accent);box-shadow:0 0 0 4px rgba(95,208,138,.2)}
+.tl-item.stopped{opacity:1}.tl-item.stopped::before{background:var(--warn)}
+.tl-item .tl-time{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.tl-item .tl-desc{font-size:.9rem;margin-top:.2rem}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.8rem;margin:1rem 0}
+.kpi{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1rem}
+.kpi .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.kpi .v{font-family:var(--mono);font-size:1.5rem;color:var(--ink);margin-top:.3rem}
+.kpi .v.money{color:var(--accent)}
+footer{padding:2rem 0;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="index.html">hanz@automation:~</a>
+  <span class="tag">simulation</span>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <span class="sim-badge">⚠ INTERACTIVE SIMULATION — FICTIONAL DATA, RUNS IN YOUR BROWSER</span>
+  <h1>LeadScore Engine</h1>
+  <p>Follow one lead through the whole suite: <strong>AI scoring</strong>, a <strong>priced quote with a PDF proposal</strong>, a <strong>stale-quote recovery sequence</strong> that knows when to stop, and the <strong>Monday pipeline digest</strong>. Every step mirrors what the real n8n workflows do. Nothing here sends real email — it's all simulated, with a fictional business and a fictional demo catalog.</p>
+</div></div>
+
+<div class="wrap">
+<!-- STAGE 1 + 2: scoring -->
+<div class="section" id="s1">
+  <h2><span class="n">[01]</span> A lead comes in — WF01 scores it</h2>
+  <p style="color:var(--muted)">A new inquiry lands on the webhook. In the real system, the company and contact are saved to Supabase first, then Google Gemini scores the lead against the ideal customer profile.</p>
+  <div class="panel">
+    <dl class="kv">
+      <dt>COMPANY</dt><dd>Northgate Dental Group <span style="color:var(--muted)">(fictional)</span></dd>
+      <dt>INDUSTRY</dt><dd>Healthcare — dental clinics, 6 branches</dd>
+      <dt>EMPLOYEES</dt><dd>140</dd>
+      <dt>CONTACT</dt><dd>Clinic operations manager</dd>
+      <dt>SIGNAL</dt><dd>Asked about automating appointment reminders and patient follow-up</dd>
+    </dl>
+    <button class="btn" id="btn-score">▶ Run WF01 — Score this lead</button>
+    <div id="score-out" style="display:none">
+      <div class="scorewrap">
+        <div><div class="scorebig" id="score-num">0</div><div style="font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em">ICP SCORE / 100</div></div>
+        <div class="grade" id="score-grade">?</div>
+        <div style="max-width:26rem"><strong>Score saved back to Supabase</strong><br><span style="color:var(--muted)">The webhook returns the scored row — the same values the team sees in the database.</span></div>
+      </div>
+      <p class="reason" id="score-reason"></p>
+    </div>
+    <div class="log" id="log1"></div>
+  </div>
+</div>
+
+<!-- STAGE 3: quotation -->
+<div class="section locked" id="s2">
+  <h2><span class="n">[02]</span> Build the quote — WF02 prices it and sends a PDF proposal</h2>
+  <p style="color:var(--muted)">Pick what the client asked for. WF02 matches services and add-ons <em>by name</em> against the live catalogs, applies the complexity multiplier (140 employees is over 100, so the base is ×1.5), saves the quote as Draft, renders a real PDF proposal, and emails it.</p>
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:.5rem">Services <span style="color:var(--muted);font-weight:400">(demo catalog)</span></h3>
+    <label class="pick"><span><input type="checkbox" class="svc" value="1000" checked> Lead Scoring Engine setup</span><span>1,000</span></label>
+    <label class="pick"><span><input type="checkbox" class="svc" value="750"> Quotation Automation</span><span>750</span></label>
+    <label class="pick"><span><input type="checkbox" class="svc" value="500"> Pipeline Reporting</span><span>500</span></label>
+    <h3 style="font-size:1rem;margin:.9rem 0 .5rem">Add-ons <span style="color:var(--muted);font-weight:400">(demo catalog)</span></h3>
+    <label class="pick"><span><input type="checkbox" class="addon" value="600"> Custom Dashboard</span><span>600</span></label>
+    <label class="pick"><span><input type="checkbox" class="addon" value="400" checked> Data Migration</span><span>400</span></label>
+    <label class="pick"><span><input type="checkbox" class="addon" value="250"> Priority Support</span><span>250</span></label>
+    <div class="total" id="quote-total">Base 1,500 × 1.5 complexity = 2,250 + services 1,000 + add-ons 400 → Total 3,650.00</div>
+    <button class="btn" id="btn-quote">▶ Run WF02 — Generate quote + PDF</button>
+    <div id="quote-out" style="display:none">
+      <div class="mail"><h4>📧 TEAM ALERT (simulated)</h4><p class="subj">[NEW AI LEAD] Northgate Dental Group</p><p>New quote saved as Draft. Total <span class="qtot"></span>. Proposal PDF generated (document.pdf, ~306 KB in real runs).</p></div>
+      <div class="mail"><h4>📧 CLIENT PROPOSAL (simulated)</h4><p class="subj">Your Custom AI Proposal</p><p>Sent to the client's email from the request data, with the PDF proposal attached.</p></div>
+    </div>
+    <div class="log" id="log2"></div>
+  </div>
+</div>
+
+<!-- STAGE 4: recovery -->
+<div class="section locked" id="s3">
+  <h2><span class="n">[03]</span> The quote goes quiet — WF03 chases it, politely</h2>
+  <p style="color:var(--muted)">Seven days pass with no reply, so the quote becomes stale-eligible and is enrolled in a 3-touch sequence (+0 / +3 / +6 days). Before <em>every</em> send, the step is re-checked: if the quote's status changed or it was updated, the sequence stops and nothing sends. Reminder copy carries no "reminder N of 3" counter — clients just get a follow-up.</p>
+  <div class="panel">
+    <div class="timeline">
+      <div class="tl-item" id="tl1"><div class="tl-time">DAY 0 — ENROLLMENT + REMINDER 1</div><div class="tl-desc">Subject: <em>Following up on your quote — total <span class="qtot"></span></em></div></div>
+      <div class="tl-item" id="tl2"><div class="tl-time">DAY 3 — REMINDER 2</div><div class="tl-desc">Subject: <em>Reminder: your quote (total <span class="qtot"></span>) is still open</em></div></div>
+      <div class="tl-item" id="tl3"><div class="tl-time">DAY 6 — FINAL NOTICE</div><div class="tl-desc">Subject: <em>Final notice: your quote (total <span class="qtot"></span>) is about to expire</em></div></div>
+      <div class="tl-item" id="tl4"><div class="tl-time">DAY 9 — EXPIRY CHECK</div><div class="tl-desc">Still Draft/Sent 3+ days after the final notice → quote marked <strong>Expired</strong>, team alerted: <em>[STALE QUOTE] Expired — Northgate Dental Group</em></div></div>
+    </div>
+    <button class="btn" id="btn-advance">▶ Advance one step</button>
+    <button class="btn btn--warn" id="btn-accept" disabled>✋ Client accepts the quote — stop the sequence</button>
+    <p id="recovery-note" style="color:var(--muted);margin-top:1rem"></p>
+    <div class="log" id="log3"></div>
+  </div>
+</div>
+
+<!-- STAGE 5: velocity digest -->
+<div class="section locked" id="s4">
+  <h2><span class="n">[04]</span> Monday 08:00 — WF04 sends the owner the numbers that matter</h2>
+  <p style="color:var(--muted)">The weekly digest is a dashboard-styled HTML email. It leads with money — open pipeline and accepted value — not internal process timings. The figures below include your simulated quote.</p>
+  <div class="panel">
+    <h3 style="font-size:1rem">Pipeline Velocity Report — week of Mon → Mon <span style="color:var(--muted)">(simulated figures)</span></h3>
+    <div class="kpis">
+      <div class="kpi"><div class="k">Leads scored</div><div class="v" id="k-leads">7</div></div>
+      <div class="kpi"><div class="k">Quotes created</div><div class="v" id="k-quotes">5</div></div>
+      <div class="kpi"><div class="k">Open pipeline (Draft + Sent)</div><div class="v money" id="k-open">—</div></div>
+      <div class="kpi"><div class="k">Accepted value (to date)</div><div class="v money" id="k-acc">—</div></div>
+      <div class="kpi"><div class="k">Stale quotes</div><div class="v" id="k-stale">1</div></div>
+    </div>
+    <p style="color:var(--muted)" id="digest-note"></p>
+    <button class="btn btn--ghost" id="btn-restart">↺ Restart the simulation</button>
+    <a class="btn btn--ghost" href="index.html#projects" style="text-decoration:none">← Back to the case study</a>
+  </div>
+</div>
+</div>
+
+<footer><div class="wrap">
+  <p>Simulation only — fictional business, fictional demo catalog, no real emails sent, no connection to any live system. The real LeadScore Engine runs on n8n + Supabase + Google Gemini.</p>
+  <p style="margin-top:.5rem"><a href="index.html">← Portfolio home</a> · Hanz Jay Apoon — tvet.hjapoon@gmail.com</p>
+</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+function log(el,msg,cls){const d=document.createElement('div');if(cls)d.className=cls;d.innerHTML='<span class="t">›</span> '+msg;el.appendChild(d);el.scrollTop=el.scrollHeight;}
+let quoteTotal=3650, accepted=false, step=0;
+
+// --- Stage 1: scoring ---
+$('btn-score').addEventListener('click',()=>{
+  $('btn-score').disabled=true;
+  const L=$('log1');
+  log(L,'Webhook received: ai-lead-scoring');
+  log(L,'Company + contact saved to Supabase');
+  log(L,'Gemini scoring against the ICP…');
+  let n=0; const target=82;
+  const iv=setInterval(()=>{ n+=Math.ceil(Math.random()*9); if(n>=target){n=target;clearInterval(iv);
+    $('score-grade').textContent='A';
+    $('score-reason').textContent='“Multi-branch healthcare operator with 140 staff and an explicit automation need (appointment reminders, patient follow-up). Strong ICP fit: clear pain, operational scale, and a named operations contact.”';
+    log(L,'Score written back: icp_score=82 · lead_grade=A','t');
+    $('s2').classList.remove('locked');
+    $('s2').scrollIntoView({behavior:'smooth',block:'start'});
+  } $('score-num').textContent=n; $('score-out').style.display='block'; },90);
+});
+
+// --- Stage 2: quotation ---
+function recalc(){
+  const svc=[...document.querySelectorAll('.svc:checked')].reduce((a,c)=>a+ +c.value,0);
+  const ad=[...document.querySelectorAll('.addon:checked')].reduce((a,c)=>a+ +c.value,0);
+  quoteTotal=1500*1.5+svc+ad;
+  $('quote-total').textContent='Base 1,500 × 1.5 complexity = 2,250 + services '+svc.toLocaleString()+' + add-ons '+ad.toLocaleString()+' → Total '+fmt(quoteTotal);
+  document.querySelectorAll('.qtot').forEach(e=>e.textContent=fmt(quoteTotal));
+}
+document.querySelectorAll('.svc,.addon').forEach(c=>c.addEventListener('change',recalc)); recalc();
+$('btn-quote').addEventListener('click',()=>{
+  $('btn-quote').disabled=true;
+  document.querySelectorAll('.svc,.addon').forEach(c=>c.disabled=true);
+  const L=$('log2');
+  log(L,'Webhook received: ai-qualification');
+  log(L,'Company/contact matched in Supabase (existing lead found)');
+  log(L,'Services + add-ons matched by name against the catalogs');
+  log(L,'Pricing calculated: total '+fmt(quoteTotal));
+  log(L,'Quote saved with status Draft');
+  log(L,'PDF proposal generated via html2pdf');
+  $('quote-out').style.display='block';
+  log(L,'Team alert + client proposal emailed (simulated)','t');
+  $('s3').classList.remove('locked');
+});
+
+// --- Stage 3: recovery ---
+const notes=[
+ 'Quote is 7+ days old and still Draft → enrolled with 3 follow-up rows (+0/+3/+6 days). Reminder 1 sent after the pre-send check passed.',
+ 'Pre-send check: status unchanged, quote untouched → reminder 2 sent.',
+ 'Pre-send check passed → final notice sent. The copy never shows a "step N of 3" counter to the client.',
+ 'Final notice is 3+ days old and the quote is still open → marked Expired, remaining steps stopped, team alerted.'];
+$('btn-advance').addEventListener('click',()=>{
+  if(step>=4) return;
+  step++;
+  const tl=$('tl'+step); tl.classList.add(step<4?'done':'done','active');
+  $('recovery-note').textContent=notes[step-1];
+  log($('log3'),'Day '+[0,3,6,9][step-1]+' — step '+(step<4?'sent':'expiry processed'));
+  if(step===1) $('btn-accept').disabled=false;
+  if(step>=4){ $('btn-advance').disabled=true; $('btn-accept').disabled=true;
+    $('recovery-note').textContent+=' Sequence complete — the quote expired without a reply.';
+    finish(false); }
+});
+$('btn-accept').addEventListener('click',()=>{
+  accepted=true;
+  for(let i=step+1;i<=4;i++){ const tl=$('tl'+i); tl.classList.add('stopped'); tl.querySelector('.tl-desc').innerHTML+=' <strong style="color:var(--warn)">— stopped: quote status changed to Accepted</strong>'; }
+  $('btn-advance').disabled=true; $('btn-accept').disabled=true;
+  $('recovery-note').textContent='The client accepted. At the next pre-send check, WF03 sees the status change, marks the remaining steps stopped with that reason, and sends nothing. Polite persistence, hard stop on reply or decision — that is the whole design.';
+  log($('log3'),'Status changed → remaining steps stopped, nothing sent','w');
+  finish(true);
+});
+
+// --- Stage 4: digest ---
+function finish(wasAccepted){
+  const otherOpen=7601.49, otherAccepted=4250.00;
+  const open=otherOpen+(wasAccepted?0:0); // expired quote leaves open pipeline; accepted moves to accepted
+  const openVal=wasAccepted?otherOpen:otherOpen; // sim baseline excludes this quote once resolved either way
+  const accVal=otherAccepted+(wasAccepted?quoteTotal:0);
+  $('k-open').textContent=fmt(openVal);
+  $('k-acc').textContent=fmt(accVal);
+  $('k-stale').textContent=wasAccepted?'0':'0';
+  $('digest-note').textContent=wasAccepted
+    ? 'Your simulated quote shows up in Accepted value — the number the owner actually opens this email for.'
+    : 'Your simulated quote expired, so it drops out of open pipeline and the stale count clears — the digest reflects reality on Monday, not hope.';
+  $('s4').classList.remove('locked');
+  $('s4').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('btn-restart').addEventListener('click',()=>location.reload());
+</script>
+</body>
+</html>

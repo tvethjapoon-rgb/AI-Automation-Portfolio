@@ -39,7 +39,7 @@
         <a class="btn btn--ghost" href="https://github.com/tvethjapoon-rgb" target="_blank" rel="noopener">github.com/tvethjapoon-rgb</a>
       </div>
       <div class="metrics" role="list" aria-label="Key figures">
-        <div class="metric" role="listitem"><p class="k">workflows live</p><p class="v"><em>16</em></p></div>
+        <div class="metric" role="listitem"><p class="k">workflows live</p><p class="v"><em>20</em></p></div>
         <div class="metric" role="listitem"><p class="k">integrated tools</p><p class="v"><em>06</em></p></div> <!-- anti-ui-slop: count matches the 6 tech chips, no invented figures -->
         <div class="metric" role="listitem"><p class="k">ai policy</p><p class="v" style="font-size:1.25rem;padding-top:.4rem">human-in-the-loop</p></div>
       </div>
@@ -54,7 +54,7 @@
         <p>I'm an AI automation specialist building practical systems for small and mid-size businesses — the kind where busywork eats the day and follow-ups fall through the cracks. My work centers on one belief: <strong>AI should draft, humans should decide.</strong></p>
         <p>Every system I build keeps a person in the approval loop, logs every action, and produces numbers the owner can actually read. My stack is built around <strong>n8n</strong> for orchestration, <strong>Supabase</strong> as the system of record, and familiar tools owners already use — Trello, Google Workspace, Airtable — so the automation fits the business instead of the other way around.</p>
       </div>
-      <p style="max-width:56rem;color:var(--muted);margin-top:var(--s4)">Shipped so far: AI call QA for support operations; Contractor's Office Autopilot for trade businesses. Queued next: inventory alerts for retailers and intake automation for law firms.</p>
+      <p style="max-width:56rem;color:var(--muted);margin-top:var(--s4)">Shipped so far: AI call QA for support operations; Contractor's Office Autopilot for trade businesses; LeadScore Engine for lead scoring, quotation, and pipeline recovery. Queued next: inventory alerts for retailers and intake automation for law firms.</p>
     </div>
   </section>
 
@@ -343,6 +343,99 @@
             </div>
           </div>
           <p class="scope">// scope: 8 workflows · mock-transcript MVP · 5-test validation suite: 23 pass · 0 fail · WF01→WF07 verified live end-to-end 2026-10-05 (sales 94%, complaint 26% w/ critical failure caught, billing 89%) · WF08 reporting: fix in progress</p>
+        </div>
+      </article>
+
+      <article class="node" aria-labelledby="lse-h" style="margin-top:var(--s6)">
+        <div class="node-head">
+          <div>
+            <h3 id="lse-h">LeadScore Engine</h3>
+            <p class="node-sub">target: sales-led SMBs <span style="color:var(--muted)">(fictional demo data in the simulation)</span></p>
+          </div>
+          <span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span>
+        </div>
+        <div class="node-body">
+          <div class="duo">
+            <div><h4>input: the problem</h4><p>Inbound leads get scored by gut feel — or not at all. Quotes sit in Draft and Sent until they go cold, nobody chases them, and the owner only sees the pipeline slowing down when the month is already lost.</p></div>
+            <div><h4>output: the system</h4><p>A 4-workflow suite: <strong>Gemini scores every lead</strong> (ICP 0–100, grade, written reasoning, saved to the database), quotes are <strong>priced from live catalogs and sent as PDF proposals</strong>, stale quotes get <strong>chased daily with a 3-touch sequence that stops the moment anything changes</strong>, and a <strong>Monday dashboard digest</strong> reports the pipeline in money, not process timings.</p></div>
+          </div>
+          <figure class="wffig">
+            <figcaption>fig. 03 — workflow registry · 4 diagrams rendered from the live workflow exports + system overview · click any shot for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Lead Scoring &amp; Enrichment</h5>
+                  <p>Leads arrive via webhook; company and contact are saved, then Gemini scores fit (0–100 + grade + reasoning) and writes it back.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/wf01-scoring.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/wf01-scoring.png" alt="WF01 Lead Scoring and Enrichment — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Quotation &amp; PDF Generator</h5>
+                  <p>Base × complexity multiplier + catalog services and add-ons; a real PDF proposal is generated and emailed to the client, with a team alert.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/wf02-quotation.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/wf02-quotation.png" alt="WF02 Quotation and PDF Generator — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>Stale Quote Recovery</h5>
+                  <p>Daily 09:00 scan enrolls stale quotes into +0/+3/+6-day reminders, with a stop check before every send; dead quotes expire with a team alert.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/wf03-recovery.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/wf03-recovery.png" alt="WF03 Stale Quote Recovery — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF04</span>
+                  <h5>Pipeline Velocity Report</h5>
+                  <p>Monday 08:00 dashboard-styled HTML digest: leads by grade, quotes by status, open pipeline value, accepted value, stale count.</p>
+                </div>
+                <a class="wfshot" href="assets/leadscore/wf04-velocity.png" target="_blank" rel="noopener">
+                  <img src="assets/leadscore/wf04-velocity.png" alt="WF04 Pipeline Velocity Report — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+            <p style="margin-top:var(--s4)"><a href="assets/leadscore/overview.png" target="_blank" rel="noopener">System overview diagram &#8599;</a> <span style="color:var(--muted)">— 4 independent workflows, one shared Supabase database; no workflow calls another.</span></p>
+          </figure>
+          <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
+                <li><strong>Supabase is the system of record</strong> — companies, contacts, quotes, service/add-on catalogs, follow-up sequences.</li>
+                <li><strong>AI scores, rules price</strong> — Gemini judges lead fit with written reasoning; pricing is deterministic catalog math (base × complexity + services + add-ons).</li>
+                <li><strong>Recovery with manners</strong> — every reminder is re-checked before sending (status changed / quote updated / no contact email), and client copy never shows a "reminder N of 3" counter.</li>
+                <li><strong>Owner-first reporting</strong> — the digest leads with open pipeline and accepted value; an internal timing KPI was removed because it read as a performance grade.</li>
+                <li><strong>Tested in the enabled configuration</strong> — a visual review of every output caught a production-only bug that disabled-node testing had masked; fixed and re-verified live.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/supabase.svg" alt="Supabase logo"><span>Supabase</span></li>
+                <li><img src="assets/stack/googlegemini.svg" alt="Google Gemini logo"><span>Google Gemini</span></li>
+              </ul>
+              <p style="margin-top:var(--s4)"><a class="btn" href="leadscore-sim.html" style="text-decoration:none">▶ Try the Interactive Simulation</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional data — it is not connected to any live system</p>
+            </div>
+          </div>
+          <p class="scope">// scope: 4 workflows · verified live end-to-end 2026-10-09 · Gemini test scores 45 (C) and 75 (A) with reasoning · verified quote total 4,250.00 with a 306 KB PDF · digest metrics matched independent recomputation 14/14 in three rounds · the suite arrived broken (its database tables had never been created) — the schema was rebuilt from the workflows' actual usage, and three pre-existing bugs were found and fixed along the way</p>
         </div>
       </article>
       <p class="sec-label" style="margin-bottom:0"><span class="n">[+]</span> // queued_builds</p>
