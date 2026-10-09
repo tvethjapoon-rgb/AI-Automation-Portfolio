@@ -100,6 +100,7 @@
                 <li><strong>AI scores, rules price</strong> — Gemini judges lead fit with written reasoning; pricing is deterministic catalog math (base × complexity + services + add-ons).</li>
                 <li><strong>Recovery with manners</strong> — every reminder is re-checked before sending (status changed / quote updated / no contact email), and client copy never shows a "reminder N of 3" counter.</li>
                 <li><strong>Owner-first reporting</strong> — the digest leads with open pipeline and accepted value; an internal timing KPI was removed because it read as a performance grade.</li>
+                <li><strong>Full-lifecycle simulation, live</strong> — an accelerated end-to-end run over a seeded lifecycle dataset (Gmail enabled) proved the whole cycle: enrollment → reminders at +0/+3/+6 days → expiry + team alert → weekly digest. Both decision stops fired correctly (a repriced quote stopped as quote_updated; a converted quote stopped as status_changed), the no-contact-email skip and the expiry stop-remaining path were proven in enabled mode, and all 19 sends are accounted for. The digest over that data — open pipeline 32,800 · accepted value 30,800 · stale 5 — matched independent recomputation on all 14 fields.</li>
                 <li><strong>Tested in the enabled configuration</strong> — a visual review of every output caught a production-only bug that disabled-node testing had masked; fixed and re-verified live.</li>
               </ul>
             </div>
@@ -114,7 +115,7 @@
               <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional data — it is not connected to any live system</p>
             </div>
           </div>
-          <p class="scope">// scope: 4 workflows · verified live end-to-end 2026-10-09 · Gemini test scores 45 (C) and 75 (A) with reasoning · verified quote total 4,250.00 with a 306 KB PDF · digest metrics matched independent recomputation 14/14 in three rounds · the suite arrived broken (its database tables had never been created) — the schema was rebuilt from the workflows' actual usage, and three pre-existing bugs were found and fixed along the way</p>
+          <p class="scope">// scope: 4 workflows · verified live end-to-end 2026-10-09 · Gemini test scores 45 (C) and 75 (A) with reasoning · verified quote total 4,250.00 with a 306 KB PDF · digest metrics matched independent recomputation 14/14 in three rounds, and again over a full-lifecycle simulation (19 accounted sends, both decision stops + the no-email skip proven with email enabled) · the suite arrived broken (its database tables had never been created) — the schema was rebuilt from the workflows' actual usage, and three pre-existing bugs were found and fixed along the way</p>
         </div>
       </article>
     </div>
