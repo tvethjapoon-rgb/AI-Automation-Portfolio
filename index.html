@@ -39,8 +39,8 @@
         <a class="btn btn--ghost" href="https://github.com/tvethjapoon-rgb" target="_blank" rel="noopener">github.com/tvethjapoon-rgb</a>
       </div>
       <div class="metrics" role="list" aria-label="Key figures">
-        <div class="metric" role="listitem"><p class="k">projects shipped</p><p class="v"><em>03</em></p></div>
-        <div class="metric" role="listitem"><p class="k">workflows live</p><p class="v"><em>20</em></p></div>
+        <div class="metric" role="listitem"><p class="k">projects shipped</p><p class="v"><em>04</em></p></div>
+        <div class="metric" role="listitem"><p class="k">workflows live</p><p class="v"><em>31</em></p></div>
         <div class="metric" role="listitem"><p class="k">integrated tools</p><p class="v"><em>06</em></p></div> <!-- anti-ui-slop: count matches the 6 tech chips, no invented figures -->
         <div class="metric" role="listitem"><p class="k">ai policy</p><p class="v" style="font-size:1.25rem;padding-top:.4rem">human-in-the-loop</p></div>
       </div>
@@ -55,7 +55,7 @@
         <p>I'm an AI automation specialist building practical systems for small and mid-size businesses — the kind where busywork eats the day and follow-ups fall through the cracks. My work centers on one belief: <strong>AI should draft, humans should decide.</strong></p>
         <p>Every system I build keeps a person in the approval loop, logs every action, and produces numbers the owner can actually read. My stack is built around <strong>n8n</strong> for orchestration, <strong>Supabase</strong> as the system of record, and familiar tools owners already use — Trello, Google Workspace, Airtable — so the automation fits the business instead of the other way around.</p>
       </div>
-      <p style="max-width:56rem;color:var(--muted);margin-top:var(--s4)">Shipped so far: AI call QA for support operations; Contractor's Office Autopilot for trade businesses; LeadScore Engine for lead scoring, quotation, and pipeline recovery. Queued next: inventory alerts for retailers and intake automation for law firms.</p>
+      <p style="max-width:56rem;color:var(--muted);margin-top:var(--s4)">Shipped so far: AI call QA for support operations; Contractor's Office Autopilot for trade businesses; LeadScore Engine for lead scoring, quotation, and pipeline recovery; Inventory Automation for a school's supply requests, approvals, and purchase orders. Queued next: intake automation for law firms.</p>
     </div>
   </section>
 
@@ -85,15 +85,16 @@
           <ul class="chips" aria-label="Stack"><li>n8n</li><li>Supabase</li><li>Gemini</li><li>Gmail</li></ul>
           <p class="pcard-actions"><a class="btn btn--primary" href="leadscore.html" style="text-decoration:none">View case study</a><a class="btn btn--ghost" href="leadscore-sim.html" style="text-decoration:none">▶ Simulation</a></p>
         </article>
+        <article class="pcard">
+          <a class="pthumb" href="inventory.html"><img src="assets/inventory/overview.png" alt="Inventory Automation — system overview diagram rendered from the live workflow exports" loading="lazy"></a>
+          <div class="pcard-head"><h3>Inventory Automation</h3><span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span></div>
+          <p>A school's supply requests lived on paper — no approval trail, stock counts nobody trusted, the same last units promised twice. This suite takes a request from Google Form to Messenger approval, reserves stock by formula, and drafts the purchase order when supplies run low.</p>
+          <ul class="chips" aria-label="Stack"><li>n8n</li><li>Google Sheets</li><li>Messenger</li><li>Gmail</li></ul>
+          <p class="pcard-actions"><a class="btn btn--primary" href="inventory.html" style="text-decoration:none">View case study</a><a class="btn btn--ghost" href="inventory-sim.html" style="text-decoration:none">▶ Simulation</a></p>
+        </article>
       </div>
       <p class="sec-label" style="margin-bottom:0"><span class="n">[+]</span> // queued_builds</p>
       <div class="pipe-grid">
-        <article class="pipe" aria-labelledby="p2h">
-          <span class="status status--warn"><i aria-hidden="true"></i>QUEUED</span>
-          <h4 id="p2h">Inventory Alerts for Small Retailers</h4>
-          <p>Low-stock detection and reorder nudges for independent shops — connecting sales data to timely alerts so shelves stay stocked without constant manual checks.</p>
-          <ul class="chips" aria-label="Planned stack"><li>n8n</li><li>Supabase</li><li>Google Sheets</li></ul>
-        </article>
         <article class="pipe" aria-labelledby="p3h">
           <span class="status status--warn"><i aria-hidden="true"></i>QUEUED</span>
           <h4 id="p3h">Legal Intake for Solo &amp; Small Firms</h4>

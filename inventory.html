@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Inventory Automation — n8n + Google Sheets item-request, approval, reservation and purchase-order system for a small private school. Case study by Hanz Jay Apoon.">
+<title>Inventory Automation — Case Study — Hanz Jay Apoon</title>
+<link rel="stylesheet" href="style.css?v=20261006c">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>hanz@automation:~</a>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html#projects">./work</a></li>
+        <li><a class="nav-link" href="index.html#systems">./systems</a></li>
+        <li><a class="nav-link" href="index.html#contact">./contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="section" style="border-bottom:none">
+    <div class="wrap">
+      <p class="sec-label"><a href="index.html#projects" style="color:var(--accent);text-decoration:none">← all projects</a> <span class="n" style="margin-left:1rem">// case_study</span></p>
+<article class="node" aria-labelledby="inv-h">
+        <div class="node-head">
+          <div>
+            <h3 id="inv-h">Inventory Automation</h3>
+            <p class="node-sub">target: a small private school's supply &amp; property office <span style="color:var(--muted)">(fictional demo data in the simulation)</span></p>
+          </div>
+          <span class="status status--live"><i aria-hidden="true"></i>SHIPPED</span>
+        </div>
+        <div class="node-body">
+          <div class="duo">
+            <div><h4>input: the problem</h4><p>Supply requests ran on paper slips and chat messages. Approvals left no trail, the stock card and the shelf disagreed, and the same last box of supplies could be promised to two teachers in one morning. When stock ran out, buying happened first and the paperwork — if any — came later.</p></div>
+            <div><h4>output: the system</h4><p>An 11-workflow n8n suite with <strong>Google Sheets as the state machine</strong>: a Google Form takes requests of <strong>up to 15 items per basket</strong>, the requester confirms on <strong>Messenger</strong>, two approval levels decide — with the <strong>School Head's decision final on every request</strong> — stock is <strong>reserved by formula</strong> so it can't be double-allocated, shortfalls become restock requests, and <strong>PO drafts are grouped by supplier</strong> for the School Head to approve or edit.</p></div>
+          </div>
+          <figure class="wffig">
+            <figcaption>fig. 04 — workflow registry · 11 diagrams rendered from the live workflow exports · node names &amp; flow only · click any diagram for full size</figcaption>
+            <div class="wfrows">
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF06</span>
+                  <h5>Request Intake</h5>
+                  <p>Validates each basket once — requester, items, quantities, duplicate guard, department assignment — merges duplicate items and stamps the approval path at intake.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf06-intake.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf06-intake.png" alt="WF06 Request Intake — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF05</span>
+                  <h5>Messenger Webhook Router</h5>
+                  <p>The Messenger front door: registration, confirmation referrals, approval taps, and custodian prepare/receive taps — every event signature-verified.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf05-router.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf05-router.png" alt="WF05 Messenger Webhook Router — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF05+</span>
+                  <h5>Email Approval Links</h5>
+                  <p>Receives the signed email-link clicks: approve-all, the decline form, and the “Approve with changes” page. A bare click never decides — status is re-checked first.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf05-email-approval-links.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf05-email-approval-links.png" alt="Email Approval Links handler — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">SUB</span>
+                  <h5>Notify Fan-Out</h5>
+                  <p>The single notification composer: basket item lines with an availability snapshot, Messenger buttons, and signed email links — and it stands down when a call is stale.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/notify-fanout.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/notify-fanout.png" alt="Notify Fan-Out sub-workflow — diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF07</span>
+                  <h5>Availability, Reservation &amp; Restock</h5>
+                  <p>The stock engine. Fires only after School Head final approval: full reservation, partial plus a shortfall child request, or none — verified after every write.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf07-reservation.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf07-reservation.png" alt="WF07 Availability Reservation and Restock — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF08</span>
+                  <h5>Pickup &amp; Completion</h5>
+                  <p>Prepared → Ready for Pickup → Received. Receipt appends exactly one Issue transaction; a second receipt appends nothing. The requester gets a plain confirmation — the operational line goes to custodians.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf08-pickup.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf08-pickup.png" alt="WF08 Pickup and Completion — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF01</span>
+                  <h5>Real-Time Sync</h5>
+                  <p>The only writer of stock-on-hand. Applies each ledger transaction exactly once; an Issue row closes its request, a Restock row triggers the restock sweep.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf01-sync.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf01-sync.png" alt="WF01 Real-Time Sync — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF09</span>
+                  <h5>Daily Digest &amp; Reminders</h5>
+                  <p>The backstop: a 09:00 digest re-sends every still-pending basket with its own buttons, plus confirm/pickup reminders, Day-7 reassignment and Day-8 release of uncollected stock.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf09-digest.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf09-digest.png" alt="WF09 Daily Digest and Reminders — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF10</span>
+                  <h5>PO Drafts</h5>
+                  <p>Groups custodian-approved restock rows by supplier into purchase-order drafts and emails them to the School Heads. Approve stamps the draft; the edit page cuts quantities, and cut lines return to the pool.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf10-po-drafts.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf10-po-drafts.png" alt="WF10 PO Drafts — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF02</span>
+                  <h5>Low-Stock Alert Engine</h5>
+                  <p>Daily 08:00 scan: SKUs at or below reorder level with no open restock row get one — and custodians get the email. A second run creates zero duplicates.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf02-low-stock.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf02-low-stock.png" alt="WF02 Low-Stock Alert Engine — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            <div class="wfrow">
+              <div class="wfunit">
+                <div>
+                  <span class="wfnum">WF03</span>
+                  <h5>Metric Maintenance</h5>
+                  <p>Sunday 00:05 weekly integrity checks over the workbook, with the Dashboard refresh stamp — the quiet auditor of the suite.</p>
+                </div>
+                <a class="wfshot" href="assets/inventory/wf03-metrics.png" target="_blank" rel="noopener">
+                  <img src="assets/inventory/wf03-metrics.png" alt="WF03 Metric Maintenance — workflow diagram rendered from the live export" loading="lazy">
+                  <span class="tag">full size &#8599;</span>
+                </a>
+              </div>
+            </div>
+            </div>
+            <p style="margin-top:var(--s4)"><a href="assets/inventory/overview.png" target="_blank" rel="noopener">System overview diagram &#8599;</a> <span style="color:var(--muted)">— 11 workflows around one Google Sheets workbook. The sheet, not the chat thread, is the source of truth: every handler re-reads the request's live status before it acts.</span></p>
+          </figure>
+          <div class="duo">
+            <div>
+              <h4>architecture</h4>
+              <ul class="checklist">
+                <li><strong>Sheets are the state machine</strong> — each request row carries a 12-status lifecycle, and every button tap, link click, and typed command re-reads that live status before acting. Double-taps and stale clicks can't double-decide.</li>
+                <li><strong>Reservation by formula, never by counter</strong> — Reserved is a SUMIFS over the request log and Available = On Hand − Reserved, so two approvals can never promise the same last units. Stock deducts exactly once — when the requester confirms receipt — through the transaction ledger.</li>
+                <li><strong>Two levels, one final say</strong> — the Faculty Head endorses at L1; the School Head's decision is final on <em>every</em> request. Approvers can also “Approve with changes”: cut an item's quantity and the cut portion splits off as a declined sibling row with a reason, so the paperwork always sums to the original ask.</li>
+                <li><strong>Buttons everywhere, first decision wins</strong> — Messenger postbacks plus per-approver signed email links that expire in 7 days and re-check status on click. Email is the guaranteed channel when a Messenger window has closed; the daily digest re-sends anything still pending.</li>
+                <li><strong>Shortfalls become purchase orders</strong> — a partial reservation spawns a child request and a restock row; custodian-approved rows are pooled by supplier into PO drafts. PO-2026-00001 (₱1,080, 2 lines) was approved live by the School Head; PO-2026-00002 (₱1,100) was drafted in the same sweep. The system drafts and tracks POs — sending one to a supplier stays a human step.</li>
+                <li><strong>Proven on live traffic, not just in tests</strong> — the first multi-item basket ran the whole chain end-to-end: form → Messenger confirm → L1/L2 approvals with quantity cuts → reservation → prepared → received → restock → custodian approval → PO draft → School Head PO approval. An edge-case suite then passed 101 offline checks and 21/21 independent reviewer probes with zero defects.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>tech stack</h4>
+              <ul class="stacklogos">
+                <li><img src="assets/stack/n8n.svg" alt="n8n logo"><span>n8n</span></li>
+                <li><img src="assets/stack/googlesheets.svg" alt="Google Sheets logo"><span>Google Sheets</span></li>
+              </ul>
+              <p style="color:var(--muted);margin-top:1rem">Plus Google Forms + Apps Script (intake), Meta Messenger (approvals &amp; confirmations), and Gmail (signed approval links, digests, PO drafts).</p>
+              <p style="margin-top:var(--s4)"><a class="btn" href="inventory-sim.html" style="text-decoration:none">▶ Try the Interactive Simulation</a></p>
+              <p class="note" style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:1rem">// the simulation runs 100% in your browser with fictional data — it is not connected to any live system</p>
+            </div>
+          </div>
+          <p class="scope">// scope: 11 n8n workflows + a bound Apps Script form sync · deployed and verified live end-to-end, integrated 2026-10-14 · demo dataset (Northgate Academy, fictional): 45 SKUs · ₱335,915 stock value · 14 users · 7 departments · baskets up to 15 items · unconfirmed requests auto-cancel at 72h; uncollected reservations release on Day 8 · still open before real-staff rollout: Meta App Review (Business Verification + privacy policy) so non-role staff can use Messenger — approvals by signed email link already work for everyone</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot-inner">
+    <p>&copy; <span id="year">2026</span> Hanz Jay Apoon — built by hand, no templates, no trackers.</p>
+    <p><a href="index.html#projects">← Back to all projects</a></p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

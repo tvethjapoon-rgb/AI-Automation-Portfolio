@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive simulation: Inventory Automation System. Fictional demo data, runs entirely in your browser.">
+<title>Inventory Automation Simulation — Hanz Jay Apoon</title>
+<style>
+:root{
+  --bg:#0c1210; --panel:#111916; --ink:#e9f2ec; --muted:#93a89a;
+  --line:#243128; --accent:#5fd08a; --accent-ink:#0a1a10; --ok:#37c978;
+  --warn:#ffb020; --bad:#ff5d5d; --info:#5aa9ff;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --disp:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--disp);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+a{color:var(--accent)}
+.topbar{border-bottom:1px solid var(--line);padding:.9rem 0}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--mono);font-size:.85rem;color:var(--ink);text-decoration:none}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);letter-spacing:-.02em;margin:.6rem 0}
+.hero p{color:var(--muted);max-width:44rem}
+.sim-badge{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;border:1px dashed var(--warn);color:var(--warn);padding:.4rem .8rem;margin-bottom:1rem}
+.section{padding:2.5rem 0;border-bottom:1px solid var(--line)}
+.section h2{font-size:1.4rem;margin-bottom:1rem}
+.section h2 .n{font-family:var(--mono);color:var(--accent);font-size:.85rem;margin-right:.6rem}
+.section.locked{opacity:.38;pointer-events:none}
+.section p.lede{color:var(--muted)}
+.btn{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;padding:.85rem 1.5rem;border:1px solid var(--accent);display:inline-block;cursor:pointer;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border-radius:6px;margin-right:.6rem;margin-top:1rem}
+.btn:disabled{opacity:.4;cursor:default}
+.btn--ghost{background:transparent;color:var(--accent)}
+.btn--warn{background:transparent;color:var(--warn);border-color:var(--warn)}
+.btn--bad{background:transparent;color:var(--bad);border-color:var(--bad)}
+.panel{background:var(--panel);border:1px solid var(--line);padding:1.5rem;font-size:.92rem;border-radius:8px;margin-top:1rem}
+.kv{display:grid;grid-template-columns:11rem 1fr;gap:.3rem .8rem;font-size:.9rem;margin:.6rem 0}
+.kv dt{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.06em}
+.kv dd{color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem;margin:.8rem 0}
+.tbl th{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:1px solid var(--line);padding:.5rem .6rem}
+.tbl td{border-bottom:1px solid var(--line);padding:.55rem .6rem;color:var(--muted);vertical-align:top}
+.tbl td:first-child{font-family:var(--mono);color:var(--accent);font-size:.8rem;white-space:nowrap}
+.tbl td.nm{color:var(--ink);font-weight:600}
+.tbl td.num,.tbl th.num{text-align:right;font-family:var(--mono);white-space:nowrap}
+.tbl tr.cut td{color:var(--warn)}
+.tbl tr.child td{color:var(--info)}
+.pill{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;border:1px solid var(--line);color:var(--ink);padding:.2rem .55rem;border-radius:99px;white-space:nowrap}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.pill.info{border-color:var(--info);color:var(--info)}
+.qty{width:4.5rem;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:.9rem;padding:.35rem .5rem;border-radius:6px;text-align:right}
+.qty:disabled{opacity:.5}
+.total{font-family:var(--mono);font-size:1.15rem;color:var(--accent);margin-top:1rem}
+.reason{background:var(--bg);border-left:3px solid var(--accent);padding:.8rem 1rem;color:var(--muted)}
+.reason strong{color:var(--ink)}
+.log{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:1rem;max-height:12rem;overflow:auto}
+.log .t{color:var(--accent)} .log .w{color:var(--warn)} .log .e{color:var(--bad)}
+.chat{background:#1a2420;border:1px solid var(--line);border-radius:8px;padding:1.25rem;margin:1rem 0;max-width:34rem}
+.chat h4{font-family:var(--mono);font-size:.85rem;color:var(--accent);margin-bottom:.8rem}
+.bubble{background:var(--bg);border:1px solid var(--line);border-radius:12px;border-bottom-left-radius:3px;padding:.7rem .95rem;font-size:.9rem;color:var(--muted);margin:.5rem 0;max-width:88%}
+.bubble strong{color:var(--ink)}
+.bubble.me{margin-left:auto;background:rgba(95,208,138,.12);border-color:var(--accent);border-radius:12px;border-bottom-right-radius:3px;color:var(--ink)}
+.bubble .btn{margin-top:.6rem;margin-right:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.8rem;margin:1rem 0}
+.kpi{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:1rem}
+.kpi .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.kpi .v{font-family:var(--mono);font-size:1.5rem;color:var(--ink);margin-top:.3rem}
+.kpi .v.money{color:var(--accent)}
+.checklist{list-style:none;margin-top:.5rem}
+.checklist li{padding:.55rem 0 .55rem 1.9rem;position:relative;border-bottom:1px dashed var(--line);color:var(--muted);font-size:.93rem}
+.checklist li strong{color:var(--ink)}
+.checklist li::before{content:"▸";position:absolute;left:.2rem;color:var(--accent)}
+footer{padding:2rem 0;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="index.html">hanz@automation:~</a>
+  <span class="tag">simulation</span>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <span class="sim-badge">⚠ INTERACTIVE SIMULATION — FICTIONAL DATA, RUNS IN YOUR BROWSER</span>
+  <h1>Inventory Automation System</h1>
+  <p>Follow one supply request through the whole system at <strong>Northgate Academy</strong> (a fictional school): a <strong>multi-item basket</strong> submitted as one group, a <strong>Messenger confirmation</strong>, a <strong>two-level approval chain</strong> with a partial cut, <strong>live stock reservation</strong>, a <strong>restock purchase order</strong>, and <strong>pickup &amp; receipt</strong> — with stock deducting exactly once at the end. You play every role in turn. Nothing here touches a real system.</p>
+</div></div>
+
+<div class="wrap">
+<!-- STEP 1: basket -->
+<div class="section" id="s1">
+  <h2><span class="n">[01]</span> Submit a basket — one form, one group, one row per item</h2>
+  <p class="lede">You are <strong>Ms. Reyes</strong>, a Grade 5 teacher (fictional). One submission can hold many items: the system files it as <em>one request group</em> with one row per item in the Requests Log, so each item can be approved, cut, reserved, and tracked on its own. Tweak the quantities if you like — watch the ink: the class set needs more than the stockroom has.</p>
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:.3rem">Catalog <span style="color:var(--muted);font-weight:400">(fictional demo catalog)</span></h3>
+    <table class="tbl">
+      <thead><tr><th>SKU</th><th>Item</th><th class="num">Unit price</th><th class="num">On hand</th><th class="num">Qty</th><th class="num">Line total</th></tr></thead>
+      <tbody>
+        <tr><td>SKU-001</td><td class="nm">Bond Paper A4 (ream)</td><td class="num">₱250</td><td class="num">120</td><td class="num"><input class="qty" id="q-bond" type="number" min="1" max="20" value="5"></td><td class="num" id="lt-bond">₱1,250</td></tr>
+        <tr><td>SKU-002</td><td class="nm">Ballpens, Blue (box of 12)</td><td class="num">₱180</td><td class="num">60</td><td class="num"><input class="qty" id="q-pen" type="number" min="3" max="20" value="8"></td><td class="num" id="lt-pen">₱1,440</td></tr>
+        <tr><td>SKU-003</td><td class="nm">Ink Cartridge, Black <span class="pill warn">low stock</span></td><td class="num">₱950</td><td class="num">4</td><td class="num"><input class="qty" id="q-ink" type="number" min="6" max="12" value="10"></td><td class="num" id="lt-ink">₱9,500</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--muted);font-size:.85rem">Demo quantities are capped so the low-stock shortfall path always triggers for the ink cartridges — that shortfall is where the interesting machinery lives.</p>
+    <div class="total" id="basket-total">Basket total ₱12,190 · 23 units across 3 items</div>
+    <button class="btn" id="btn-submit">▶ Submit the basket</button>
+    <div id="submit-out" style="display:none">
+      <table class="tbl">
+        <thead><tr><th>Row</th><th>Item</th><th class="num">Qty</th><th>Group</th><th>Status</th></tr></thead>
+        <tbody id="rows-body"></tbody>
+      </table>
+      <p class="reason"><strong>One group, many rows.</strong> All three rows share group <strong>GRP-2026-00001</strong>. Approvers act on the group, but every quantity change, reservation, and deduction is recorded per row — the stock engine never has to guess which item a number belongs to.</p>
+    </div>
+    <div class="log" id="log1"></div>
+  </div>
+</div>
+
+<!-- STEP 2: confirm -->
+<div class="section locked" id="s2">
+  <h2><span class="n">[02]</span> Confirm on Messenger — unconfirmed requests go nowhere</h2>
+  <p class="lede">The system messages the requester a summary with action buttons. This is a deliberate gate: <strong>an unconfirmed request never reaches an approver</strong> — it filters out accidental form submissions before they cost anyone's time. Tap Confirm as Ms. Reyes.</p>
+  <div class="panel">
+    <div class="chat">
+      <h4>💬 MESSENGER · NORTHGATE INVENTORY BOT (SIMULATED)</h4>
+      <div id="chat1">
+        <div class="bubble">Hi Ms. Reyes! We received your supply request <strong id="chat-summary">GRP-2026-00001</strong>. Please confirm this is correct — your approvers will only see it after you confirm.</div>
+      </div>
+      <button class="btn" id="btn-confirm">✓ Confirm request</button>
+    </div>
+    <div class="log" id="log2"></div>
+  </div>
+</div>
+
+<!-- STEP 3: L1 approval with cut -->
+<div class="section locked" id="s3">
+  <h2><span class="n">[03]</span> Level 1 approval — the Faculty Head trims the basket</h2>
+  <p class="lede">Now you are <strong>Mr. Santos</strong>, Faculty Head (fictional). Level 1 is an endorsement check: does this department really need this, at these quantities? You have three buttons. For this demo, use <strong>Approve with changes</strong> — the term budget covers fewer ballpen boxes than requested, so cut that line and let the rest through. (Approve in full also works; Decline would close the whole group.)</p>
+  <div class="panel">
+    <table class="tbl">
+      <thead><tr><th>Row</th><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Line total</th></tr></thead>
+      <tbody id="l1-body"></tbody>
+    </table>
+    <div class="total" id="l1-total"></div>
+    <button class="btn btn--ghost" id="btn-l1-full">✓ Approve in full</button>
+    <button class="btn" id="btn-l1-changes">✂ Approve with changes</button>
+    <button class="btn btn--bad" id="btn-l1-decline">✕ Decline group</button>
+    <p id="l1-decline-note" style="display:none;color:var(--bad);margin-top:1rem">Declining closes the entire group — every row, including the bond paper the class needs this week. That is a real option in the system; for this walkthrough, use Approve with changes instead so you can see how a partial cut is recorded.</p>
+    <div id="cut-panel" style="display:none;margin-top:1rem">
+      <p style="color:var(--muted)">Cut the <strong style="color:var(--ink)">Ballpens, Blue</strong> line. The cut portion does not vanish — it splits off as its own Declined row with your reason attached, so the requester can see exactly what was trimmed and why.</p>
+      <div class="kv">
+        <dt>UNITS TO CUT</dt><dd><input class="qty" id="cut-qty" type="number" min="1" value="2"></dd>
+        <dt>REASON</dt><dd>Term budget cap — the remaining boxes cover the class need; re-request next term if short.</dd>
+      </div>
+      <p class="reason" id="cut-preview"></p>
+      <button class="btn" id="btn-apply-cut">✂ Apply cut &amp; approve the rest</button>
+    </div>
+    <div id="l1-out" style="display:none">
+      <table class="tbl">
+        <thead><tr><th>Row</th><th>Item</th><th class="num">Qty</th><th>Status</th><th>Note</th></tr></thead>
+        <tbody id="l1-out-body"></tbody>
+      </table>
+      <p class="reason" id="l1-summary"></p>
+    </div>
+    <div class="log" id="log3"></div>
+  </div>
+</div>
+
+<!-- STEP 4: L2 School Head -->
+<div class="section locked" id="s4">
+  <h2><span class="n">[04]</span> Level 2 — the School Head decides last, on every request</h2>
+  <p class="lede">Now you are <strong>Dr. Lim</strong>, School Head (fictional). The chain is dynamic — Level 1 endorsers vary by department — but one rule never changes: <strong>the School Head gives the final approval on every request</strong>, no exceptions and no routing around it. Level 1 endorsed; Level 2 decides.</p>
+  <div class="panel">
+    <table class="tbl">
+      <thead><tr><th>Row</th><th>Item</th><th class="num">Approved qty</th><th class="num">Line total</th></tr></thead>
+      <tbody id="l2-body"></tbody>
+    </table>
+    <div class="total" id="l2-total"></div>
+    <button class="btn" id="btn-l2-approve">✓ Approve — final decision</button>
+    <button class="btn btn--bad" id="btn-l2-decline">✕ Decline group</button>
+    <p id="l2-decline-note" style="display:none;color:var(--bad);margin-top:1rem">A School Head decline closes the group and releases nothing — no reservation was ever made, so no stock moves. For this walkthrough, approve so you can watch the reservation engine work.</p>
+    <div class="log" id="log4"></div>
+  </div>
+</div>
+
+<!-- STEP 5: reservation -->
+<div class="section locked" id="s5">
+  <h2><span class="n">[05]</span> Reservation — available stock is held, shortfalls spawn a child</h2>
+  <p class="lede">Approval triggers the reservation step (WF7 in the real system). Reserved stock is spoken for but not yet gone: <strong>Available = On Hand − Reserved</strong>, computed live for every item. The ink cartridges cannot be fully covered — watch what the system does with the gap instead of just failing.</p>
+  <div class="panel">
+    <button class="btn" id="btn-reserve">▶ Run reservation (WF7)</button>
+    <div id="res-out" style="display:none">
+      <table class="tbl">
+        <thead><tr><th>SKU</th><th>Item</th><th class="num">On hand</th><th class="num">Reserved</th><th class="num">Available = On Hand − Reserved</th></tr></thead>
+        <tbody id="res-body"></tbody>
+      </table>
+      <table class="tbl">
+        <thead><tr><th>Row</th><th>Item</th><th class="num">Qty</th><th>Status</th><th>Note</th></tr></thead>
+        <tbody id="child-body"></tbody>
+      </table>
+      <p class="reason" id="res-summary"></p>
+    </div>
+    <div class="log" id="log5"></div>
+  </div>
+</div>
+
+<!-- STEP 6: restock + PO -->
+<div class="section locked" id="s6">
+  <h2><span class="n">[06]</span> Restock &amp; purchase order — the system drafts, humans decide</h2>
+  <p class="lede">The shortfall created a restock need. First, you — as <strong>Mr. Dela Cruz</strong>, custodian (fictional) — confirm the stockroom really needs it. Then the PO engine sweeps every approved restock row, <strong>groups them by supplier</strong>, and drafts a purchase order. Finally, as School Head, you approve the PO. One honest boundary: the system drafts and tracks POs — <strong>sending the order to the supplier stays manual</strong>.</p>
+  <div class="panel">
+    <div class="kv">
+      <dt>RESTOCK ROW</dt><dd>RST-2026-00001 — Ink Cartridge, Black × <span id="restock-qty">6</span> — for child request REQ-2026-00005 (GRP-2026-00001)</dd>
+      <dt>STATUS</dt><dd><span class="pill warn" id="restock-pill">awaiting custodian approval</span></dd>
+    </div>
+    <button class="btn" id="btn-restock">✓ Custodian: approve restock need</button>
+    <button class="btn btn--ghost" id="btn-po" disabled>▶ Draft purchase order</button>
+    <div id="po-out" style="display:none">
+      <div class="kv" style="margin-top:1rem">
+        <dt>PO NUMBER</dt><dd>PO-2026-00001</dd>
+        <dt>STATUS</dt><dd><span class="pill warn" id="po-pill">Draft — awaiting School Head</span></dd>
+        <dt>SUPPLIER GROUP</dt><dd>OfficeTech Supplies (fictional supplier)</dd>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Source</th><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Line total</th></tr></thead>
+        <tbody id="po-body"></tbody>
+      </table>
+      <div class="total" id="po-total"></div>
+      <p style="color:var(--muted);font-size:.88rem">The second line is a pre-existing approved restock row from a stockroom count (RST-2026-00002). Same supplier, so the sweep pooled it into this one PO instead of raising two orders.</p>
+      <button class="btn" id="btn-po-approve">✓ School Head: approve PO-2026-00001</button>
+    </div>
+    <div class="log" id="log6"></div>
+  </div>
+</div>
+
+<!-- STEP 7: prepare -> receive -->
+<div class="section locked" id="s7">
+  <h2><span class="n">[07]</span> Prepare → Receive — stock deducts exactly once, at receipt</h2>
+  <p class="lede">The reserved items are ready to move. As custodian, mark them <strong>Prepared (Ready for Pickup)</strong> — note that stock has <em>not</em> left the books yet; reservation is a hold, not a deduction. Then, back as Ms. Reyes, confirm <strong>Received</strong>. Only that confirmation posts the deduction, and it can only ever post once. (The ink shortfall stays Awaiting Restock until the PO goods arrive — this pickup covers the reserved portion.)</p>
+  <div class="panel">
+    <div class="kv">
+      <dt>GROUP</dt><dd>GRP-2026-00001 — reserved portion: <span id="prep-summary"></span></dd>
+      <dt>STATUS</dt><dd><span class="pill warn" id="prep-pill">Reserved — not yet prepared</span></dd>
+    </div>
+    <button class="btn" id="btn-prepare">📦 Custodian: mark Prepared (Ready for Pickup)</button>
+    <div class="chat" id="chat2" style="display:none">
+      <h4>💬 MESSENGER · NORTHGATE INVENTORY BOT (SIMULATED)</h4>
+      <div class="bubble">Good news, Ms. Reyes! Your items for <strong>GRP-2026-00001</strong> are <strong>Ready for Pickup</strong> at the stockroom. Please confirm once you have them.</div>
+      <button class="btn" id="btn-receive">✓ Confirm Received</button>
+    </div>
+    <div id="ded-out" style="display:none">
+      <table class="tbl">
+        <thead><tr><th>SKU</th><th>Item</th><th class="num">On hand before</th><th class="num">Deducted</th><th class="num">On hand after</th></tr></thead>
+        <tbody id="ded-body"></tbody>
+      </table>
+      <p class="reason"><strong>Exactly once.</strong> The deduction is posted as a single Transactions Log entry (TXN-2026-00001). The Received button is now disabled — and in the real system a duplicate tap is checked against the log and posts nothing. Request GRP-2026-00001 closes <strong>Completed</strong>.</p>
+    </div>
+    <div class="log" id="log7"></div>
+  </div>
+</div>
+
+<!-- STEP 8: wrap-up -->
+<div class="section locked" id="s8">
+  <h2><span class="n">[08]</span> The numbers that matter</h2>
+  <p class="lede">Money first — what this one basket moved, and the size of the inventory the system watches over.</p>
+  <div class="panel">
+    <div class="kpis">
+      <div class="kpi"><div class="k">Inventory value tracked (demo dataset)</div><div class="v money">₱335,915</div></div>
+      <div class="kpi"><div class="k">SKUs tracked (demo dataset)</div><div class="v">45</div></div>
+      <div class="kpi"><div class="k">This basket — issued at receipt</div><div class="v money" id="k-issued">—</div></div>
+      <div class="kpi"><div class="k">Awaiting restock (child request)</div><div class="v money" id="k-restock">—</div></div>
+      <div class="kpi"><div class="k">Cut at Level 1 (declined sibling)</div><div class="v" id="k-declined">—</div></div>
+      <div class="kpi"><div class="k">PO-2026-00001 total</div><div class="v money" id="k-po">—</div></div>
+    </div>
+    <p style="color:var(--muted)" id="wrap-note"></p>
+    <h3 style="font-size:1rem;margin:1.2rem 0 .3rem">What the real system adds beyond this walkthrough</h3>
+    <ul class="checklist">
+      <li><strong>Daily digest backstop:</strong> a scheduled sweep re-checks every open group each day, so a request whose notification was missed still surfaces — nothing depends on a single message landing.</li>
+      <li><strong>Reminders that escalate politely:</strong> unconfirmed and unacted requests get timed reminders to the requester and approvers, so baskets do not silently stall in someone's chat list.</li>
+      <li><strong>Uncollected pickup rules:</strong> a Ready-for-Pickup group that is never collected gets a reminder before the deadline — and on <strong>Day 8</strong> its reservation is released, returning the stock to Available for everyone else.</li>
+      <li><strong>Buttons everywhere:</strong> confirm, approve, decline, and received all work as one-tap buttons in Messenger or email — the first decision recorded wins, and every later tap is safely ignored.</li>
+      <li><strong>A full audit trail:</strong> every state change — submission, cut, reservation, deduction — is a dated row in the logs, so any peso or unit can be traced back to the tap that moved it.</li>
+    </ul>
+    <button class="btn btn--ghost" id="btn-restart">↺ Restart the simulation</button>
+    <a class="btn btn--ghost" href="inventory.html" style="text-decoration:none">← Back to the case study</a>
+    <a class="btn btn--ghost" href="index.html" style="text-decoration:none">Portfolio home</a>
+  </div>
+</div>
+</div>
+
+<footer><div class="wrap">
+  <p>Simulation only — fictional school (Northgate Academy), fictional people, catalog, and suppliers; no real requests, messages, or purchase orders. The real Inventory Automation System runs on n8n + Google Sheets + Messenger/email approvals.</p>
+  <p style="margin-top:.5rem"><a href="index.html">← Portfolio home</a> · Hanz Jay Apoon — tvet.hjapoon@gmail.com</p>
+</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>n.toLocaleString('en-US');
+const peso=n=>'₱'+fmt(n);
+function log(el,msg,cls){const d=document.createElement('div');if(cls)d.className=cls;d.innerHTML='<span class="t">›</span> '+msg;el.appendChild(d);el.scrollTop=el.scrollHeight;}
+function setMainStatus(txt,cls){document.querySelectorAll('.main-status').forEach(e=>{e.textContent=txt;e.className='pill main-status'+(cls?' '+cls:'');});}
+const PRICE={bond:250,pen:180,ink:950};
+const ONHAND={bond:120,pen:60,ink:4};
+let S=null;
+
+// --- Step 1: basket ---
+function basketVals(){return {bond:+$('q-bond').value||0,pen:+$('q-pen').value||0,ink:+$('q-ink').value||0};}
+function recalc(){
+  const v=basketVals();
+  $('lt-bond').textContent=peso(v.bond*PRICE.bond);
+  $('lt-pen').textContent=peso(v.pen*PRICE.pen);
+  $('lt-ink').textContent=peso(v.ink*PRICE.ink);
+  const total=v.bond*PRICE.bond+v.pen*PRICE.pen+v.ink*PRICE.ink;
+  $('basket-total').textContent='Basket total '+peso(total)+' · '+(v.bond+v.pen+v.ink)+' units across 3 items';
+}
+document.querySelectorAll('.qty').forEach(c=>{if(c.id.indexOf('q-')===0)c.addEventListener('input',recalc);});
+recalc();
+$('btn-submit').addEventListener('click',()=>{
+  const v=basketVals();
+  S={bond:v.bond,pen:v.pen,ink:v.ink,cut:0,approvedPen:v.pen,
+     inkReserved:Math.min(v.ink,ONHAND.ink),inkShort:Math.max(0,v.ink-ONHAND.ink)};
+  S.origTotal=v.bond*PRICE.bond+v.pen*PRICE.pen+v.ink*PRICE.ink;
+  S.approvedTotal=S.origTotal; S.declinedTotal=0;
+  ['q-bond','q-pen','q-ink'].forEach(id=>$(id).disabled=true);
+  $('btn-submit').disabled=true;
+  const rows=[['REQ-2026-00001','Bond Paper A4 (ream)',v.bond],['REQ-2026-00002','Ballpens, Blue (box of 12)',v.pen],['REQ-2026-00003','Ink Cartridge, Black',v.ink]];
+  $('rows-body').innerHTML=rows.map(r=>'<tr><td>'+r[0]+'</td><td class="nm">'+r[1]+'</td><td class="num">'+r[2]+'</td><td style="font-family:var(--mono);font-size:.8rem">GRP-2026-00001</td><td><span class="pill warn main-status">Unconfirmed</span></td></tr>').join('');
+  $('submit-out').style.display='block';
+  $('chat-summary').textContent='GRP-2026-00001 · '+peso(S.origTotal)+' · '+(v.bond+v.pen+v.ink)+' units across 3 items';
+  const L=$('log1');
+  log(L,'Form submitted by Ms. Reyes (Grade 5)');
+  log(L,'Basket grouped as GRP-2026-00001 — 3 rows written to the Requests Log');
+  log(L,'Status: Unconfirmed — approvers cannot see this yet');
+  log(L,'Messenger confirmation sent to the requester (simulated)','t');
+  $('s2').classList.remove('locked');
+  $('s2').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// --- Step 2: confirm ---
+$('btn-confirm').addEventListener('click',()=>{
+  $('btn-confirm').disabled=true;
+  const you=document.createElement('div');you.className='bubble me';you.textContent='✓ Confirmed — that is my request.';
+  $('chat1').appendChild(you);
+  const bot=document.createElement('div');bot.className='bubble';
+  bot.innerHTML='Thank you! <strong>GRP-2026-00001</strong> is now <strong>Confirmed</strong> and visible to your Faculty Head for Level 1 approval.';
+  $('chat1').appendChild(bot);
+  setMainStatus('Confirmed','ok');
+  const L=$('log2');
+  log(L,'Requester tapped Confirm — first decision recorded');
+  log(L,'Status: Unconfirmed → Confirmed');
+  log(L,'Routed to Level 1: Faculty Head (Grade 5 department)','t');
+  $('l1-body').innerHTML=[['REQ-2026-00001','Bond Paper A4 (ream)',S.bond,PRICE.bond],['REQ-2026-00002','Ballpens, Blue (box of 12)',S.pen,PRICE.pen],['REQ-2026-00003','Ink Cartridge, Black',S.ink,PRICE.ink]]
+    .map(r=>'<tr><td>'+r[0]+'</td><td class="nm">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+peso(r[3])+'</td><td class="num">'+peso(r[2]*r[3])+'</td></tr>').join('');
+  $('l1-total').textContent='Group total '+peso(S.origTotal);
+  $('cut-qty').max=S.pen-1;
+  cutPreview();
+  $('s3').classList.remove('locked');
+  $('s3').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// --- Step 3: L1 with partial cut ---
+function cutPreview(){
+  let c=+$('cut-qty').value||0;
+  if(c<1)c=1; if(c>S.pen-1)c=S.pen-1;
+  $('cut-preview').innerHTML='<strong>Preview:</strong> Ballpens '+S.pen+' → '+(S.pen-c)+' approved · '+c+' split off as a Declined sibling ('+peso(c*PRICE.pen)+') · approved group value becomes '+peso(S.origTotal-c*PRICE.pen)+'. '+peso(S.origTotal-c*PRICE.pen)+' + '+peso(c*PRICE.pen)+' = '+peso(S.origTotal)+' — the original ask, fully accounted for.';
+}
+$('cut-qty').addEventListener('input',cutPreview);
+$('btn-l1-changes').addEventListener('click',()=>{$('cut-panel').style.display='block';cutPreview();$('cut-panel').scrollIntoView({behavior:'smooth',block:'center'});});
+$('btn-l1-decline').addEventListener('click',()=>{$('l1-decline-note').style.display='block';log($('log3'),'Decline considered — group would close with no reservation made','w');});
+function completeL1(cut){
+  S.cut=cut; S.approvedPen=S.pen-cut;
+  S.declinedTotal=cut*PRICE.pen; S.approvedTotal=S.origTotal-S.declinedTotal;
+  ['btn-l1-full','btn-l1-changes','btn-l1-decline','btn-apply-cut'].forEach(id=>$(id).disabled=true);
+  $('cut-qty').disabled=true;
+  let html='<tr><td>REQ-2026-00002</td><td class="nm">Ballpens, Blue (box of 12)</td><td class="num">'+S.approvedPen+'</td><td><span class="pill ok">L1 Approved</span></td><td>Continues to Level 2</td></tr>';
+  if(cut>0) html+='<tr class="cut"><td>REQ-2026-00004</td><td class="nm">Ballpens, Blue (box of 12) — cut portion</td><td class="num">'+cut+'</td><td><span class="pill bad">Declined</span></td><td>Split from REQ-2026-00002 · Term budget cap — the remaining boxes cover the class need</td></tr>';
+  $('l1-out-body').innerHTML=html;
+  $('l1-out').style.display='block';
+  $('l1-summary').innerHTML= cut>0
+    ? '<strong>The cut is a row, not an edit.</strong> The original ballpen row keeps its history; the trimmed '+cut+' units live on as Declined sibling REQ-2026-00004 with the reason attached. Approved '+peso(S.approvedTotal)+' + declined '+peso(S.declinedTotal)+' = the original '+peso(S.origTotal)+' ask.'
+    : '<strong>Approved in full.</strong> No cut was made, so no Declined sibling row exists — the group goes to Level 2 at the original '+peso(S.origTotal)+'.';
+  setMainStatus('L1 Approved','ok');
+  const L=$('log3');
+  if(cut>0) log(L,'Approve with changes: ballpens '+S.pen+' → '+S.approvedPen+' · cut of '+cut+' split to REQ-2026-00004 (Declined)');
+  log(L,'Level 1 endorsement recorded by Mr. Santos');
+  log(L,'Routed to Level 2: School Head — final approval required on every request','t');
+  $('l2-body').innerHTML=[['REQ-2026-00001','Bond Paper A4 (ream)',S.bond],['REQ-2026-00002','Ballpens, Blue (box of 12)',S.approvedPen],['REQ-2026-00003','Ink Cartridge, Black',S.ink]]
+    .map(r=>'<tr><td>'+r[0]+'</td><td class="nm">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+peso(r[2]*(r[1].indexOf('Bond')===0?PRICE.bond:r[1].indexOf('Ballpens')===0?PRICE.pen:PRICE.ink))+'</td></tr>').join('');
+  $('l2-total').textContent='Approved group value '+peso(S.approvedTotal);
+  $('s4').classList.remove('locked');
+  $('s4').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('btn-l1-full').addEventListener('click',()=>completeL1(0));
+$('btn-apply-cut').addEventListener('click',()=>{
+  let c=+$('cut-qty').value||0;
+  if(c<1||c>S.pen-1){log($('log3'),'Cut must be between 1 and '+(S.pen-1)+' units — adjust and try again','e');return;}
+  completeL1(c);
+});
+
+// --- Step 4: L2 School Head ---
+$('btn-l2-decline').addEventListener('click',()=>{$('l2-decline-note').style.display='block';log($('log4'),'Decline considered at Level 2 — nothing reserved, no stock would move','w');});
+$('btn-l2-approve').addEventListener('click',()=>{
+  $('btn-l2-approve').disabled=true; $('btn-l2-decline').disabled=true;
+  setMainStatus('Approved','ok');
+  const L=$('log4');
+  log(L,'School Head approval recorded by Dr. Lim — chain complete');
+  log(L,'Level 1 endorsed · Level 2 approved · no step can be skipped or reordered');
+  log(L,'Handing the group to reservation (WF7)','t');
+  $('s5').classList.remove('locked');
+  $('s5').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// --- Step 5: reservation ---
+$('btn-reserve').addEventListener('click',()=>{
+  $('btn-reserve').disabled=true;
+  const res=[['SKU-001','Bond Paper A4 (ream)',ONHAND.bond,S.bond],['SKU-002','Ballpens, Blue (box of 12)',ONHAND.pen,S.approvedPen],['SKU-003','Ink Cartridge, Black',ONHAND.ink,S.inkReserved]];
+  $('res-body').innerHTML=res.map(r=>'<tr><td>'+r[0]+'</td><td class="nm">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td><td class="num">'+r[2]+' − '+r[3]+' = '+(r[2]-r[3])+'</td></tr>').join('');
+  $('child-body').innerHTML='<tr class="child"><td>REQ-2026-00005</td><td class="nm">Ink Cartridge, Black — unfilled portion</td><td class="num">'+S.inkShort+'</td><td><span class="pill info">Awaiting Restock</span></td><td>Child of REQ-2026-00003 under GRP-2026-00001 · restock row RST-2026-00001 created</td></tr>';
+  S.reservedValue=S.bond*PRICE.bond+S.approvedPen*PRICE.pen+S.inkReserved*PRICE.ink;
+  S.restockValue=S.inkShort*PRICE.ink;
+  $('res-summary').innerHTML='<strong>Partial is a state, not a failure.</strong> Reserved now: '+peso(S.reservedValue)+' of the '+peso(S.approvedTotal)+' approved. The ink shortfall — '+S.inkShort+' units, '+peso(S.restockValue)+' — did not block the other items; it became child request REQ-2026-00005 (Awaiting Restock) with its own restock row, so it can be fulfilled the moment stock lands. '+peso(S.reservedValue)+' + '+peso(S.restockValue)+' = '+peso(S.approvedTotal)+'.';
+  $('res-out').style.display='block';
+  setMainStatus('Reserved','info');
+  const L=$('log5');
+  log(L,'WF7 reservation run for GRP-2026-00001');
+  log(L,'Bond paper and ballpens fully reserved · ink partially reserved ('+S.inkReserved+' of '+S.ink+')');
+  log(L,'Child request REQ-2026-00005 spawned: Awaiting Restock · restock row RST-2026-00001 written','w');
+  $('restock-qty').textContent=S.inkShort;
+  $('prep-summary').textContent='Bond Paper × '+S.bond+' · Ballpens × '+S.approvedPen+' · Ink Cartridge × '+S.inkReserved;
+  $('s6').classList.remove('locked');
+});
+
+// --- Step 6: restock + PO ---
+$('btn-restock').addEventListener('click',()=>{
+  $('btn-restock').disabled=true;
+  $('restock-pill').textContent='approved by custodian'; $('restock-pill').className='pill ok';
+  $('btn-po').disabled=false;
+  log($('log6'),'Custodian approved restock row RST-2026-00001 (Ink Cartridge × '+S.inkShort+')','t');
+});
+$('btn-po').addEventListener('click',()=>{
+  $('btn-po').disabled=true;
+  S.poTotal=S.restockValue+2*650;
+  $('po-body').innerHTML='<tr><td>RST-2026-00001</td><td class="nm">Ink Cartridge, Black</td><td class="num">'+S.inkShort+'</td><td class="num">₱950</td><td class="num">'+peso(S.restockValue)+'</td></tr>'
+    +'<tr><td>RST-2026-00002</td><td class="nm">HDMI Cable, 1.8 m</td><td class="num">2</td><td class="num">₱650</td><td class="num">₱1,300</td></tr>';
+  $('po-total').textContent='PO total '+peso(S.restockValue)+' + ₱1,300 = '+peso(S.poTotal);
+  $('po-out').style.display='block';
+  const L=$('log6');
+  log(L,'PO sweep: 2 approved restock rows found, both from OfficeTech Supplies');
+  log(L,'Draft PO-2026-00001 created — 2 lines, total '+peso(S.poTotal));
+  log(L,'Sent to the School Head for PO approval (simulated)','t');
+});
+$('btn-po-approve').addEventListener('click',()=>{
+  $('btn-po-approve').disabled=true;
+  $('po-pill').textContent='Approved by School Head'; $('po-pill').className='pill ok';
+  const L=$('log6');
+  log(L,'PO-2026-00001 approved by Dr. Lim — status tracked in the PO log');
+  log(L,'Boundary: the system drafts and tracks this PO. Sending it to the supplier stays a manual step.','w');
+  $('s7').classList.remove('locked');
+  $('s7').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// --- Step 7: prepare -> receive ---
+$('btn-prepare').addEventListener('click',()=>{
+  $('btn-prepare').disabled=true;
+  $('prep-pill').textContent='Ready for Pickup'; $('prep-pill').className='pill ok';
+  setMainStatus('Ready for Pickup','ok');
+  $('chat2').style.display='block';
+  const L=$('log7');
+  log(L,'Custodian marked the reserved items Prepared — status: Ready for Pickup');
+  log(L,'No deduction posted: stock is still On Hand, just reserved');
+  log(L,'Pickup notification sent to the requester (simulated)','t');
+});
+$('btn-receive').addEventListener('click',()=>{
+  $('btn-receive').disabled=true;
+  const ded=[['SKU-001','Bond Paper A4 (ream)',ONHAND.bond,S.bond],['SKU-002','Ballpens, Blue (box of 12)',ONHAND.pen,S.approvedPen],['SKU-003','Ink Cartridge, Black',ONHAND.ink,S.inkReserved]];
+  $('ded-body').innerHTML=ded.map(r=>'<tr><td>'+r[0]+'</td><td class="nm">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">− '+r[3]+'</td><td class="num">'+(r[2]-r[3])+'</td></tr>').join('');
+  $('ded-out').style.display='block';
+  $('prep-pill').textContent='Completed — received';
+  setMainStatus('Completed','ok');
+  const L=$('log7');
+  log(L,'Requester confirmed Received');
+  log(L,'TXN-2026-00001 posted to the Transactions Log — deduction applied exactly once');
+  log(L,'GRP-2026-00001 closed: Completed · child REQ-2026-00005 remains Awaiting Restock','t');
+  $('k-issued').textContent=peso(S.reservedValue);
+  $('k-restock').textContent=peso(S.restockValue);
+  $('k-declined').textContent=S.cut>0?peso(S.declinedTotal):'₱0';
+  $('k-po').textContent=peso(S.poTotal);
+  $('wrap-note').textContent='Reconciliation for this basket: original ask '+peso(S.origTotal)+' = issued '+peso(S.reservedValue)+' + awaiting restock '+peso(S.restockValue)+' + declined at Level 1 '+peso(S.declinedTotal)+'. Every peso of the original request is accounted for in exactly one of those three buckets.';
+  $('s8').classList.remove('locked');
+  $('s8').scrollIntoView({behavior:'smooth',block:'start'});
+});
+$('btn-restart').addEventListener('click',()=>location.reload());
+</script>
+</body>
+</html>
